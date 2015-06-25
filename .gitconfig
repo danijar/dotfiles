@@ -1,0 +1,5 @@
+[user]
+	email = mail@danijar.com
+	name = Danijar Hafner
+[push]
+	default = simple

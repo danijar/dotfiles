@@ -1,0 +1,10 @@
+"~/.config/brightness.sh +10"
+    XF86MonBrightnessUp
+"~/.config/brightness.sh -10"
+    XF86MonBrightnessDown
+"amixer set Master 5+"
+    XF86AudioRaiseVolume
+"amixer set Master 5-"
+    XF86AudioLowerVolume
+"axmier set Master toggle"
+    XF86AudioMute
