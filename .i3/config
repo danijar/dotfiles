@@ -13,10 +13,12 @@ set $mod Mod4
 
 # Autostart
 exec --no-startup-id nm-applet
-exec --no-startup-id i3-msg 'workspace 1; exec urxvt'
+exec --no-startup-id cbatticon
+exec --no-startup-id insync start
+exec i3-msg 'workspace 1; exec urxvt'
 exec --no-startup-id i3-msg 'workspace 2; exec subl3'
+exec i3-msg 'workspace 4; exec urxvt -e htop'
 exec --no-startup-id i3-msg 'workspace 3; exec google-chrome-stable'
-exec --no-startup-id i3-msg 'workspace 4; exec urxvt -e htop'
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
