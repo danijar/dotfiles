@@ -25,6 +25,7 @@ alias va='source bin/activate'
 alias vd='deactivate'
 alias cl='clear'
 alias home='cd ~'
+alias clip='xclip -selection c'
 
 # Default versions
 alias subl='subl3'
