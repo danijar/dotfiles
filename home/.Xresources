@@ -1,8 +1,10 @@
+! Apply changes in this file with `xrdb ~/.Xresources`
+
+! Terminal style
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=18
 URxvt.scrollBar: false
-URxvt.background: black
-URxvt.foreground: white
 
+! Terminal colors
 ! Gray
 URxvt.background: #575757
 URxvt.foreground: #dcdccc

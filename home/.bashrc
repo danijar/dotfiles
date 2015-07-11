@@ -7,10 +7,8 @@
 
 # Unix tool shortcuts
 alias ls='ls --color=auto'
-alias l='ls -lh --color=auto --group-directories-first'
-
-# Backup shortcuts
-alias backup-pacman='pacman -Qe > ~/.backup/pacman-installed-packages'
+alias l='ls -lh --color=auto --group-directories-first --time-style long-iso'
+alias clip='xclip -selection c'
 
 # Git shortcuts
 alias gs='git status'
@@ -19,17 +17,15 @@ alias ga='git add -A'
 alias gc='git commit -m '
 
 # Workflow shortcuts
-alias x='exit'
 alias sp='sudo pacman'
 alias va='source bin/activate'
 alias vd='deactivate'
-alias cl='clear'
-alias home='cd ~'
-alias clip='xclip -selection c'
+alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 
-# Default versions
+# Default versions and programs
 alias subl='subl3'
 alias chrome='google-chrome-stable'
+export EDITOR='nano'
 
 # Current projects
 alias km='cd ~/repository/seminar-knowledge-mining && source bin/activate'
@@ -40,7 +36,7 @@ function cd()
     builtin cd "$*" && ls --group-directories-first -A
 }
 
-#PS1='[\u@\h \W]\$ '
+# Promt
 PS1='\[\e[0;32m\]\u\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
 
 # Enable tab completion

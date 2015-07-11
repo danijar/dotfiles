@@ -1,5 +1,21 @@
 {
+	"color_scheme": "Packages/User/Monokai (SL) (Flake8Lint).tmTheme",
 	"ensure_newline_at_eof_on_save": true,
+	"folder_exclude_patterns":
+	[
+		".git",
+		"__pycache__",
+		"bin",
+		"lib",
+		"man",
+		"share",
+		"include",
+		"CMakeFiles"
+	],
+	"file_exclude_patterns":
+	[
+		"CMakeCache.txt"
+	],
 	"font_size": 16,
 	"ignored_packages":
 	[
@@ -10,7 +26,7 @@
 		80,
 		100
 	],
-	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true,
 	"scroll_speed": 0.8,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true
 }
