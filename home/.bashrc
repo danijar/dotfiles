@@ -12,6 +12,10 @@ alias clip='xclip -selection c'
 
 # Git shortcuts
 alias gs='git status'
+alias gd='git diff'
+alias gds='git diff --stat'
+alias gdo='git diff origin/master'
+alias gdos='git diff --stat origin/master'
 alias gl='git log'
 alias ga='git add -A'
 alias gc='git commit -m '
