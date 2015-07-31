@@ -16,10 +16,7 @@
 		"CMakeCache.txt"
 	],
 	"font_size": 16,
-	"ignored_packages":
-	[
-		"Vintage"
-	],
+	"ignored_packages": [],
 	"rulers":
 	[
 		80,
