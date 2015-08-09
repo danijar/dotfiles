@@ -1,6 +1,10 @@
 {
 	"color_scheme": "Packages/User/Monokai (SL) (Flake8Lint).tmTheme",
 	"ensure_newline_at_eof_on_save": true,
+	"file_exclude_patterns":
+	[
+		"CMakeCache.txt"
+	],
 	"folder_exclude_patterns":
 	[
 		".git",
@@ -11,12 +15,11 @@
 		"share",
 		"CMakeFiles"
 	],
-	"file_exclude_patterns":
+	"font_size": 15,
+	"ignored_packages":
 	[
-		"CMakeCache.txt"
+		"Vintage"
 	],
-	"font_size": 16,
-	"ignored_packages": [],
 	"rulers":
 	[
 		80,

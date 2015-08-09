@@ -29,7 +29,7 @@ alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 # Default versions and programs
 alias subl='subl3'
 alias chrome='google-chrome-stable'
-export EDITOR='nano'
+export EDITOR='vim'
 
 # Current projects
 alias km='cd ~/repository/seminar-knowledge-mining && source bin/activate'
