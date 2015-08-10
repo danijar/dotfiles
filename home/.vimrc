@@ -31,10 +31,12 @@ set ignorecase smartcase
 set hlsearch incsearch
 
 " Formatting
-set ts=2 sw=2 sts=2
+set ts=4 sw=4 sts=4
 set autoindent
 set expandtab
 set backspace=indent,eol,start
+autocmd Filetype cc setlocal ts=2 sw=2
+autocmd Filetype h  setlocal ts=2 sw=2
 
 " Scroll before cursor reaches window border
 " set scrolloff=5
