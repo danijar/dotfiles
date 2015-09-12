@@ -41,6 +41,8 @@ set ignorecase smartcase
 set hlsearch incsearch
 
 " Formatting
+set tw=79
+set formatoptions+=t
 set ts=4 sw=4 sts=4
 autocmd Filetype cc setlocal ts=2 sw=2
 autocmd Filetype h  setlocal ts=2 sw=2

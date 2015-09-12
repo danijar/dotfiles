@@ -16,10 +16,11 @@ exec --no-startup-id nm-applet
 exec --no-startup-id cbatticon -n
 exec --no-startup-id insync start
 exec --no-startup-id screencloud
-exec --no-startup-id i3-msg 'workspace 1; exec urxvt'
-exec --no-startup-id i3-msg 'workspace 2; exec subl3'
-exec --no-startup-id i3-msg 'workspace 4; exec urxvt -e htop'
-exec --no-startup-id i3-msg 'workspace 3; exec --no-startup-id google-chrome-stable'
+exec i3-msg 'workspace 1; exec urxvtcd'
+exec i3-msg 'workspace 1; exec urxvtcd'
+exec i3-msg 'workspace 2; exec urxvtcd'
+exec i3-msg 'workspace 2; exec urxvtcd'
+exec i3-msg 'workspace 3; exec --no-startup-id --no-startup-id google-chrome-stable'
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -40,7 +41,7 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+q kill
