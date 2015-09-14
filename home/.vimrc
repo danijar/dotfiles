@@ -1,6 +1,14 @@
 set nocompatible
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Google
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+source /usr/share/vim/google/google.vim
+Glug youcompleteme-google
+Glug ft-cpp
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -12,9 +20,9 @@ Plugin 'gmarik/Vundle.vim'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'terryma/vim-smooth-scroll'
-Plugin 'sickill/vim-monokai'
 Plugin 'jnurmine/Zenburn'
 Plugin 'vim-scripts/loremipsum'
+Plugin 'airblade/vim-gitgutter'
 
 " Vundle end
 call vundle#end()
@@ -49,6 +57,8 @@ autocmd Filetype h  setlocal ts=2 sw=2
 set autoindent
 set expandtab
 set backspace=indent,eol,start
+set formatoptions-=o
+au filetype * set formatoptions-=o
 
 " Exit visual mode immediately
 set timeoutlen=1000 ttimeoutlen=0
