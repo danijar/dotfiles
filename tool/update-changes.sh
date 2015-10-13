@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
-repo=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/..
+repo=$(dirname "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)")
+echo "Found repository at $repo"
 
 # update_dir(repo_dir, system_dir)
 # Update all files inside the specified directory with their current versions
