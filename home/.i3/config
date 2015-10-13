@@ -12,15 +12,7 @@
 set $mod Mod4
 
 # Autostart
-exec --no-startup-id nm-applet
-exec --no-startup-id cbatticon -n
-exec --no-startup-id insync start
-exec --no-startup-id screencloud
-exec i3-msg 'workspace 1; exec urxvtcd'
-exec i3-msg 'workspace 1; exec urxvtcd'
-exec i3-msg 'workspace 2; exec urxvtcd'
-exec i3-msg 'workspace 2; exec urxvtcd'
-exec i3-msg 'workspace 3; exec --no-startup-id --no-startup-id google-chrome-stable'
+exec --no-startup-id ~/.script/startup.sh
 
 # Hide title bar for chrome
 for_window [title="Google Chrome"] border pixel 2
@@ -45,10 +37,17 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec urxvtcd
 
 # kill focused window
-bindsym $mod+Shift+q kill
+mode "kill" {
+    bindsym y kill, mode default
+    bindsym Return kill, mode default
+    bindsym n mode default
+    bindsym Escape mode default
+}
+
+bindsym $mod+Shift+q mode "kill"
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono:pixelsize=16'
@@ -58,7 +57,7 @@ bindsym $mod+d exec dmenu_run -fn 'DejaVu Sans Mono:pixelsize=16'
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # lock screen
-bindsym Control+Mod1+l exec i3lock -d -c 3a3a3a
+bindsym Control+Mod1+l exec i3lock -c 3a3a3a
 
 # change focus
 bindsym $mod+h focus left
@@ -122,6 +121,9 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
+# rename current workspace
+bindsym $mod+Control+r exec i3-input -F 'rename workspace to "%s"' -P 'rename workspace: '
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
