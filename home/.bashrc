@@ -29,6 +29,7 @@ alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 # Default versions and programs
 alias subl='subl3'
 alias chrome='google-chrome-stable'
+alias python='python3'
 export EDITOR='vim'
 
 # Current projects

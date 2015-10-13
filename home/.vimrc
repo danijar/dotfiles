@@ -55,9 +55,6 @@ au filetype * set formatoptions-=o
 " Exit visual mode immediately
 set timeoutlen=1000 ttimeoutlen=0
 
-" Scroll before cursor reaches window border
-" set scrolloff=5
-
 " Always scroll so cursor stays in the middle
 set scrolloff=100
 
@@ -86,12 +83,6 @@ let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_complete_in_comments=0
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_max_diagnostics_to_display=10
-
-" vim-smooth-scroll
-" noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-" noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-" noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-" noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 " vim-multiple-cursors
 let g:multi_cursor_exit_from_visual_mode=0
