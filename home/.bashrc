@@ -35,9 +35,6 @@ alias chrome='google-chrome-stable'
 alias python='python3'
 export EDITOR='vim'
 
-# Current projects
-alias km='cd ~/repository/seminar-knowledge-mining && source bin/activate'
-
 # List contents after changing directory
 function cd()
 {
