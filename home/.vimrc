@@ -9,12 +9,14 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'terryma/vim-smooth-scroll'
 Plugin 'jnurmine/Zenburn'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-scripts/loremipsum'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'godlygeek/tabular'
 
 " Vundle end
 call vundle#end()
@@ -76,17 +78,20 @@ nnoremap <esc>^[ <esc>^[
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" vim-multiple-cursors
+let g:multi_cursor_exit_from_visual_mode=0
+let g:multi_cursor_exit_from_insert_mode=0
+
 " YouCompleteMe
-" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
 let g:ycm_complete_in_comments=0
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_max_diagnostics_to_display=10
+let g:ycm_filetype_whitelist={'cpp':1, 'c':1, 'python':1}
 
-" vim-multiple-cursors
-let g:multi_cursor_exit_from_visual_mode=0
-let g:multi_cursor_exit_from_insert_mode=0
+" jedi-vim
+let g:jedi#completions_enabled=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
