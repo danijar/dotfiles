@@ -35,6 +35,9 @@ alias chrome='google-chrome-stable'
 alias python='python3'
 export EDITOR='vim'
 
+# Path variable
+export PATH=$PATH:~/.gem/ruby/2.2.0/bin
+
 # List contents after changing directory
 function cd()
 {
