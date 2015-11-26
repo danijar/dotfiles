@@ -1,6 +1,6 @@
-"~/.config/brightness.sh +10"
+"~/.script/backlight.py up"
     XF86MonBrightnessUp
-"~/.config/brightness.sh -10"
+"~/.script/backlight.py down"
     XF86MonBrightnessDown
 "amixer set Master 5+"
     XF86AudioRaiseVolume
