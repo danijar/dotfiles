@@ -1,7 +1,3 @@
-#
-# ~/.bashrc
-#
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -21,9 +17,6 @@ alias ga='git add -A'
 alias gc='git commit -m '
 
 # Workflow shortcuts
-alias sp='sudo pacman'
-alias va='source bin/activate'
-alias vd='deactivate'
 alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias scandoc='scanimage --resolution 150dpi | \
     convert -resize 1240x1753 -density 150x150 -units PixelsPerInch \
@@ -38,10 +31,33 @@ export EDITOR='vim'
 # Path variable
 export PATH=$PATH:~/.gem/ruby/2.2.0/bin
 
-# List contents after changing directory
+# Auto activate and deavtivate virtualenv
+function _cd_virtualenv()
+{
+    DIR='$(pwd -P)'
+    if [ -e 'bin/activate' ]; then
+        if [ '$VIRTUAL_ENV' != '$PWD' ]; then
+            echo 'Enter virtualenv'
+            source bin/activate
+        fi
+    else
+        if ! [ -z $VIRTUAL_ENV ]; then
+            echo 'Leave virtualenv'
+            deactivate
+        fi
+    fi
+}
+
+# List contents after changing the directory
+function _cd_ls()
+{
+    ls --group-directories-first -A
+}
+
+# Register functions to after changing the directory
 function cd()
 {
-    builtin cd "$*" && ls --group-directories-first -A
+    builtin cd "$*" && _cd_virtualenv && _cd_ls
 }
 
 # Promt
@@ -58,4 +74,3 @@ fi
 
 # Include Z
 . ~/.script/z.sh
-
