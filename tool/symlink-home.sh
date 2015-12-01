@@ -9,8 +9,10 @@ link_dir() {
     find $repo/$1 -type f -print0 | while IFS= read -r -d '' file; do
         link=$2/${file#$repo/$1/}
         echo $link
-        mkdir -p "$(dirname "$link")"
-        ln -s "$file" "$link"
+        if [ ! -L $link ]; then
+            mkdir -p "$(dirname "$link")"
+            ln -s "$file" "$link"
+        fi
     done;
 }
 
