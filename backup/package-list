@@ -106,7 +106,6 @@ parted 3.2-3
 patch 2.7.5-1
 pciutils 3.3.1-1
 pcmciautils 018-7
-pep8 1.6.2-3
 perl 5.22.0-1
 pkg-config 0.29-1
 pkgfile 15-1
@@ -115,13 +114,9 @@ powertop 2.8-1
 procps-ng 3.3.11-2
 psmisc 22.21-3
 python-gobject 3.18.2-1
-python-matplotlib 1.5.0-1
 python-neovim 0.0.38-2
-python-numpy 1.10.1-1
 python-pip 7.1.2-2
-python-pytest 2.8.2-1
 python-virtualenv 13.1.2-2
-python-yaml 3.11-3
 python2-neovim 0.0.38-2
 redshift 1.10-2
 reiserfsprogs 3.6.24-1
@@ -148,6 +143,7 @@ util-linux 2.27-6
 vertex-themes-git r542.20151008-1
 vi 1:070224-2
 viewnior 1.5-3
+virtualbox 5.0.10-1
 vlc 2.2.1-9
 w3m 0.5.3.git20151109-1
 wd719x-firmware 1-1
@@ -163,6 +159,7 @@ xfce4-notifyd 0.2.4-2
 xfce4-screenshooter 1.8.2-2
 xfsprogs 4.2.0-1
 xorg-server 1.17.4-2
+xorg-xbacklight 1.2.1-1
 xorg-xinit 1.3.4-3
 xorg-xinput 1.6.2-1
 xorg-xrandr 1.4.3-1
@@ -171,3 +168,4 @@ xterm 320-2
 xv 3.10a-18
 yaourt 1.6-1
 zip 3.0-6
+zsh 5.2-1

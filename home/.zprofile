@@ -1,0 +1,1 @@
+startx -- -dpi 144
