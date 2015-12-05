@@ -5,6 +5,7 @@ nm-applet &
 cbatticon -n &
 insync start &
 screencloud &
+redshift-gtk &
 
 # Try to start Ubuntu specific deamons.
 if [ 'python -mplatform | grep Ubuntu' ]; then
