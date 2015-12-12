@@ -33,12 +33,13 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Visual settings
-let t_Co=256
 set number
 set cursorline
 set visualbell
 set background=dark
 colorscheme zenburn
+highlight LineNr ctermbg=NONE
+highlight CursorLineNr ctermbg=NONE
 
 " Only consider case for search strings containing upper case letter
 set ignorecase smartcase
@@ -150,7 +151,7 @@ autocmd BufReadPost *
 set viminfo^=%
 
 " Highlight long lines
-let &colorcolumn=join(range(80,999),",")
+match Error /\%80v.\+/
 
 " Remove highlighting on ESC in normal mode
 nnoremap <silent> <esc> :noh<return><esc>

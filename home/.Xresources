@@ -1,48 +1,39 @@
 ! Apply changes in this file with `xrdb ~/.Xresources`
 
 ! Font rendering
-Xft.antialias:  true
-Xft.rgba:       rgb
-Xft.hinting:    tRue
-dt.hintstyle:   hintfull
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: tRue
+dt.hintstyle: hintfull
+! URxvt.intensityStyles: false
 
 ! Terminal style
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=16
 URxvt.scrollBar: false
-
-! Terminal colors
-! Gray
-URxvt.background: #3a3a3a
-URxvt.foreground: #dcdccc
-! Black
-URxvt.color0: #666666
-URxvt.color8: #666666
-! Red
-URxvt.color1: #cc9393
-URxvt.color9: #cc9393
-! Green
-URxvt.color2: #7f9f7f
-URxvt.color10: #7f9f7f
-! Yellow
-URxvt.color3: #e3ceab
-URxvt.color11: #e3ceab
-! Orange
-URxvt.color4: #dfaf8f
-URxvt.color12: #dfaf8f
-! Magenta
-URxvt.color5: #cc9393
-URxvt.color13: #cc9393
-! Cyan
-URxvt.color6: #8cd0d3
-URxvt.color14: #8cd0d3
-! White
-URxvt.color7: #dcdccc
-URxvt.color15: #dcdccc
+URxvt.fading: 20
 
 ! Terminal extensions
 URxvt.altSendsEscape: true
 URxvt.perl-ext-common: default,clipboard
-
-! Copy and paste in terminal
 URxvt.keysym.Control-Shift-C: perl:clipboard:copy
 URxvt.keysym.Control-Shift-V: perl:clipboard:paste
+
+! Zenburn color scheme
+URxvt.fadeColor:  #3a3a3a
+URxvt.background: #3a3a3a
+URxvt.foreground: #dcdccc
+URxvt.color0:     #666666
+URxvt.color1:     #cc9393
+URxvt.color2:     #7f9f7f
+URxvt.color3:     #e3ceab
+URxvt.color5:     #cc9393
+URxvt.color6:     #8cd0d3
+URxvt.color7:     #dcdccc
+URxvt.color8:     #666666
+URxvt.color9:     #cc9393
+URxvt.color10:    #7f9f7f
+URxvt.color11:    #e3ceab
+URxvt.color12:    #dfaf8f
+URxvt.color13:    #cc9393
+URxvt.color14:    #8cd0d3
+URxvt.color15:    #dcdccc
