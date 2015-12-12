@@ -14,15 +14,17 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'terryma/vim-multiple-cursors'
-Plug 'jnurmine/Zenburn'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python2 install.py' }
+Plug 'jnurmine/Zenburn'
+Plug 'Raimondi/delimitMate'
+Plug 'airblade/vim-gitgutter'
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/loremipsum'
-Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'leafgarland/typescript-vim'
 Plug 'yaml.vim'
-Plug 'scrooloose/syntastic'
 
 call plug#end()
 
@@ -71,9 +73,8 @@ set timeoutlen=300
 " Reload when file changed on the disk
 set autoread
 
-" Remove highlighting on ESC in normal mode
-nnoremap <silent> <esc> :noh<return><esc>
-nnoremap <esc>^[ <esc>^[
+" Enable mouse support
+set mouse=a
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Language settings
@@ -95,10 +96,11 @@ let g:multi_cursor_exit_from_insert_mode=0
 let g:ycm_path_to_python_interpreter='/usr/bin/python2'
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_complete_in_comments=0
 let g:ycm_add_preview_to_completeopt=0
 let g:ycm_max_diagnostics_to_display=10
-let g:ycm_filetype_whitelist={'cpp':1, 'c':1, 'python':1}
+let g:ycm_key_invoke_completion='<C-Space>'
+let g:ycm_key_list_select_completion=['<tab>', '<down>', '<c-j>']
+let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
 
 " jedi-vim
 let g:jedi#completions_enabled=0
@@ -111,6 +113,7 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
+let g:syntastic_python_flake8_post_args='--ignore=F403'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
@@ -138,3 +141,7 @@ set viminfo^=%
 
 " Highlight long lines
 let &colorcolumn=join(range(80,999),",")
+
+" Remove highlighting on ESC in normal mode
+nnoremap <silent> <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
