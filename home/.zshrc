@@ -10,8 +10,9 @@ PS1='%B%F{green}%n%f %F{blue}%~%f %F{green}$%f%b '
 bindkey '^R' history-incremental-search-backward
 
 # Sync history immediately
-setopt inc_append_history
-setopt share_history
+SAVEHIST=100
+HISTFILE=~/.zsh_history
+setopt inc_append_history share_history
 
 # Include Z
 . ~/.script/z.sh
