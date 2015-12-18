@@ -21,3 +21,6 @@ PS1+='%K{yellow}%F{black} %~ %f%k'
 PS1+='%K{green}%F{yellow}▶%f%k'
 PS1+='%K{green}%F{black} $ %f%k'
 PS1+='%F{green}%f%b '
+
+# Vim commands
+bindkey -v

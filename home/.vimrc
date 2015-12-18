@@ -22,6 +22,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/loremipsum'
+Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'leafgarland/typescript-vim'
 Plug 'yaml.vim'
@@ -151,7 +152,7 @@ autocmd BufReadPost *
 set viminfo^=%
 
 " Highlight long lines
-match Error /\%80v.\+/
+match Error /\%81v.\+/
 
 " Remove highlighting on ESC in normal mode
 nnoremap <silent> <esc> :noh<return><esc>

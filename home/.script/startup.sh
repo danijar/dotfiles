@@ -7,6 +7,9 @@ insync start &
 screencloud &
 redshift-gtk &
 
+# Set wallpaper.
+nitrogen --restore &
+
 # Try to start Ubuntu specific deamons.
 if [ 'python -mplatform | grep Ubuntu' ]; then
     echo 'Start Ubuntu deamons'
