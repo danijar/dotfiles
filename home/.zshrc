@@ -18,46 +18,41 @@ setopt inc_append_history share_history
 bindkey -v
 export KEYTIMEOUT=1
 
-# Left prompt
-PS1="%B%F{black}"
-PS1+="%K{green} %n %k"
-PS1+="%K{yellow} %~ %k"
-PS1+="%k%f%b "
+setopt promptsubst
+(){
+    local left right invisible lenleft
 
-# Enable version control status
-autoload -Uz vcs_info
+    # User name.
+    left='%B%F{black}%K{green} %n '
+    # Current working directory.
+    left+='%K{yellow} %~ '
+    # Version control branch.
+    right='${vcs_info_msg_0_:+${vcs_info_msg_0_//[%]/%%} }'
+    # Virtualenv.
+    export VIRTUAL_ENV_DISABLE_PROMPT=1
+    right+='${VIRTUAL_ENV:+venv }'
+    # Editing mode.
+    EDITMODE=insert
+    right+='%K{green} $EDITMODE'
+    right+=$' %k%f%b'
+
+    # Combine left and right prompt with spacing in between.
+    invisible='%([BSUbfksu]|([FBK]|){*})'
+    lenleft=${(S)left//$~invisible}
+    lenright=${(S)right//$~invisible}
+    PS1="$left\${(l,COLUMNS-\${#\${(%):-$lenleft$lenright}},)}$right%{"$'\n%}$ '
+}
+
+autoload vcs_info
+precmd() vcs_info
 zstyle ":vcs_info:git:*" formats "%b"
-setopt prompt_subst
-precmd() { vcs_info }
 
-# Disable default virtualenv info
-VIRTUAL_ENV_DISABLE_PROMPT=1
-
-# Right prompt
-function right_prompt {
-    RPROMPT="%B%F{black}%K{yellow} "
-    # Version control status
-    if [ $vcs_info_msg_0_ ]; then
-        RPROMPT+="$vcs_info_msg_0_ "
-    fi
-    # Virtualenv
-    if [ $VIRTUAL_ENV ]; then
-        RPROMPT+="venv "
-    fi
-    # Editing mode
-    RPROMPT+="%K{green} "
-    if [ "$KEYMAP" = "vicmd" ]; then
-        RPROMPT+="normal "
-    elif [ "$KEYMAP" = "main" ]; then
-        RPROMPT+="insert "
-    fi
+update-edit-mode() {
+    case $KEYMAP in
+        (vicmd) EDITMODE=normal;;
+        (*) EDITMODE=insert
+    esac
+    [[ $EDITMODE = $oldmode ]] || zle reset-prompt
 }
 
-ZLE_RPROMPT_INDENT=0
-right_prompt
-function zle-line-init zle-keymap-select {
-    right_prompt
-    zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
+zle -N zle-keymap-select update-edit-mode
