@@ -56,4 +56,3 @@ update-edit-mode() {
 }
 
 zle -N zle-keymap-select update-edit-mode
-sleep 1000
