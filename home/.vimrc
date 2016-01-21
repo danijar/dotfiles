@@ -26,6 +26,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'leafgarland/typescript-vim'
 Plug 'yaml.vim'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -126,6 +127,9 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 let g:syntastic_python_flake8_post_args='--ignore=F403'
+
+" Yggdroot/indentLine
+let g:indentLine_color_term = 244
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts

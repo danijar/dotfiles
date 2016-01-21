@@ -10,7 +10,7 @@ dt.hintstyle: hintfull
 ! Terminal style
 URxvt.font: xft:DejaVu Sans Mono:pixelsize=16
 URxvt.scrollBar: false
-URxvt.fading: 20
+URxvt.fading: 30
 
 ! Terminal extensions
 URxvt.altSendsEscape: true
