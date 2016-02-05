@@ -14,9 +14,17 @@ URxvt.fading: 30
 
 ! Terminal extensions
 URxvt.altSendsEscape: true
-URxvt.perl-ext-common: default,clipboard
+URxvt.perl-ext-common: default,clipboard,resize-font
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.clipboard.copycmd:  xclip -i -sel clip
+URxvt.clipboard.pastecmd: xclip -o -sel clip
+
+! Terminal keybindings
 URxvt.keysym.Control-Shift-C: perl:clipboard:copy
 URxvt.keysym.Control-Shift-V: perl:clipboard:paste
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
 
 ! Zenburn color scheme
 URxvt.fadeColor:  #3a3a3a

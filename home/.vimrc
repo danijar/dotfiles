@@ -27,6 +27,7 @@ Plug 'godlygeek/tabular'
 Plug 'leafgarland/typescript-vim'
 Plug 'yaml.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'nelstrom/vim-visual-star-search'
 
 call plug#end()
 
@@ -93,9 +94,10 @@ set mouse=a
 " Language settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd Filetype cc   setlocal ts=2 sw=2
-autocmd Filetype h    setlocal ts=2 sw=2
-autocmd Filetype html setlocal ts=2 sw=2
+autocmd Filetype cc   setlocal ts=2 sw=2 sts=2
+autocmd Filetype h    setlocal ts=2 sw=2 sts=2
+autocmd Filetype html setlocal ts=2 sw=2 sts=2
+autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
