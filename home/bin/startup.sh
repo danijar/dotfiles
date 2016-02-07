@@ -6,9 +6,11 @@ cbatticon -n &
 insync start &
 screencloud &
 redshift-gtk &
+compton -b &
 
-# Set wallpaper.
-nitrogen --restore &
+# Set wallpaper or color.
+# nitrogen --restore &
+hsetroot -solid #000000
 
 # Try to start Ubuntu specific deamons.
 if [ 'python -mplatform | grep Ubuntu' ]; then
