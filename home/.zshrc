@@ -12,9 +12,9 @@ HISTFILE=~/.zsh_history
 setopt inc_append_history share_history
 
 # Include Z
-. ~/.script/z.sh
+. ~/bin/z.sh
 
-# Vim commands
+# Vi commands
 bindkey -v
 export KEYTIMEOUT=1
 

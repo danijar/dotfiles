@@ -12,7 +12,7 @@
 set $mod Mod4
 
 # Autostart
-exec --no-startup-id ~/.script/startup.sh
+exec --no-startup-id ~/bin/startup.sh
 
 # Hide title bar for chrome
 for_window [title="Google Chrome"] border pixel 2
