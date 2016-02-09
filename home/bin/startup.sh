@@ -6,7 +6,7 @@ cbatticon -n &
 insync start &
 screencloud &
 redshift-gtk &
-compton -b &
+# compton -b &
 
 # Set wallpaper or color.
 # nitrogen --restore &
