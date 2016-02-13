@@ -1,30 +1,36 @@
 ! Apply changes in this file with `xrdb ~/.Xresources`
 
-! Font rendering
+! Terminal fonts
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=16
+URxvt.boldFont: xft:DejaVu Sans Mono:pixelsize=16:weight=bold
 Xft.antialias: true
 Xft.rgba: rgb
 Xft.hinting: tRue
 dt.hintstyle: hintfull
+! URxvt.letterSpace: -1
 ! URxvt.intensityStyles: false
 
-! Terminal style
-URxvt.font: xft:DejaVu Sans Mono:pixelsize=16
+! Terminal settings
 URxvt.scrollBar: false
+! URxvt.internalBorder: 0
+URxvt.saveLines: 10000
 URxvt.fading: 30
+URxvt.depth: 32
 
 ! Terminal extensions
 URxvt.altSendsEscape: true
-URxvt.perl-ext-common: default,clipboard,resize-font
+URxvt.perl-ext-common: default,clipboard,font-size
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.clipboard.copycmd:  xclip -i -sel clip
 URxvt.clipboard.pastecmd: xclip -o -sel clip
 
 ! Terminal keybindings
-URxvt.keysym.Control-Shift-C: perl:clipboard:copy
-URxvt.keysym.Control-Shift-V: perl:clipboard:paste
-URxvt.resize-font.smaller: C-Down
-URxvt.resize-font.bigger: C-Up
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.C-0x2b: perl:font-size:increase
+URxvt.keysym.C-0x2d: perl:font-size:decrease
+! URxvt.keysym.Control-0x2d: perl:font-size:reset
 
 ! Zenburn color scheme
 URxvt.fadeColor:  #3a3a3a

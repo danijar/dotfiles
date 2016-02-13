@@ -2,9 +2,9 @@
     XF86MonBrightnessUp
 "~/bin/backlight.py down"
     XF86MonBrightnessDown
-"amixer set DAC0 5+"
+"amixer set Master unmute 5%+"
     XF86AudioRaiseVolume
-"amixer set DAC0 5-"
+"amixer set Master unmute 5%-"
     XF86AudioLowerVolume
-"amixer set SPO toggle"
+"amixer set Master mute"
     XF86AudioMute
