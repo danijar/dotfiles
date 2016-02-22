@@ -14,9 +14,6 @@ set $mod Mod4
 # Autostart
 exec --no-startup-id ~/bin/windows.sh
 
-# Retrieve xrdb colors
-set $base00 "$(xrdb -q | egrep background | egrep -o \"[^#]{6}$\")"
-
 # Hide title bar for chrome
 for_window [title="Google Chrome"] border pixel 2
 hide_edge_borders both
@@ -60,7 +57,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run -fn 'DejaVu Sans Mono:pixelsize=16
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # lock screen
-bindsym Control+Mod1+l exec i3lock -c $base00
+bindsym Control+Mod1+l exec i3lock -c $COLOR_BG
 
 # change focus
 bindsym $mod+h focus left

@@ -1,14 +1,8 @@
-# Export user scripts directory.
-# export PATH=~/bin:$PATH
+#!/bin/sh
+# Executed by startx.
 
-# X server configuration.
-xrdb -merge ~/xresources/main
+# Run xorg user startup script.
+[[ -f ~/.xprofile ]] && . ~/.xprofile
 
-# Keyboard layout and bindings.
-~/bin/keyboard.sh &
-
-# Background applications.
-~/bin/startup.sh &
-
-# Start and run window manager.
+# Start window manager.
 exec i3
