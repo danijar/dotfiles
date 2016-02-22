@@ -1,0 +1,6 @@
+*.font: xft:DejaVu Sans Mono:pixelsize=16
+*.boldFont: xft:DejaVu Sans Mono:pixelsize=16:weight=bold
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: tRue
+Xft.hintstyle: hintfull

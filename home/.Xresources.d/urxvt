@@ -1,0 +1,23 @@
+! Appearance
+URxvt.scrollBar: false
+URxvt.saveLines: 10000
+URxvt.fading: 30
+URxvt.depth: 32
+URxvt.intensityStyles: false
+! URxvt.internalBorder: 0
+! URxvt.letterSpace: -1
+
+! Extensions
+URxvt.altSendsEscape: true
+URxvt.perl-ext-common: default,clipboard,font-size
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.clipboard.copycmd:  xclip -i -sel clip
+URxvt.clipboard.pastecmd: xclip -o -sel clip
+
+! Keybinds
+URxvt.keysym.C-C: perl:clipboard:copy
+URxvt.keysym.C-V: perl:clipboard:paste
+URxvt.keysym.C-0x2b: perl:font-size:increase
+URxvt.keysym.C-0x2d: perl:font-size:decrease
+! URxvt.keysym.Control-0x2d: perl:font-size:reset

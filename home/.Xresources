@@ -1,53 +1,5 @@
 ! Apply changes in this file with `xrdb ~/.Xresources`
-
-! Terminal fonts
-URxvt.font: xft:DejaVu Sans Mono:pixelsize=16
-URxvt.boldFont: xft:DejaVu Sans Mono:pixelsize=16:weight=bold
-Xft.antialias: true
-Xft.rgba: rgb
-Xft.hinting: tRue
-dt.hintstyle: hintfull
-! URxvt.letterSpace: -1
-! URxvt.intensityStyles: false
-
-! Terminal settings
-URxvt.scrollBar: false
-! URxvt.internalBorder: 0
-URxvt.saveLines: 10000
-URxvt.fading: 30
-URxvt.depth: 32
-
-! Terminal extensions
-URxvt.altSendsEscape: true
-URxvt.perl-ext-common: default,clipboard,font-size
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-URxvt.clipboard.copycmd:  xclip -i -sel clip
-URxvt.clipboard.pastecmd: xclip -o -sel clip
-
-! Terminal keybindings
-URxvt.keysym.C-C: perl:clipboard:copy
-URxvt.keysym.C-V: perl:clipboard:paste
-URxvt.keysym.C-0x2b: perl:font-size:increase
-URxvt.keysym.C-0x2d: perl:font-size:decrease
-! URxvt.keysym.Control-0x2d: perl:font-size:reset
-
-! Zenburn color scheme
-URxvt.fadeColor:  #3a3a3a
-URxvt.background: #3a3a3a
-URxvt.foreground: #dcdccc
-URxvt.color0:     #666666
-URxvt.color1:     #cc9393
-URxvt.color2:     #7f9f7f
-URxvt.color3:     #e3ceab
-URxvt.color5:     #cc9393
-URxvt.color6:     #8cd0d3
-URxvt.color7:     #dcdccc
-URxvt.color8:     #666666
-URxvt.color9:     #cc9393
-URxvt.color10:    #7f9f7f
-URxvt.color11:    #e3ceab
-URxvt.color12:    #dfaf8f
-URxvt.color13:    #cc9393
-URxvt.color14:    #8cd0d3
-URxvt.color15:    #dcdccc
+#include ".Xresources.d/zenburn"
+#include ".Xresources.d/colors"
+#include ".Xresources.d/urxvt"
+#include ".Xresources.d/font"

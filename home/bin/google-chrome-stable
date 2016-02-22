@@ -1,3 +1,0 @@
-#!/bin/sh
-/usr/bin/google-chrome-stable --force-device-scale-factor > /dev/null 2> /dev/null &
-disown

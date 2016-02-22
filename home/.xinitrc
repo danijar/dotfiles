@@ -1,10 +1,14 @@
-# Path variable
-export PATH=~/bin:$PATH
+# Export user scripts directory.
+# export PATH=~/bin:$PATH
 
-# Keyboard mapping
-setxkbmap -layout us -variant altgr-intl -option nodeadkeys -option ctrl:nocaps
-xbindkeys
-xmodmap ~/.Xmodmap
+# X server configuration.
+xrdb -merge ~/xresources/main
 
-xrdb -merge ~/.Xresources
+# Keyboard layout and bindings.
+~/bin/keyboard.sh &
+
+# Background applications.
+~/bin/startup.sh &
+
+# Start and run window manager.
 exec i3
