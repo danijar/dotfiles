@@ -21,21 +21,20 @@ export KEYTIMEOUT=1
 setopt promptsubst
 (){
     local left right invisible lenleft
-
+    left='%B%F{black}%K{yellow}'
+    right='%B%F{black}%K{yellow}'
     # User name.
-    left='%B%F{black}%K{green} %n '
+    left+=' %n '
     # Current working directory.
-    left+='%K{yellow} %~ '
+    left+='%K{white} %~ '
     # Version control branch.
-    right='${vcs_info_msg_0_:+${vcs_info_msg_0_//[%]/%%} }'
+    right+='${vcs_info_msg_0_:+ ${vcs_info_msg_0_//[%]/%%}}'
     # Virtualenv.
     export VIRTUAL_ENV_DISABLE_PROMPT=1
-    right+='${VIRTUAL_ENV:+venv }'
+    right+='${VIRTUAL_ENV:+ venv}'
     # Editing mode.
     EDITMODE=insert
-    right+='%K{green} $EDITMODE'
-    right+=$' %k%f%b'
-
+    right+=' $EDITMODE %k%f%b'
     # Combine left and right prompt with spacing in between.
     invisible='%([BSUbfksu]|([FBK]|){*})'
     lenleft=${(S)left//$~invisible}

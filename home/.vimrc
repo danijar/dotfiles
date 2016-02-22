@@ -39,10 +39,12 @@ call plug#end()
 set number
 set cursorline
 set visualbell
-set background=dark
+set t_Co=256
 colorscheme zenburn
 highlight LineNr ctermbg=NONE
 highlight CursorLineNr ctermbg=NONE
+highlight CursorColumn cterm=None ctermbg=black
+" highlight CursorLine cterm=None ctermbg=...
 
 " Only consider case for search strings containing upper case letter
 set ignorecase smartcase
@@ -97,6 +99,7 @@ set mouse=a
 autocmd Filetype cc   setlocal ts=2 sw=2 sts=2
 autocmd Filetype h    setlocal ts=2 sw=2 sts=2
 autocmd Filetype html setlocal ts=2 sw=2 sts=2
+autocmd Filetype css  setlocal ts=2 sw=2 sts=2
 autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -131,13 +134,13 @@ let g:syntastic_check_on_wq=0
 let g:syntastic_python_flake8_post_args='--ignore=F403'
 
 " Yggdroot/indentLine
-let g:indentLine_color_term = 244
+let g:indentLine_color_term=244
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Remove trailing whitespace on save
+" Remove trailing whitespace on save.
 function! TrimWhiteSpace()
   %s/\s\+$//e
 endfunction
@@ -149,7 +152,7 @@ autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FilterWritePre  * :call TrimWhiteSpace()
 autocmd BufWritePre     * :call TrimWhiteSpace()
 
-" Return to last edit position when opening files
+" Return to last edit position when opening files.
 autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \     exe "normal! g`\"" |
@@ -157,9 +160,9 @@ autocmd BufReadPost *
 
 set viminfo^=%
 
-" Highlight long lines
+" Highlight long lines.
 match Error /\%81v.\+/
 
-" Remove highlighting on ESC in normal mode
+" Remove highlighting on ESC in normal mode.
 nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[

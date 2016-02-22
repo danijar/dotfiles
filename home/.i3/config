@@ -11,12 +11,14 @@
 
 set $mod Mod4
 
+# Color scheme palette.
+set $COLOR_BG #3a3a3a
+set $COLOR_FG #adada2
+set $COLOR_PR #7f9f7f
+set $COLOR_AC #8cd0d3
+
 # Autostart
 exec --no-startup-id ~/bin/windows.sh
-
-# Hide title bar for chrome
-for_window [title="Google Chrome"] border pixel 2
-hide_edge_borders both
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -146,30 +148,30 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit X session?' -b 'Yes' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -177,5 +179,32 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    status_command i3status
+    # Define bar colors using the palette.
+    colors {
+        background $COLOR_BG
+        statusline $COLOR_FG
+        # class            border    backgr.   text
+        focused_workspace  $COLOR_PR $COLOR_PR $COLOR_BG
+        active_workspace   $COLOR_PR $COLOR_PR $COLOR_BG
+        inactive_workspace $COLOR_BG $COLOR_BG $COLOR_FG
+        urgent_workspace   $COLOR_AC $COLOR_AC $COLOR_BG
+        binding_mode       $COLOR_AC $COLOR_AC $COLOR_BG
+    }
+
 }
+
+# Hide border but show title bar.
+new_window normal 0
+
+# Define window colors using the palette.
+# class                 border    backgr.   text      indicator
+client.focused          $COLOR_PR $COLOR_PR $COLOR_BG $COLOR_PR
+client.focused_inactive $COLOR_BG $COLOR_BG $COLOR_FG $COLOR_BG
+client.unfocused        $COLOR_BG $COLOR_BG $COLOR_FG $COLOR_BG
+client.urgent           $COLOR_AC $COLOR_AC $COLOR_BG $COLOR_AC
+client.placeholder      #000000   $COLOR_BG $COLOR_FG   #000000
+client.background       $COLOR_BG
+
+# Hide title bar for Chrome.
+for_window [title="Google Chrome"] border pixel 0

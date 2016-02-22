@@ -15,7 +15,7 @@ startup screencloud
 startup redshift-gtk
 
 # Set wallpaper or color.
-startup hsetroot -solid "#000000"
+startup hsetroot -solid "#$COLOR_BG"
 
 # Try to start Ubuntu specific deamons.
 if python -mplatform | grep -q Ubuntu; then
