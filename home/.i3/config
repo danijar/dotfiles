@@ -59,7 +59,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run -fn 'DejaVu Sans Mono:pixelsize=16
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # lock screen
-bindsym Control+Mod1+l exec i3lock -c $COLOR_BG
+bindsym Control+Mod1+l exec i3lock -c "$COLOR_BG"
 
 # change focus
 bindsym $mod+h focus left
