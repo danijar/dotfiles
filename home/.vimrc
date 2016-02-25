@@ -28,6 +28,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'yaml.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
+Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 
@@ -109,6 +110,7 @@ autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
 " vim-multiple-cursors
 let g:multi_cursor_exit_from_visual_mode=0
 let g:multi_cursor_exit_from_insert_mode=0
+let g:multi_cursor_prev_key='<C-S-n>'
 
 " YouCompleteMe
 let g:ycm_path_to_python_interpreter='/usr/bin/python2'
