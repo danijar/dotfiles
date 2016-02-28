@@ -20,26 +20,16 @@ export KEYTIMEOUT=1
 
 setopt promptsubst
 (){
-    local left right invisible lenleft
-    left='%B%F{black}%K{yellow}'
-    right='%B%F{black}%K{yellow}'
-    # User name.
-    left+=' %n '
-    # Current working directory.
-    left+='%K{white} %~ '
-    # Version control branch.
-    right+='${vcs_info_msg_0_:+ ${vcs_info_msg_0_//[%]/%%}}'
-    # Virtualenv.
+    local line length invisible
     export VIRTUAL_ENV_DISABLE_PROMPT=1
-    right+='${VIRTUAL_ENV:+ venv}'
-    # Editing mode.
     EDITMODE=insert
-    right+=' $EDITMODE %k%f%b'
-    # Combine left and right prompt with spacing in between.
-    invisible='%([BSUbfksu]|([FBK]|){*})'
-    lenleft=${(S)left//$~invisible}
-    lenright=${(S)right//$~invisible}
-    PS1="$left\${(l,COLUMNS-\${#\${(%):-$lenleft$lenright}},)}$right%{"$'\n%}$ '
+    line='%B%F{black}%K{blue} '
+    # line+='▶ $EDITMODE '
+    line+='◕ %T '
+    line+='${vcs_info_msg_0_:+± ${vcs_info_msg_0_} }'
+    line+='${VIRTUAL_ENV:+↱ venv }'
+    line+='%K{yellow} %~ %k%f%b'
+    PS1="$line $ "
 }
 
 autoload vcs_info

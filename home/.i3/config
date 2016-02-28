@@ -200,8 +200,8 @@ new_window normal 0
 # Define window colors using the palette.
 # class                 border    backgr.   text      indicator
 client.focused          $COLOR_PR $COLOR_PR $COLOR_BG $COLOR_PR
-client.focused_inactive $COLOR_BG $COLOR_BG $COLOR_FG $COLOR_BG
-client.unfocused        $COLOR_BG $COLOR_BG $COLOR_FG $COLOR_BG
+client.focused_inactive $COLOR_FG $COLOR_FG $COLOR_BG $COLOR_FG
+client.unfocused        $COLOR_FG $COLOR_FG $COLOR_BG $COLOR_FG
 client.urgent           $COLOR_AC $COLOR_AC $COLOR_BG $COLOR_AC
 client.placeholder      #000000   $COLOR_BG $COLOR_FG   #000000
 client.background       $COLOR_BG

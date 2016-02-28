@@ -45,7 +45,6 @@ colorscheme zenburn
 highlight LineNr ctermbg=NONE
 highlight CursorLineNr ctermbg=NONE
 highlight CursorColumn cterm=None ctermbg=black
-" highlight CursorLine cterm=None ctermbg=...
 
 " Only consider case for search strings containing upper case letter
 set ignorecase smartcase
@@ -82,6 +81,12 @@ set autoread
 
 " Enable mouse support
 set mouse=a
+
+" Allow buffers in the background
+set hidden
+
+" Set leader key
+let mapleader="\\"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Disable features
@@ -133,7 +138,7 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
-let g:syntastic_python_flake8_post_args='--ignore=F403'
+let g:syntastic_python_flake8_post_args='--ignore=F403,E402'
 
 " Yggdroot/indentLine
 let g:indentLine_color_term=244
