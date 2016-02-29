@@ -9,7 +9,7 @@ URxvt.intensityStyles: false
 
 ! Extensions
 URxvt.altSendsEscape: true
-URxvt.perl-ext-common: default,clipboard,font-size
+URxvt.perl-ext-common: default,clipboard,font-size,searchable-scrollback
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.clipboard.copycmd:  xclip -i -sel clip
@@ -21,3 +21,6 @@ URxvt.keysym.C-V: perl:clipboard:paste
 URxvt.keysym.C-0x2b: perl:font-size:increase
 URxvt.keysym.C-0x2d: perl:font-size:decrease
 ! URxvt.keysym.Control-0x2d: perl:font-size:reset
+
+! Behavior
+URxvt*print-pipe: cat > $HOME/urxvt.print
