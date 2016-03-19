@@ -193,7 +193,6 @@ bar {
         urgent_workspace   $COLOR_AC $COLOR_AC $COLOR_BG
         binding_mode       $COLOR_AC $COLOR_AC $COLOR_BG
     }
-
 }
 
 # Hide border but show title bar.

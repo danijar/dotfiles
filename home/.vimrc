@@ -102,11 +102,12 @@ let mapleader="\\"
 " Language settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd Filetype cc   setlocal ts=2 sw=2 sts=2
-autocmd Filetype h    setlocal ts=2 sw=2 sts=2
-autocmd Filetype html setlocal ts=2 sw=2 sts=2
-autocmd Filetype css  setlocal ts=2 sw=2 sts=2
-autocmd Filetype yaml setlocal ts=2 sw=2 sts=2
+autocmd Filetype cc    setlocal ts=2 sw=2 sts=2
+autocmd Filetype h     setlocal ts=2 sw=2 sts=2
+autocmd Filetype html  setlocal ts=2 sw=2 sts=2
+autocmd Filetype css   setlocal ts=2 sw=2 sts=2
+autocmd Filetype yaml  setlocal ts=2 sw=2 sts=2
+autocmd Filetype proto setlocal ts=2 sw=2 sts=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -131,13 +132,13 @@ let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
 let g:jedi#completions_enabled=0
 
 " syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
+" let g:syntastic_check_on_wq=0
 let g:syntastic_python_flake8_post_args='--ignore=F403,E402'
 
 " Yggdroot/indentLine

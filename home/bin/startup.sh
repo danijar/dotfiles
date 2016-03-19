@@ -17,6 +17,9 @@ startup redshift-gtk
 # Set wallpaper or color.
 startup hsetroot -solid "#$COLOR_BG"
 
+# Compositor.
+startup compton --config ~/.config/compton.conf
+
 # Try to start Ubuntu specific deamons.
 if python -mplatform | grep -q Ubuntu; then
     startup unity-settings-daemon &
