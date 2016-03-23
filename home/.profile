@@ -32,6 +32,7 @@ function loc()
 alias subl='subl3'
 alias chrome='google-chrome-stable'
 alias python='python3'
+alias pip='pip3'
 export EDITOR='vim'
 
 # Auto activate and deavtivate virtualenv
