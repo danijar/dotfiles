@@ -29,6 +29,8 @@ Plug 'yaml.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'textobj-user'
+Plug 'kana/vim-textobj-entire'
 
 call plug#end()
 
@@ -85,6 +87,9 @@ set mouse=a
 " Allow buffers in the background
 set hidden
 
+" Use X clipboard by default
+set clipboard=unnamedplus
+
 " Set leader key
 let mapleader="\\"
 
@@ -133,17 +138,17 @@ let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
 let g:jedi#completions_enabled=0
 
 " syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_always_populate_loc_list=1
-" let g:syntastic_auto_loc_list=1
 let g:syntastic_check_on_open=1
-" let g:syntastic_check_on_wq=0
 let g:syntastic_python_flake8_post_args='--ignore=F403,E402'
 
-" Yggdroot/indentLine
+" indentLine
 let g:indentLine_color_term=244
+
+" ctrlp.vim
+let g:ctrlp_working_path_mode='a'
+let g:ctrlp_user_command = {'types': {
+    \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
+    \ }, 'fallback': 'find %s -type f'}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
