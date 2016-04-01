@@ -13,6 +13,7 @@ startup cbatticon -n
 startup insync start
 startup screencloud
 startup redshift-gtk
+startup unclutter
 
 # Set wallpaper or color.
 startup hsetroot -solid "#$COLOR_BG"

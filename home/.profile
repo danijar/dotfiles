@@ -1,6 +1,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Path variable.
+PATH=$PATH:~/.gem/ruby/2.3.0/bin
+
 # Unix tool shortcuts
 alias ls='ls --color=auto'
 alias l='ls -lh --color=auto --group-directories-first --time-style long-iso'
