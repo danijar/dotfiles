@@ -24,6 +24,10 @@ alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias scandoc='scanimage --resolution 150dpi | \
     convert -resize 1240x1753 -density 150x150 -units PixelsPerInch \
     -quality 90 -level 0,80%,0.3 -'
+function convert-preview
+{
+    ffmpeg -y -i $1 -r 30 -s 1280x720 -b 3M -strict -2 -movflags faststart $2
+}
 function loc()
 {
     extensions=$(IFS=$'|'; echo "$*")
