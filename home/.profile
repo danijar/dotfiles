@@ -24,27 +24,23 @@ alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias scandoc='scanimage --resolution 150dpi | \
     convert -resize 1240x1753 -density 150x150 -units PixelsPerInch \
     -quality 90 -level 0,80%,0.3 -'
-function convert-preview
-{
-    ffmpeg -y -i $1 -r 30 -s 1280x720 -b 3M -strict -2 -movflags faststart $2
+function convert-preview() {
+    ffmpeg -y -i $1 -r 30 -s 1280x720 -b 3M -strict -2 -movflags faststart $2;
 }
-function loc()
-{
+function loc() {
     extensions=$(IFS=$'|'; echo "$*")
     echo "$extensions"
     find . -type f | egrep -i "*.($extensions)$" | xargs wc -l
 }
 
 # Default versions and programs
-alias subl='subl3'
 alias chrome='google-chrome-stable'
-alias python='python3'
-alias pip='pip3'
+if [ -x "$(command -v python3)" ]; then alias python='python3'; fi
+if [ -x "$(command -v pip3)" ]; then alias pip='pip3'; fi
 export EDITOR='vim'
 
 # Auto activate and deavtivate virtualenv
-function _cd_virtualenv()
-{
+function _cd_virtualenv() {
     DIR='$(pwd -P)'
     if [ -e 'bin/activate' ]; then
         if [ '$VIRTUAL_ENV' != '$PWD' ]; then
@@ -60,13 +56,11 @@ function _cd_virtualenv()
 }
 
 # List contents after changing the directory
-function _cd_ls()
-{
+function _cd_ls() {
     ls --group-directories-first -A
 }
 
 # Register functions to after changing the directory
-function cd()
-{
+function cd() {
     builtin cd "$*" && _cd_virtualenv && _cd_ls
 }
