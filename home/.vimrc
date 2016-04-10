@@ -20,11 +20,10 @@ Plug 'Valloric/YouCompleteMe', { 'do': 'python2 install.py' }
 Plug 'jnurmine/Zenburn'
 Plug 'Raimondi/delimitMate'
 Plug 'airblade/vim-gitgutter'
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/loremipsum'
-Plug 'airblade/vim-gitgutter'
-Plug 'godlygeek/tabular'
-Plug 'leafgarland/typescript-vim'
+" Plug 'godlygeek/tabular'
+" Plug 'leafgarland/typescript-vim'
 Plug 'yaml.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
@@ -93,6 +92,9 @@ set clipboard=unnamedplus
 " Set leader key
 let mapleader="\\"
 
+" Performance
+set lazyredraw
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Disable features
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -122,7 +124,9 @@ autocmd Filetype scss  setlocal ts=2 sw=2 sts=2
 " vim-multiple-cursors
 let g:multi_cursor_exit_from_visual_mode=0
 let g:multi_cursor_exit_from_insert_mode=0
+let g:multi_cursor_start_word_key='g<C-n>'
 let g:multi_cursor_prev_key='<C-S-n>'
+let g:multi_cursor_quit_key='<C-c>'
 
 " YouCompleteMe
 let g:ycm_path_to_python_interpreter='/usr/bin/python2'
@@ -135,10 +139,11 @@ let g:ycm_key_list_select_completion=['<tab>', '<down>', '<c-j>']
 let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
 
 " jedi-vim
-let g:jedi#completions_enabled=0
+" let g:jedi#completions_enabled=0
 
 " syntastic
 let g:syntastic_check_on_open=1
+let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_post_args='--ignore=F403,E402'
 
 " indentLine
