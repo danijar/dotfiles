@@ -124,8 +124,9 @@ autocmd Filetype scss  setlocal ts=2 sw=2 sts=2
 " vim-multiple-cursors
 let g:multi_cursor_exit_from_visual_mode=0
 let g:multi_cursor_exit_from_insert_mode=0
+let g:multi_cursor_start_key='<C-n>'
 let g:multi_cursor_start_word_key='g<C-n>'
-let g:multi_cursor_prev_key='<C-S-n>'
+" let g:multi_cursor_prev_key='<C-S-n>'
 let g:multi_cursor_quit_key='<C-c>'
 
 " YouCompleteMe
