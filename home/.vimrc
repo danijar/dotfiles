@@ -13,7 +13,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do': 'python2 install.py' }
@@ -96,38 +96,16 @@ let mapleader="\\"
 set lazyredraw
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Disable features
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Command window
-:map q: <Nop>
-
-" Command mode
-:map Q <Nop>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Language settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-autocmd Filetype cc    setlocal ts=2 sw=2 sts=2
-autocmd Filetype h     setlocal ts=2 sw=2 sts=2
-autocmd Filetype html  setlocal ts=2 sw=2 sts=2
-autocmd Filetype css   setlocal ts=2 sw=2 sts=2
-autocmd Filetype yaml  setlocal ts=2 sw=2 sts=2
-autocmd Filetype proto setlocal ts=2 sw=2 sts=2
-autocmd Filetype scss  setlocal ts=2 sw=2 sts=2
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " vim-multiple-cursors
-let g:multi_cursor_exit_from_visual_mode=0
-let g:multi_cursor_exit_from_insert_mode=0
-let g:multi_cursor_start_key='<C-n>'
-let g:multi_cursor_start_word_key='g<C-n>'
+" let g:multi_cursor_exit_from_visual_mode=0
+" let g:multi_cursor_exit_from_insert_mode=0
+" let g:multi_cursor_start_key='<C-n>'
+" let g:multi_cursor_start_word_key='g<C-n>'
 " let g:multi_cursor_prev_key='<C-S-n>'
-let g:multi_cursor_quit_key='<C-c>'
+" let g:multi_cursor_quit_key='<C-c>'
 
 " YouCompleteMe
 let g:ycm_path_to_python_interpreter='/usr/bin/python2'
@@ -157,6 +135,23 @@ let g:ctrlp_user_command = {'types': {
     \ }, 'fallback': 'find %s -type f'}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Modifications
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Make visual block mode work with Ctrl+C.
+vnoremap <C-c> <Esc>
+
+" Remove highlighting on ESC in normal mode.
+nnoremap <silent> <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
+
+" Disable command window.
+:map q: <Nop>
+
+" Disable command mode.
+:map Q <Nop>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -165,8 +160,8 @@ function! TrimWhiteSpace()
   %s/\s\+$//e
 endfunction
 
+" Trim whitespace on save.
 nnoremap <silent> <leader>rts :call TrimWhiteSpace()<cr>
-
 autocmd FileWritePre    * :call TrimWhiteSpace()
 autocmd FileAppendPre   * :call TrimWhiteSpace()
 autocmd FilterWritePre  * :call TrimWhiteSpace()
@@ -183,6 +178,14 @@ set viminfo^=%
 " Highlight long lines.
 match Error /\%81v.\+/
 
-" Remove highlighting on ESC in normal mode.
-nnoremap <silent> <esc> :noh<return><esc>
-nnoremap <esc>^[ <esc>^[
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Language settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd Filetype cc    setlocal ts=2 sw=2 sts=2
+autocmd Filetype h     setlocal ts=2 sw=2 sts=2
+autocmd Filetype html  setlocal ts=2 sw=2 sts=2
+autocmd Filetype css   setlocal ts=2 sw=2 sts=2
+autocmd Filetype yaml  setlocal ts=2 sw=2 sts=2
+autocmd Filetype proto setlocal ts=2 sw=2 sts=2
+autocmd Filetype scss  setlocal ts=2 sw=2 sts=2

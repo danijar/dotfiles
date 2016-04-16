@@ -45,6 +45,3 @@ setopt promptsubst
     line+='%K{yellow} %~ %k%f%b'
     PS1="$line $ "
 }
-
-# Plugins
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
