@@ -151,6 +151,9 @@ nnoremap <esc>^[ <esc>^[
 " Disable command mode.
 :map Q <Nop>
 
+" Disable swap files.
+set noswapfile
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
