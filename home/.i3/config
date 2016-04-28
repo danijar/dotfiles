@@ -207,5 +207,6 @@ client.urgent           $COLOR_AC $COLOR_AC $COLOR_BG $COLOR_AC
 client.placeholder      #000000   $COLOR_BG $COLOR_FG   #000000
 client.background       $COLOR_BG
 
-# Hide title bar for Chrome.
+# Hide title bar for some applications.
 for_window [title="Google Chrome"] border pixel 0
+for_window [title="Android Studio"] border pixel 0

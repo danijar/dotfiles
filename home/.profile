@@ -18,6 +18,8 @@ alias gdos='git diff --stat origin/master'
 alias gl='git log'
 alias ga='git add -A'
 alias gc='git commit -m '
+alias gf='git fetch --all'
+alias gr='git rebase'
 
 # Workflow shortcuts
 alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
