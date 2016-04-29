@@ -21,6 +21,12 @@ alias gc='git commit -m '
 alias gf='git fetch --all'
 alias gr='git rebase'
 
+# Default versions and programs
+alias chrome='google-chrome-stable'
+if [ -x "$(command -v python3)" ]; then alias python='python3'; fi
+if [ -x "$(command -v pip3)" ]; then alias pip='pip3'; fi
+export EDITOR='vim'
+
 # Workflow shortcuts
 alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias scandoc='scanimage --resolution 150dpi | \
@@ -34,12 +40,16 @@ function loc() {
     echo "$extensions"
     find . -type f | egrep -i "*.($extensions)$" | xargs wc -l
 }
-
-# Default versions and programs
-alias chrome='google-chrome-stable'
-if [ -x "$(command -v python3)" ]; then alias python='python3'; fi
-if [ -x "$(command -v pip3)" ]; then alias pip='pip3'; fi
-export EDITOR='vim'
+function python3() {
+    # Colorize stack traces if highlighter is installed and python is not
+    # running interactively (without arguments).
+    if [ -x "$(command -v pygmentize)" ] && [ "$@" ]; then
+        /usr/bin/python3 "$@" 2> /tmp/python-trace
+        cat /tmp/python-trace | pygmentize -l py3tb
+    else
+        /usr/bin/python3 "$@"
+    fi
+}
 
 # Auto activate and deavtivate virtualenv
 function _cd_virtualenv() {
