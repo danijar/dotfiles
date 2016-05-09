@@ -30,6 +30,7 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'textobj-user'
 Plug 'kana/vim-textobj-entire'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
@@ -134,6 +135,11 @@ let g:ctrlp_user_command = {'types': {
     \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
     \ }, 'fallback': 'find %s -type f'}
 
+" plasticboy/vim-markdown
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_conceal = 0
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Modifications
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -146,13 +152,16 @@ nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
 " Disable command window.
-:map q: <Nop>
+map q: <Nop>
 
 " Disable command mode.
-:map Q <Nop>
+map Q <Nop>
 
 " Disable swap files.
 set noswapfile
+
+" Disable code folding.
+set nofoldenable
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
@@ -192,3 +201,5 @@ autocmd Filetype css   setlocal ts=2 sw=2 sts=2
 autocmd Filetype yaml  setlocal ts=2 sw=2 sts=2
 autocmd Filetype proto setlocal ts=2 sw=2 sts=2
 autocmd Filetype scss  setlocal ts=2 sw=2 sts=2
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+let g:tex_conceal = "agms"

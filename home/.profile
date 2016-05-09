@@ -2,7 +2,9 @@
 [[ $- != *i* ]] && return
 
 # Path variable.
-PATH=$PATH:~/.gem/ruby/2.3.0/bin
+export PATH="$PATH:~/.gem/ruby/2.3.0/bin"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"
+export CUDA_HOME="/usr/local/cuda"
 
 # Unix tool shortcuts
 alias ls='ls --color=auto'
@@ -39,16 +41,6 @@ function loc() {
     extensions=$(IFS=$'|'; echo "$*")
     echo "$extensions"
     find . -type f | egrep -i "*.($extensions)$" | xargs wc -l
-}
-function python3() {
-    # Colorize stack traces if highlighter is installed and python is not
-    # running interactively (without arguments).
-    if [ -x "$(command -v pygmentize)" ] && [ "$@" ]; then
-        /usr/bin/python3 "$@" 2> /tmp/python-trace
-        cat /tmp/python-trace | pygmentize -l py3tb
-    else
-        /usr/bin/python3 "$@"
-    fi
 }
 
 # Auto activate and deavtivate virtualenv
