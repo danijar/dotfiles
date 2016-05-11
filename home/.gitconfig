@@ -3,3 +3,5 @@
 	name = Danijar Hafner
 [push]
 	default = simple
+[pull]
+	rebase = true
