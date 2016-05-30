@@ -37,6 +37,7 @@ Plug 'asciidoc/vim-asciidoc'
 " Colorschemes
 Plug 'morhetz/gruvbox'
 Plug 'jnurmine/Zenburn'
+Plug 'easysid/mod8.vim'
 
 call plug#end()
 
@@ -57,6 +58,9 @@ set lazyredraw
 set nofoldenable
 set noswapfile
 set number
+set ruler
+set splitbelow
+set splitright
 set visualbell
 set wildmenu history=250
 set wildmode=longest,list
@@ -70,8 +74,18 @@ set sidescrolloff=100
 " Reduce time to wait for key combos.
 set timeoutlen=300
 
-" Make visual block mode work with Ctrl+C.
-vnoremap <C-c> <Esc>
+" Disable detailed completion window.
+set completeopt-=preview
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Keybinds
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Save pressing Shift to enter command mode.
+nnoremap ; :
+
+" Use Q to execute default register.
+nnoremap Q @q
 
 " Remove highlighting on ESC in normal mode.
 nnoremap <silent> <esc> :noh<return><esc>
@@ -81,8 +95,8 @@ nnoremap <esc>^[ <esc>^[
 map q: <Nop>
 map Q <Nop>
 
-" Disable detailed completion window.
-set completeopt-=preview
+" Make visual block mode work with Ctrl+C.
+vnoremap <C-c> <Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Formatting
@@ -95,6 +109,7 @@ set autoindent
 set expandtab
 set backspace=indent,eol,start
 set formatoptions-=o
+set nojoinspaces
 
 au filetype * set formatoptions-=o
 
@@ -153,11 +168,16 @@ let g:gruvbox_contrast_light = "hard"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set background=dark
+" set background=light
 colorscheme gruvbox
 " colorscheme zenburn
-highlight LineNr ctermbg=NONE
-highlight CursorLineNr ctermbg=NONE
-highlight CursorColumn cterm=None ctermbg=black
+" colorscheme mod8
+
+if exists('g:colors_name') && g:colors_name == 'zenburn'
+  highlight LineNr ctermbg=NONE
+  highlight CursorLineNr ctermbg=NONE
+  highlight CursorColumn cterm=None ctermbg=black
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
@@ -177,9 +197,9 @@ autocmd BufWritePre     * :call TrimWhiteSpace()
 
 " Return to last edit position when opening files.
 autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \     exe "normal! g`\"" |
-    \ endif
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \     exe "normal! g`\"" |
+  \ endif
 
 set viminfo^=%
 
@@ -199,5 +219,6 @@ autocmd Filetype css   setlocal ts=2 sw=2 sts=2
 autocmd Filetype yaml  setlocal ts=2 sw=2 sts=2
 autocmd Filetype proto setlocal ts=2 sw=2 sts=2
 autocmd Filetype scss  setlocal ts=2 sw=2 sts=2
+autocmd Filetype vim   setlocal ts=2 sw=2 sts=2
 
 let g:tex_conceal = "agms"
