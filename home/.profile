@@ -2,6 +2,7 @@
 [[ $- != *i* ]] && return
 
 # Path variable.
+export PATH="$PATH:~/bin"
 export PATH="$PATH:~/.gem/ruby/2.3.0/bin"
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64"
 export CUDA_HOME="/usr/local/cuda"

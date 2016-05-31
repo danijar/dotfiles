@@ -182,6 +182,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     status_command i3status
+    # status_command $HOME/bin/conky-i3bar
     # Define bar colors using the palette.
     colors {
         background $COLOR_BG

@@ -45,7 +45,7 @@ call plug#end()
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let mapleader="\\"
+let mapleader="\<SPACE>"
 
 " Editor settings
 " set autoread
@@ -168,10 +168,10 @@ let g:gruvbox_contrast_light = "hard"
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set background=dark
-set background=light
-colorscheme gruvbox
-" colorscheme zenburn
+set background=dark
+" set background=light
+" colorscheme gruvbox
+colorscheme zenburn
 " colorscheme mod8
 
 if exists('g:colors_name') && g:colors_name == 'zenburn'
