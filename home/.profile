@@ -26,6 +26,7 @@ alias gr='git rebase'
 # Default versions and programs
 alias chrome='google-chrome-stable'
 if [ -x "$(command -v python3)" ]; then alias python='python3'; fi
+if [ -x "$(command -v nvim)" ]; then alias vim='nvim'; fi
 if [ -x "$(command -v pip3)" ]; then alias pip='pip3'; fi
 export EDITOR='vim'
 

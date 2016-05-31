@@ -91,9 +91,10 @@ nnoremap Q @q
 nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
-" Disable command mode and window.
+" Disable features.
 map q: <Nop>
 map Q <Nop>
+map <F1> <Nop>
 
 " Make visual block mode work with Ctrl+C.
 vnoremap <C-c> <Esc>
@@ -167,8 +168,8 @@ let g:gruvbox_contrast_light = "hard"
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set background=dark
-" set background=light
+" set background=dark
+set background=light
 colorscheme gruvbox
 " colorscheme zenburn
 " colorscheme mod8
@@ -212,13 +213,14 @@ match Error /\%81v.\+/
 
 autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
-autocmd Filetype cc    setlocal ts=2 sw=2 sts=2
-autocmd Filetype h     setlocal ts=2 sw=2 sts=2
-autocmd Filetype html  setlocal ts=2 sw=2 sts=2
-autocmd Filetype css   setlocal ts=2 sw=2 sts=2
-autocmd Filetype yaml  setlocal ts=2 sw=2 sts=2
-autocmd Filetype proto setlocal ts=2 sw=2 sts=2
-autocmd Filetype scss  setlocal ts=2 sw=2 sts=2
-autocmd Filetype vim   setlocal ts=2 sw=2 sts=2
+autocmd Filetype cc         setlocal ts=2 sw=2 sts=2
+autocmd Filetype h          setlocal ts=2 sw=2 sts=2
+autocmd Filetype html       setlocal ts=2 sw=2 sts=2
+autocmd Filetype css        setlocal ts=2 sw=2 sts=2
+autocmd Filetype yaml       setlocal ts=2 sw=2 sts=2
+autocmd Filetype proto      setlocal ts=2 sw=2 sts=2
+autocmd Filetype scss       setlocal ts=2 sw=2 sts=2
+autocmd Filetype vim        setlocal ts=2 sw=2 sts=2
+autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
 
 let g:tex_conceal = "agms"
