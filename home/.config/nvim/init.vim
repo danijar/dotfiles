@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/loremipsum'
+Plug 'amerlyq/vim-focus-autocmd'
 
 " Editing
 " Plug 'terryma/vim-multiple-cursors'
@@ -45,28 +46,46 @@ call plug#end()
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Reload files that change on disk.
 " set autoread
+" autocmd FocusGained * checktime
+
+" Behavior.
 set clipboard=unnamedplus
-set cursorline
 set hidden
 set hlsearch incsearch
 set ignorecase smartcase
 set lazyredraw
 set nofoldenable
 set noswapfile
-set number
-set ruler
+set viminfo^=%
+
+" Operation.
+set completeopt-=preview
+set scrolloff=100
+set sidescrolloff=100
 set splitbelow
 set splitright
+set timeoutlen=300
+set ttimeoutlen=0
 set visualbell
 set wildmenu history=250
 set wildmode=longest,list
-set completeopt-=preview
-set viminfo^=%
-set timeoutlen=300
-set ttimeoutlen=0
-set scrolloff=100
-set sidescrolloff=100
+
+" Formatting.
+set autoindent
+set backspace=indent,eol,start
+set expandtab
+set formatoptions+=t
+set formatoptions-=o
+set nojoinspaces
+set ts=4 sw=4 sts=4
+set tw=79
+
+" Visual.
+set cursorline
+set number
+set ruler
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
@@ -77,45 +96,31 @@ map <Space> <Nop>
 let mapleader = " "
 
 " Save pressing Shift to enter command mode.
-nnoremap ; :
+noremap ; :
 
 " Use Q to execute default register.
-nnoremap Q @q
+" nnoremap Q @q
 
 " Remove highlighting on ESC in normal mode.
-nnoremap <silent> <esc> :noh<return><esc>
 nnoremap <silent> <C-c> :noh<return><C-c>
-nnoremap <esc>^[ <esc>^[
 
 " Disable features.
 map q: <Nop>
 map Q <Nop>
 map <F1> <Nop>
 map <esc> <Nop>
+imap <esc> <Nop>
 
 " Make visual block mode work with Ctrl+C.
-vnoremap <C-c> <Esc>
+inoremap <C-c> <esc>
 
 " Shortcuts.
 nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
 nnoremap <leader>f mzvipgq`z
 nnoremap <leader>r :source ~/.config/nvim/init.vim<return>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Formatting
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set tw=79
-set formatoptions+=t
-set ts=4 sw=4 sts=4
-set autoindent
-set expandtab
-set backspace=indent,eol,start
-set formatoptions-=o
-set nojoinspaces
-
-autocmd filetype * setlocal formatoptions-=o
+nnoremap <leader>R :edit ~/.config/nvim/init.vim<return>
+nnoremap <leader>l :Loremipsum<return>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -189,19 +194,15 @@ colorscheme gruvbox
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Remove trailing whitespace on save.
-function! TrimWhiteSpace()
-  %s/\s\+$//e
-endfunction
-autocmd FileWritePre   * :call TrimWhiteSpace()
-autocmd FileAppendPre  * :call TrimWhiteSpace()
-autocmd FilterWritePre * :call TrimWhiteSpace()
-autocmd BufWritePre    * :call TrimWhiteSpace()
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Return to last edit position when opening files.
-autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \     exe "normal! g`\"" |
-  \ endif
+function! ResumeCursorPosition()
+  if line("'\"") > 0 && line("'\"") <= line("$") |
+    exe "normal! g`\"" |
+  endif
+endfunction
+autocmd BufReadPost * call ResumeCursorPosition()
 
 " Highlight long lines.
 match Error /\%80v.\+/
