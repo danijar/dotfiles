@@ -45,9 +45,6 @@ call plug#end()
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let mapleader="\<SPACE>"
-
-" Editor settings
 " set autoread
 set clipboard=unnamedplus
 set cursorline
@@ -64,22 +61,20 @@ set splitright
 set visualbell
 set wildmenu history=250
 set wildmode=longest,list
-
-" Exit visual mode immediately.
-set timeoutlen=1000
+set completeopt-=preview
+set viminfo^=%
+set timeoutlen=300
 set ttimeoutlen=0
 set scrolloff=100
 set sidescrolloff=100
 
-" Reduce time to wait for key combos.
-set timeoutlen=300
-
-" Disable detailed completion window.
-set completeopt-=preview
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Leader key.
+map <Space> <Nop>
+let mapleader = " "
 
 " Save pressing Shift to enter command mode.
 nnoremap ; :
@@ -89,15 +84,23 @@ nnoremap Q @q
 
 " Remove highlighting on ESC in normal mode.
 nnoremap <silent> <esc> :noh<return><esc>
+nnoremap <silent> <C-c> :noh<return><C-c>
 nnoremap <esc>^[ <esc>^[
 
 " Disable features.
 map q: <Nop>
 map Q <Nop>
 map <F1> <Nop>
+map <esc> <Nop>
 
 " Make visual block mode work with Ctrl+C.
 vnoremap <C-c> <Esc>
+
+" Shortcuts.
+nnoremap <leader>s :%s//g<left><left>
+vnoremap <leader>s :s//g<left><left>
+nnoremap <leader>f mzvipgq`z
+nnoremap <leader>r :source ~/.config/nvim/init.vim<return>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Formatting
@@ -112,7 +115,7 @@ set backspace=indent,eol,start
 set formatoptions-=o
 set nojoinspaces
 
-au filetype * set formatoptions-=o
+autocmd filetype * setlocal formatoptions-=o
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -164,21 +167,22 @@ let g:gruvbox_italic = 1
 let g:gruvbox_contrast_dark = "soft"
 let g:gruvbox_contrast_light = "hard"
 
+" jnurmine/Zenburn
+if exists('g:colors_name') && g:colors_name == 'zenburn'
+  highlight LineNr ctermbg=NONE
+  highlight CursorLineNr ctermbg=NONE
+  highlight CursorColumn cterm=None ctermbg=black
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set background=dark
 " set background=light
-" colorscheme gruvbox
-colorscheme zenburn
+colorscheme gruvbox
+" colorscheme zenburn
 " colorscheme mod8
-
-if exists('g:colors_name') && g:colors_name == 'zenburn'
-  highlight LineNr ctermbg=NONE
-  highlight CursorLineNr ctermbg=NONE
-  highlight CursorColumn cterm=None ctermbg=black
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
@@ -188,13 +192,10 @@ endif
 function! TrimWhiteSpace()
   %s/\s\+$//e
 endfunction
-
-" Trim whitespace on save.
-nnoremap <silent> <leader>rts :call TrimWhiteSpace()<cr>
-autocmd FileWritePre    * :call TrimWhiteSpace()
-autocmd FileAppendPre   * :call TrimWhiteSpace()
-autocmd FilterWritePre  * :call TrimWhiteSpace()
-autocmd BufWritePre     * :call TrimWhiteSpace()
+autocmd FileWritePre   * :call TrimWhiteSpace()
+autocmd FileAppendPre  * :call TrimWhiteSpace()
+autocmd FilterWritePre * :call TrimWhiteSpace()
+autocmd BufWritePre    * :call TrimWhiteSpace()
 
 " Return to last edit position when opening files.
 autocmd BufReadPost *
@@ -202,16 +203,14 @@ autocmd BufReadPost *
   \     exe "normal! g`\"" |
   \ endif
 
-set viminfo^=%
-
 " Highlight long lines.
-match Error /\%81v.\+/
+match Error /\%80v.\+/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+autocmd BufNewFile, BufFilePre, BufRead *.md set filetype=markdown
 
 autocmd Filetype cc         setlocal ts=2 sw=2 sts=2
 autocmd Filetype h          setlocal ts=2 sw=2 sts=2
