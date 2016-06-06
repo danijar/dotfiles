@@ -169,6 +169,8 @@ let g:vim_markdown_math = 1
 let g:vim_markdown_conceal = 0
 
 " morhetz/gruvbox
+let g:gruvbox_underline = 0
+let g:gruvbox_undercurl = 0
 let g:gruvbox_italic = 1
 let g:gruvbox_contrast_dark = "soft"
 let g:gruvbox_contrast_light = "hard"
