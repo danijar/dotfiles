@@ -121,6 +121,7 @@ nnoremap <leader>f mzvipgq`z
 nnoremap <leader>r :source ~/.config/nvim/init.vim<return>
 nnoremap <leader>R :edit ~/.config/nvim/init.vim<return>
 nnoremap <leader>l :Loremipsum<return>
+nnoremap <leader>a mzggVGy`z
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -211,7 +212,8 @@ match Error /\%80v.\+/
 " Languages
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd BufNewFile, BufFilePre, BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufFilePre,BufRead *.ad set filetype=asciidoc
 
 autocmd Filetype cc         setlocal ts=2 sw=2 sts=2
 autocmd Filetype h          setlocal ts=2 sw=2 sts=2
