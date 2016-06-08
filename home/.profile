@@ -9,7 +9,7 @@ export CUDA_HOME="/usr/local/cuda"
 
 # Unix tool shortcuts
 alias ls='ls --color=auto'
-alias l='ls -lh --color=auto --group-directories-first --time-style long-iso'
+alias l='ls -lhA --color=auto --group-directories-first --time-style long-iso'
 alias clip='xclip -selection c'
 
 # Git shortcuts
@@ -63,7 +63,7 @@ function _cd_virtualenv() {
 
 # List contents after changing the directory
 function _cd_ls() {
-    ls --group-directories-first -A
+    ls --group-directories-first
 }
 
 # Register functions to after changing the directory
