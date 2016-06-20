@@ -34,6 +34,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'yaml.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'asciidoc/vim-asciidoc'
+Plug 'leafgarland/typescript-vim'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
@@ -226,5 +227,6 @@ autocmd Filetype proto      setlocal ts=2 sw=2 sts=2
 autocmd Filetype scss       setlocal ts=2 sw=2 sts=2
 autocmd Filetype vim        setlocal ts=2 sw=2 sts=2
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
+autocmd Filetype typescript setlocal ts=2 sw=2 sts=2
 
 let g:tex_conceal = "agms"
