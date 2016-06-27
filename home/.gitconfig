@@ -5,3 +5,5 @@
 	default = current
 [pull]
 	rebase = true
+[rebase]
+	autostash = true
