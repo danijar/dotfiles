@@ -156,7 +156,8 @@ let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_post_args = '--ignore=F403,E402'
 
 " indentLine
-let g:indentLine_color_term=244
+" let g:indentLine_color_term = 244
+" let g:indentLine_conceallevel = 1
 
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'
@@ -228,5 +229,7 @@ autocmd Filetype scss       setlocal ts=2 sw=2 sts=2
 autocmd Filetype vim        setlocal ts=2 sw=2 sts=2
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
 autocmd Filetype typescript setlocal ts=2 sw=2 sts=2
+autocmd Filetype json       setlocal ts=2 sw=2 sts=2 conceallevel=0
 
 let g:tex_conceal = "agms"
+" let g:vim_json_syntax_conceal = 0

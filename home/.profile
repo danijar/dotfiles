@@ -42,6 +42,7 @@ function loc() {
     echo "$extensions"
     find . -type f | egrep -i "*.($extensions)$" | xargs wc -l
 }
+alias np='python -i -c "import numpy as np"'
 
 # Auto activate and deavtivate virtualenv
 function _cd_virtualenv() {
