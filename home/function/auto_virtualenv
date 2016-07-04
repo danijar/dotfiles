@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Auto activate and deavtivate virtualenv.
+auto_virtualenv () {
+    DIR='$(pwd -P)'
+    if [ -e './bin/activate' ]; then
+        if [ "$VIRTUAL_ENV" != "$PWD" ]; then
+            echo 'Enter virtualenv'
+            . ./bin/activate
+        fi
+    else
+        if ! [ -z $VIRTUAL_ENV ]; then
+            echo 'Leave virtualenv'
+            deactivate
+        fi
+    fi
+}
+

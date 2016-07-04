@@ -34,38 +34,14 @@ alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias scandoc='scanimage --resolution 150dpi | \
     convert -resize 1240x1753 -density 150x150 -units PixelsPerInch \
     -quality 90 -level 0,80%,0.3 -'
+alias np='python -i -c "import numpy as np"'
+
 function convert-preview() {
     ffmpeg -y -i $1 -r 30 -s 1280x720 -b 3M -strict -2 -movflags faststart $2;
 }
+
 function loc() {
     extensions=$(IFS=$'|'; echo "$*")
     echo "$extensions"
     find . -type f | egrep -i "*.($extensions)$" | xargs wc -l
-}
-alias np='python -i -c "import numpy as np"'
-
-# Auto activate and deavtivate virtualenv
-function _cd_virtualenv() {
-    DIR='$(pwd -P)'
-    if [ -e 'bin/activate' ]; then
-        if [ '$VIRTUAL_ENV' != '$PWD' ]; then
-            echo 'Enter virtualenv'
-            source bin/activate
-        fi
-    else
-        if ! [ -z $VIRTUAL_ENV ]; then
-            echo 'Leave virtualenv'
-            deactivate
-        fi
-    fi
-}
-
-# List contents after changing the directory
-function _cd_ls() {
-    ls --group-directories-first
-}
-
-# Register functions to after changing the directory
-function cd() {
-    builtin cd "$*" && _cd_virtualenv && _cd_ls
 }

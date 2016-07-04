@@ -45,3 +45,15 @@ setopt promptsubst
     line+='%K{yellow} %~ %k%f%b'
     PS1="$line $ "
 }
+
+# Print git sync status.
+[[ $- != *i* ]] && return
+. ~/function/defer
+. ~/function/git_sync_status
+. ~/function/auto_virtualenv
+cd () {
+    builtin cd "$*"
+    auto_virtualenv
+    ls --group-directories-first
+    defer git_sync_status
+}

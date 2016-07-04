@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+TRAPUSR1 () { [[ -o zle ]] && zle -I }
+
+defer_out () {
+    local buffer
+    while read -r line; do
+        buffer="$buffer$line\n"
+    done
+    [[ -z "$buffer" ]] && return
+    print -rn -- $terminfo[dl1]
+    print -rn -- $terminfo[cr]
+    printf $buffer
+    kill -USR1 $$
+}
+
+# Run command in background and print above current prompt.
+defer () {
+    unsetopt monitor
+    "$@" |& defer_out & disown
+    setopt monitor
+}
