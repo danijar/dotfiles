@@ -1,3 +1,5 @@
+! Key Shift+Key mode_switch+Key mode_switch+Shift+Key AltGr+Key AltGr+Shift+Key
 clear lock
-keycode 66 = Control_L
+clear control
 add control = Control_L Control_R
+keycode 66 = Control_L

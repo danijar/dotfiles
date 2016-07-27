@@ -6,10 +6,14 @@ autoload -U compinit && compinit
 # Key bindings
 bindkey "^R" history-incremental-search-backward
 
-# Sync history immediately
+# History
 SAVEHIST=100
+HISTSIZE=100
 HISTFILE=~/.zsh_history
-setopt inc_append_history share_history
+setopt hist_find_no_dups
+setopt hist_ignore_dups
+setopt inc_append_history
+setopt share_history
 
 # Include Z
 . ~/bin/z.sh

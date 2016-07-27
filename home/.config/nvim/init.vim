@@ -27,14 +27,16 @@ Plug 'nelstrom/vim-visual-star-search'
 
 " Code intel
 " Plug 'davidhalter/jedi-vim'
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'bjoernd/vim-ycm-tex'
 
 " Languages
 Plug 'yaml.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'asciidoc/vim-asciidoc'
 Plug 'leafgarland/typescript-vim'
+Plug 'lervag/vimtex'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
@@ -77,8 +79,8 @@ set wildmode=longest,list
 set autoindent
 set backspace=indent,eol,start
 set expandtab
-set formatoptions+=t
-set formatoptions-=o
+set formatoptions+=t  " Hard wrap text using textwidth
+set formatoptions-=o  " Don't continue comments when inserting lines set
 set nojoinspaces
 set ts=4 sw=4 sts=4
 set tw=79
@@ -123,6 +125,7 @@ nnoremap <leader>r :source ~/.config/nvim/init.vim<return>
 nnoremap <leader>R :edit ~/.config/nvim/init.vim<return>
 nnoremap <leader>l :Loremipsum<return>
 nnoremap <leader>a mzggVGy`z
+nnoremap <leader>q @q
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -146,6 +149,9 @@ let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_key_list_select_completion=['<tab>', '<down>', '<c-j>']
 let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
 let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_semantic_triggers = {
+\  'tex'  : ['\ref{','\cite{'],
+\ }
 
 " jedi-vim
 " let g:jedi#completions_enabled=0
@@ -216,8 +222,9 @@ match Error /\%80v.\+/
 " Languages
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-autocmd BufNewFile,BufFilePre,BufRead *.ad set filetype=asciidoc
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
+autocmd BufNewFile,BufRead *.cls set filetype=tex
 
 autocmd Filetype cc         setlocal ts=2 sw=2 sts=2
 autocmd Filetype h          setlocal ts=2 sw=2 sts=2
@@ -230,6 +237,8 @@ autocmd Filetype vim        setlocal ts=2 sw=2 sts=2
 autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
 autocmd Filetype typescript setlocal ts=2 sw=2 sts=2
 autocmd Filetype json       setlocal ts=2 sw=2 sts=2 conceallevel=0
+autocmd Filetype tex        setlocal ts=2 sw=2 sts=2 conceallevel=0
 
-let g:tex_conceal = "agms"
-" let g:vim_json_syntax_conceal = 0
+
+" let g:tex_conceal = "agms"
+let g:tex_conceal = ""
