@@ -1,4 +1,5 @@
 [[ -e ~/.profile ]] && emulate sh -c "source ~/.profile"
+# http://zsh.sourceforge.net/Doc/Release/Options.html
 
 # Enable command completion
 autoload -U compinit && compinit
@@ -7,13 +8,16 @@ autoload -U compinit && compinit
 bindkey "^R" history-incremental-search-backward
 
 # History
-SAVEHIST=100
-HISTSIZE=100
+SAVEHIST=10000
+HISTSIZE=20000
 HISTFILE=~/.zsh_history
-setopt hist_find_no_dups
-setopt hist_ignore_dups
-setopt inc_append_history
 setopt share_history
+setopt inc_append_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt hist_reduce_blanks
 
 # Include Z
 . ~/bin/z.sh
