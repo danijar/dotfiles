@@ -1,4 +1,4 @@
-[[ -e ~/.profile ]] && emulate sh -c "source ~/.profile"
+# Zsh configuration file.
 # http://zsh.sourceforge.net/Doc/Release/Options.html
 
 # Enable command completion
@@ -54,14 +54,8 @@ setopt promptsubst
     PS1="$line $ "
 }
 
-# Print git sync status.
+# Run interactive scripts in interactive mode.
 [[ $- != *i* ]] && return
-. ~/function/defer
-. ~/function/git_sync_status
-. ~/function/auto_virtualenv
-cd () {
-    builtin cd "$*"
-    auto_virtualenv
-    ls --group-directories-first
-    defer git_sync_status
-}
+for script in ~/autoload/*; do
+    . $script;
+done

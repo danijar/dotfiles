@@ -1,2 +1,5 @@
 # Vim
 *.sw[pon]
+
+# Corporate
+*google*

@@ -1,0 +1,10 @@
+. $(dirname $0)/defer
+. $(dirname $0)/auto_virtualenv
+. $(dirname $0)/git_sync_status
+
+cd () {
+    builtin cd "$*"
+    auto_virtualenv
+    ls --group-directories-first
+    defer git_sync_status
+}

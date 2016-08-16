@@ -1,0 +1,23 @@
+function profile() {
+    python -m cProfile -s time "$@" | tee profile.txt
+}
+
+function nogpu() {
+    CUDA_VISIBLE_DEVICES=-1 "$@"
+}
+
+function convert-preview() {
+    ffmpeg -y -i $1 -r 30 -s 1280x720 -b 3M -strict -2 -movflags faststart $2;
+}
+
+function loc() {
+    extensions=$(IFS=$'|'; echo "$*")
+    echo "$extensions"
+    find . -type f | egrep -i "*.($extensions)$" | xargs wc -l
+}
+
+function scandoc() {
+    scanimage --resolution 150dpi | \
+        convert -resize 1240x1753 -density 150x150 -units PixelsPerInch \
+        -quality 90 -level 0,80%,0.3 - $1
+}
