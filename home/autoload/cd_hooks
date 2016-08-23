@@ -5,6 +5,6 @@
 cd () {
     builtin cd "$*"
     auto_virtualenv
-    ls --group-directories-first
+    l
     defer git_sync_status
 }

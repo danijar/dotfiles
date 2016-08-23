@@ -1,5 +1,5 @@
-alias ls='ls --color=auto'
-alias l='ls -lhA --color=auto --group-directories-first --time-style long-iso'
+alias l='command ls --color=auto --group-directories-first'
+alias ls='l -lhA --time-style long-iso'
 alias cdm='cd `ls -t | head -n 1`'
 alias clip='xclip -selection c'
 alias gs='git status'

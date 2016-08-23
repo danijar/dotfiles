@@ -18,6 +18,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/loremipsum'
 Plug 'amerlyq/vim-focus-autocmd'
+Plug 'tpope/vim-eunuch'
 
 " Editing
 " Plug 'terryma/vim-multiple-cursors'
@@ -30,6 +31,8 @@ Plug 'nelstrom/vim-visual-star-search'
 " Plug 'scrooloose/syntastic'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'bjoernd/vim-ycm-tex'
+Plug 'scrooloose/syntastic'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " Languages
 Plug 'yaml.vim'
@@ -40,8 +43,8 @@ Plug 'lervag/vimtex'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
-Plug 'jnurmine/Zenburn'
-Plug 'easysid/mod8.vim'
+" Plug 'jnurmine/Zenburn'
+" Plug 'easysid/mod8.vim'
 
 call plug#end()
 
@@ -122,7 +125,7 @@ nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
 nnoremap <leader>f mzvipgq`z
 nnoremap <leader>r :source ~/.config/nvim/init.vim<return>
-nnoremap <leader>R :edit ~/.config/nvim/init.vim<return>
+nnoremap <leader>R :tabedit ~/.config/nvim/init.vim<return>
 nnoremap <leader>l :Loremipsum<return>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
@@ -177,11 +180,12 @@ let g:vim_markdown_math = 1
 let g:vim_markdown_conceal = 0
 
 " morhetz/gruvbox
+let g:gruvbox_termcolors = 16
 let g:gruvbox_underline = 0
 let g:gruvbox_undercurl = 0
 let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = "soft"
-let g:gruvbox_contrast_light = "hard"
+" let g:gruvbox_contrast_dark = "soft"
+" let g:gruvbox_contrast_light = "hard"
 
 " jnurmine/Zenburn
 if exists('g:colors_name') && g:colors_name == 'zenburn'
@@ -194,11 +198,9 @@ endif
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" set t_Co=16
 set background=dark
-" set background=light
 colorscheme gruvbox
-" colorscheme zenburn
-" colorscheme mod8
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts

@@ -9,7 +9,7 @@ function git_sync_status() {
     REMOTE=$(git rev-parse @{u})
     BASE=$(git merge-base @ @{u})
 
-    echo -n "${PWD##*/} "
+    echo -n "Git: ${PWD##*/} "
     if [ $LOCAL = $REMOTE ]; then
         echo 'is up to date'
     elif [ $LOCAL = $BASE ]; then

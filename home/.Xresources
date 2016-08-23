@@ -1,5 +1,5 @@
 ! Apply changes in this file with `xrdb ~/.Xresources`
-#include ".Xresources.d/zenburn"
-#include ".Xresources.d/colors"
-#include ".Xresources.d/urxvt"
-#include ".Xresources.d/font"
+#include ".Xresources.d/gruvbox-dark.xresources"
+#include ".Xresources.d/base-colors.xresources"
+#include ".Xresources.d/urxvt.xresources"
+#include ".Xresources.d/font.xresources"
