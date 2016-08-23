@@ -1,7 +1,7 @@
 *.foreground:   basefg
+*.cursorColor:  basefg
 *.background:   basebg
 *.fadeColor:    basebg
-*.cursorColor:  base08
 *.color0:       base00
 *.color1:       base01
 *.color2:       base02
