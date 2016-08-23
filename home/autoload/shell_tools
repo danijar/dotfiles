@@ -21,3 +21,10 @@ function scandoc() {
         convert -resize 1240x1753 -density 150x150 -units PixelsPerInch \
         -quality 90 -level 0,80%,0.3 - $1
 }
+
+function ll() {
+    find . -mindepth ${1:-2} -maxdepth ${1:-2} -type d \
+        -not -path '*/\.*' \
+        -not -path '*/__*' \
+        -exec ls -1 -d --color=auto --time-style long-iso "{}" \;
+}
