@@ -33,6 +33,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'bjoernd/vim-ycm-tex'
 Plug 'scrooloose/syntastic'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'davidhalter/jedi-vim'
 
 " Languages
 Plug 'yaml.vim'
@@ -152,6 +153,7 @@ let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_key_list_select_completion=['<tab>', '<down>', '<c-j>']
 let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
 let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_filetype_blacklist = {'python': 1}
 let g:ycm_semantic_triggers = {
 \  'tex'  : ['\ref{','\cite{'],
 \ }

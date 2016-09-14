@@ -26,6 +26,10 @@ setopt hist_reduce_blanks
 bindkey -v
 export KEYTIMEOUT=1
 
+# Start new shell in command mode.
+zle-line-init() { zle -K vicmd; }
+zle -N zle-line-init
+
 # Use X clipboard
 [[ -n $DISPLAY ]] && (( $+commands[xclip] )) && {
   function cutbuffer() { zle .$WIDGET; echo $CUTBUFFER | xclip; }
