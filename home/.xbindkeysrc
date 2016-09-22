@@ -1,10 +1,21 @@
+# Apply changes with `pkill -f xbindkeys && xbindkeys`.
+
+# Backlight.
 "~/bin/backlight.py up"
     XF86MonBrightnessUp
 "~/bin/backlight.py down"
     XF86MonBrightnessDown
+
+# Volume.
 "amixer set Master unmute 5%+"
     XF86AudioRaiseVolume
-"amixer set Master unmute 5%-"
+"amixer set Master 5%-"
     XF86AudioLowerVolume
 "amixer set Master mute"
     XF86AudioMute
+
+# Mouse.
+"xte 'key Page_Up'"
+    b:9
+"xte 'key Page_Down'"
+    b:8

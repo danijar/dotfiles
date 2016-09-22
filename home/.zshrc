@@ -26,8 +26,31 @@ setopt hist_reduce_blanks
 bindkey -v
 export KEYTIMEOUT=1
 
-# Start new shell in command mode.
-zle-line-init() { zle -K vicmd; }
+x-yank() {
+    zle copy-region-as-kill
+    print -rn -- $CUTBUFFER | xclip -sel clipboard
+}
+zle -N x-yank
+
+x-cut() {
+    zle kill-region
+    print -rn -- $CUTBUFFER | xclip -sel clipboard
+}
+zle -N x-cut
+
+x-paste() {
+    PASTE=$(xclip -o -sel clipboard)
+    LBUFFER="$LBUFFER${RBUFFER:0:1}"
+    RBUFFER="$PASTE${RBUFFER:1:${#RBUFFER}}"
+}
+zle -N x-paste
+
+bindkey -M vicmd "y" x-yank
+bindkey -M vicmd "Y" x-cut
+bindkey -M vicmd "p" x-paste
+
+# Start line editor in command mode.
+zle-line-init() { zle vi-cmd-mode; }
 zle -N zle-line-init
 
 # Use X clipboard
