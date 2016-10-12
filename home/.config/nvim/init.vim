@@ -1,15 +1,15 @@
 set nocompatible
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Install plugin manager automatically
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin('~/.vim/plugged')
 
@@ -27,13 +27,10 @@ Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
 
 " Code intel
-" Plug 'davidhalter/jedi-vim'
-" Plug 'scrooloose/syntastic'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'bjoernd/vim-ycm-tex'
-Plug 'scrooloose/syntastic'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'davidhalter/jedi-vim'
+Plug 'scrooloose/syntastic'
 
 " Languages
 Plug 'yaml.vim'
@@ -86,7 +83,7 @@ set expandtab
 set formatoptions+=t  " Hard wrap text using textwidth
 set formatoptions-=o  " Don't continue comments when inserting lines set
 set nojoinspaces
-set ts=4 sw=4 sts=4
+set ts=2 sw=2 sts=2
 set tw=79
 
 " Visual.
@@ -130,6 +127,7 @@ nnoremap <leader>R :tabedit ~/.config/nvim/init.vim<return>
 nnoremap <leader>l :Loremipsum<return>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -153,10 +151,8 @@ let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_key_list_select_completion=['<tab>', '<down>', '<c-j>']
 let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
 let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_filetype_blacklist = {'python': 1}
-let g:ycm_semantic_triggers = {
-\  'tex'  : ['\ref{','\cite{'],
-\ }
+let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
+let g:ycm_semantic_triggers = {'tex': ['\ref{','\cite{']}
 
 " jedi-vim
 " let g:jedi#completions_enabled=0
@@ -230,19 +226,11 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
 autocmd BufNewFile,BufRead *.cls set filetype=tex
 
-autocmd Filetype cc         setlocal ts=2 sw=2 sts=2
-autocmd Filetype h          setlocal ts=2 sw=2 sts=2
-autocmd Filetype html       setlocal ts=2 sw=2 sts=2
-autocmd Filetype css        setlocal ts=2 sw=2 sts=2
-autocmd Filetype yaml       setlocal ts=2 sw=2 sts=2
-autocmd Filetype proto      setlocal ts=2 sw=2 sts=2
-autocmd Filetype scss       setlocal ts=2 sw=2 sts=2
-autocmd Filetype vim        setlocal ts=2 sw=2 sts=2
-autocmd Filetype javascript setlocal ts=2 sw=2 sts=2
-autocmd Filetype typescript setlocal ts=2 sw=2 sts=2
-autocmd Filetype json       setlocal ts=2 sw=2 sts=2 conceallevel=0
-autocmd Filetype tex        setlocal ts=2 sw=2 sts=2 conceallevel=0
-
+autocmd Filetype json   setlocal conceallevel=0
+autocmd Filetype tex    setlocal conceallevel=0
+autocmd Filetype python setlocal conceallevel=0
 
 " let g:tex_conceal = "agms"
 let g:tex_conceal = ""
+
+autocmd BufRead,BufEnter */mindpark/*.py setlocal ts=4 sw=4 sts=4
