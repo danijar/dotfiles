@@ -21,10 +21,10 @@ if [ ${#outputs[@]} = "3" ]; then
 # Two screens.
 elif [ ${#outputs[@]} = "2" ]; then
     i3-msg "workspace 2;
-        move workspace to output ${outputs[0]};
+        move workspace to output ${outputs[1]};
         exec urxvtcd; exec urxvtcd"
     i3-msg "workspace 1;
-        move workspace to output ${outputs[1]};
+        move workspace to output ${outputs[0]};
         exec --no-startup-id google-chrome-stable"
 
 # One screen.

@@ -1,3 +1,5 @@
+. ~/autoload/path_variable
+
 alias chrome='google-chrome-stable'
 if [ -x "$(command -v python3)" ]; then alias python='python3'; fi
 if [ -x "$(command -v nvim)" ]; then alias vim='nvim'; fi
