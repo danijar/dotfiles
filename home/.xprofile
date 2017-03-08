@@ -1,10 +1,9 @@
 #!/bin/sh
-# Xorg user startup script.
 
-# Load xorg use configuration.
+# Load Xorg configuration.
 [[ -f ~/.Xresources ]] && xrdb -all -load ~/.Xresources
 
-# Expose xorg colors as environment variables.
+# Expose Xresources as environment variables.
 . ~/bin/colors.sh
 
 # Keyboard layout and bindings.

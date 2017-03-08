@@ -1,8 +1,5 @@
 #!/bin/sh
-# Startup script for startx.
+# Startup script on Debian based distributions.
 
 # Run Xorg user startup script.
 [[ -f ~/.xprofile ]] && . ~/.xprofile
-
-# Start window manager.
-exec i3
