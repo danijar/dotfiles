@@ -3,3 +3,6 @@
 
 # Run Xorg user startup script.
 [[ -f ~/.xprofile ]] && . ~/.xprofile
+
+# Run desktop manager.
+exec i3

@@ -1,5 +1,5 @@
-*.foreground:   base05
-*.cursorColor:  base05
+*.foreground:   basefg
+*.cursorColor:  basefg
 *.background:   base00
 *.fadeColor:    base00
 *.color0:       base00

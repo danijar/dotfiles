@@ -1,0 +1,5 @@
+# Share sudo session between terminals.
+Defaults !tty_tickets
+
+# Remember sudo session for 30 minutes.
+Defaults env_reset,timestamp_timeout=30

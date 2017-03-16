@@ -4,14 +4,14 @@ set nocompatible
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Install plugin manager automatically
+" Install plugin manager automatically.
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " General
 Plug 'ctrlpvim/ctrlp.vim'
@@ -42,8 +42,8 @@ Plug 'lervag/vimtex'
 
 " Colorschemes
 Plug 'morhetz/gruvbox'
-" Plug 'jnurmine/Zenburn'
-" Plug 'easysid/mod8.vim'
+Plug 'jnurmine/Zenburn'
+Plug 'easysid/mod8.vim'
 
 call plug#end()
 
@@ -92,13 +92,13 @@ set number
 set ruler
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Keybinds
+" Key bindings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Leader key.
 map <Space> <Nop>
 let mapleader = " "
-
+"
 " Save pressing Shift to enter command mode.
 noremap ; :
 
@@ -186,8 +186,6 @@ let g:gruvbox_termcolors = 16
 let g:gruvbox_underline = 0
 let g:gruvbox_undercurl = 0
 let g:gruvbox_italic = 1
-" let g:gruvbox_contrast_dark = "soft"
-" let g:gruvbox_contrast_light = "hard"
 
 " jnurmine/Zenburn
 if exists('g:colors_name') && g:colors_name == 'zenburn'
@@ -201,26 +199,11 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " set t_Co=16
-set background=light
+" set termguicolors
+set background=dark
 colorscheme gruvbox
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Scripts
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Remove trailing whitespace on save.
-autocmd BufWritePre * :%s/\s\+$//e
-
-" Return to last edit position when opening files.
-function! ResumeCursorPosition()
-  if line("'\"") > 0 && line("'\"") <= line("$") |
-    exe "normal! g`\"" |
-  endif
-endfunction
-autocmd BufReadPost * call ResumeCursorPosition()
-
-" Highlight long lines.
-match Error /\%80v.\+/
+syntax on
+" hi CursorLine cterm=NONE ctermbg=darkgray
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
@@ -241,3 +224,21 @@ autocmd FileType markdown,asciidoc,tex call pencil#init()
 
 autocmd FileType python setlocal ts=2 sw=2 sts=2
 autocmd BufRead,BufEnter */mindpark/*.py setlocal ts=4 sw=4 sts=4
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Scripts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Remove trailing whitespace on save.
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Return to last edit position when opening files.
+function! ResumeCursorPosition()
+  if line("'\"") > 0 && line("'\"") <= line("$") |
+    exe "normal! g`\"" |
+  endif
+endfunction
+autocmd BufReadPost * call ResumeCursorPosition()
+
+" Highlight long lines.
+match Error /\%80v.\+/
