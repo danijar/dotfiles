@@ -42,7 +42,7 @@ disk "/" {
 }
 
 wireless _first_ {
-  format_up = "WIFI %quality %essid %ip"
+  format_up = "WIFI %essid %quality %ip"
   format_down = ""
 }
 

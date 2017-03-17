@@ -62,7 +62,7 @@ let g:ycm_semantic_triggers = {'tex': ['\ref{','\cite{']}
 " syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_post_args = '--ignore=F403,E402,E111,E114,E302'
+let g:syntastic_python_flake8_post_args = '--ignore=F403,E402,E111,E114,E302,E306,E125'
 
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'
@@ -161,13 +161,24 @@ nnoremap <C-t> :tabe<return>
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
-nnoremap <leader>f mzvipgq`z
+" vnoremap <leader>f mzvipgq`z
+nnoremap <leader>f gqap
+vnoremap <leader>f gq
 nnoremap <leader>r :source ~/.vimrc<return>
 nnoremap <leader>R :tabedit ~/.vimrc<return>
 nnoremap <leader>l :Loremipsum<return>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<return>
+
+" Navigation between windows.
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+" Write file with sudo permissions.
+cmap w!! w !sudo tee % >/dev/null
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
@@ -199,10 +210,9 @@ autocmd FileType json   setlocal conceallevel=0
 autocmd FileType tex    setlocal conceallevel=0
 autocmd FileType python setlocal conceallevel=0
 
-" let g:tex_conceal = "agms"
 let g:tex_conceal = ""
 
-autocmd FileType markdown,asciidoc,tex call pencil#init()
+autocmd FileType markdown,asciidoc call pencil#init()
 
 autocmd FileType python setlocal ts=2 sw=2 sts=2
 autocmd BufRead,BufEnter */mindpark/*.py setlocal ts=4 sw=4 sts=4
