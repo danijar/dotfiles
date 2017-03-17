@@ -1,0 +1,6 @@
+[Cinnamon Session]
+Name=i3 (Cinnamon)
+RequiredComponents=cinnamon-settings-daemon;cinnamon-screensaver;cinnamon-killer-daemon;
+DesktopName=X-Cinnamon
+RequiredProviders=windowmanager;
+DefaultProvider-windowmanager=i3

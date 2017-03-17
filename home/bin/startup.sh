@@ -27,5 +27,4 @@ startup xautolock -time 10 -lockaftersleep -locker "i3lock -c '$COLOR_BG'"
 # Try to start Ubuntu specific deamons.
 if python -mplatform | grep -q Ubuntu; then
     startup unity-settings-daemon
-    startup /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 fi

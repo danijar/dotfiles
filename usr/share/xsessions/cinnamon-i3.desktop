@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=i3 (Cinnamon)
+Comment=improved dynamic tiling window manager
+Exec=cinnamon-session --session=cinnamon-i3
+TryExec=/usr/bin/cinnamon
+Type=Application
+X-LightDM-DesktopName=i3
+DesktopNames=i3
+Keywords=tiling;wm;windowmanager;window;manager;

@@ -1,14 +1,17 @@
 #!/bin/sh
 
+################################################################
+# Startup script for GDM, KDM, LightDM, LXDM, SSDM.
+################################################################
+
 # Load Xorg configuration.
-[[ -f ~/.Xresources ]] && xrdb -all -load ~/.Xresources
+[ -f ~/.Xresources ] && xrdb -all -load ~/.Xresources
 
 # Expose Xresources as environment variables.
 . ~/bin/colors.sh
 
 # Background applications.
-# TODO: Move to ~/.xsession for Ubuntu?
-~/bin/startup.sh &
+. ~/bin/startup.sh &
 
 # Keyboard layout and bindings.
-~/bin/keyboard.sh &
+. ~/bin/keyboard.sh &

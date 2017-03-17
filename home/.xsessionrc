@@ -1,8 +1,0 @@
-#!/bin/sh
-# Startup script on Debian based distributions.
-
-# Run Xorg user startup script.
-[[ -f ~/.xprofile ]] && . ~/.xprofile
-
-# Run desktop manager.
-exec i3

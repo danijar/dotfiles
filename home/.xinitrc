@@ -1,8 +1,12 @@
 #!/bin/sh
-# Startup script for startx.
 
-# Run Xorg user startup script.
-[[ -f ~/.xprofile ]] && . ~/.xprofile
+################################################################
+# Startup script for startx, xinit, XDM, SLIM.
+################################################################
+
+# Run Xorg startup scripts.
+[ -f /etc/xprofile ] && . /etc/xprofile
+[ -f ~/.xprofile ] && . ~/.xprofile
 
 # Start window manager.
 exec i3
