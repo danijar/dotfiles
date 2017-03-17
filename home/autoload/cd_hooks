@@ -5,6 +5,6 @@
 cd () {
     builtin cd "$*"
     auto_virtualenv
-    l
+    ls
     defer git_sync_status
 }

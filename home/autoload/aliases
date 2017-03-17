@@ -13,5 +13,12 @@ alias gc='git commit -m '
 alias gf='git fetch --all'
 alias gr='git rebase'
 alias pym='python3 -m'
-alias np='python -i -c "import numpy as np; import matplotlib.pyplot as plt"'
+alias np='ipython -i -c " \
+  import numpy as np; \
+  import matplotlib.pyplot as plt"'
+alias tf='ipython -i -c " \
+  import numpy as np; \
+  import matplotlib.pyplot as plt; \
+  import tensorflow as tf"'
 alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
+alias ll='tree -aL 2'
