@@ -23,3 +23,4 @@ alias tf='ipython -i -c " \
 alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias ll='tree -aL 2'
 alias remove_broken_links='find -xtype l -delete'
+alias tfpython='LD_PRELOAD=/usr/lib/libtcmalloc.so python'
