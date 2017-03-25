@@ -14,6 +14,7 @@ startup insync start
 startup screencloud
 startup redshift-gtk
 startup unclutter
+startup volumeicon
 
 # Set wallpaper or color.
 startup hsetroot -solid "#$COLOR_BG"

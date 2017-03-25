@@ -26,7 +26,8 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'bjoernd/vim-ycm-tex'
 " Plug 'davidhalter/jedi-vim'
-Plug 'scrooloose/syntastic'
+Plug 'vim-syntastic/syntastic'
+Plug 'pycqa/flake8'
 
 " Languages
 Plug 'yaml.vim'
@@ -37,6 +38,7 @@ Plug 'lervag/vimtex'
 
 " Visuals.
 Plug 'morhetz/gruvbox'
+Plug 'jnurmine/Zenburn'
 Plug 'easysid/mod8.vim'
 Plug 'w0ng/vim-hybrid'
 
@@ -88,6 +90,7 @@ let g:hybrid_custom_term_colors = 1
 " Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set encoding=utf-8
 set clipboard=unnamedplus
 set hidden
 set hlsearch incsearch
@@ -128,6 +131,7 @@ colorscheme hybrid
 " w0ng/vim-hybrid
 if exists('g:colors_name') && g:colors_name == 'hybrid'
   highlight CursorLineNr ctermbg=black
+  highlight ErrorMsg ctermfg=red
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -155,8 +159,16 @@ nnoremap <esc>^[ <esc>^[
 map <Space> <Nop>
 let mapleader = " "
 
-" Open new tab.
-nnoremap <C-t> :tabe<return>
+" Line navigation.
+noremap H ^
+noremap L $
+
+" Tab navigation.
+nnoremap <silent> <C-t> :tabe<return>
+" nnoremap <C-H> :tabm -1<return>
+" nnoremap <C-L> :tabm +1<return>
+nnoremap <C-h> gT
+nnoremap <C-l> gt
 
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
@@ -197,6 +209,9 @@ autocmd BufReadPost * call ResumeCursorPosition()
 
 " Highlight long lines.
 " match Error /\%80v.\+/
+
+" Highlight trailing whitespace.
+" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages

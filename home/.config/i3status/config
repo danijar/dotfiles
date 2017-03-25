@@ -26,6 +26,14 @@ order += "volume master"
 order += "battery 0"
 order += "tztime local"
 
+# run_watch DHCP {
+#   pidfile = "/var/run/dhclient*.pid"
+# }
+
+# run_watch VPN {
+#   pidfile = "/var/run/vpnc/pid"
+# }
+
 cpu_usage {
   format = "CPU %usage"
 }
