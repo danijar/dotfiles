@@ -1,0 +1,46 @@
+command=/usr/local/libexec/i3blocks/$BLOCK_NAME
+markup=none
+
+# [load_average]
+# label=LOAD
+# interval=10
+
+[cpu_usage]
+label=CPU
+command=/usr/local/libexec/i3blocks/cpu_usage -d 0
+interval=10
+
+[gpu_usage]
+label=GPU
+command=nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | sed -r 's/\s//'
+interval=10
+
+[memory]
+label=MEM
+command=/usr/local/libexec/i3blocks/cpu_usage -d 0
+interval=10
+
+[disk]
+label=DSK
+instance=/
+interval=10
+
+[iface]
+interval=10
+
+[wifi]
+interval=10
+
+[volume]
+label=VOL
+instance=Master
+interval=once
+signal=10
+
+[battery]
+label=BAT
+interval=10
+
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1

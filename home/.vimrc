@@ -27,7 +27,7 @@ Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'bjoernd/vim-ycm-tex'
 " Plug 'davidhalter/jedi-vim'
 Plug 'vim-syntastic/syntastic'
-Plug 'pycqa/flake8'
+Plug 'pycqa/flake8', {'do': 'pip install --user flake8'}
 
 " Languages
 Plug 'yaml.vim'
@@ -119,6 +119,7 @@ set cursorline
 set number
 set ruler
 set mouse=a
+set autoread
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color scheme
@@ -132,6 +133,8 @@ colorscheme hybrid
 if exists('g:colors_name') && g:colors_name == 'hybrid'
   highlight CursorLineNr ctermbg=black
   highlight ErrorMsg ctermfg=red
+  highlight SpellBad cterm=none ctermbg=red ctermfg=black
+  highlight SyntasticErrorSign ctermbg=none ctermfg=red
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -155,9 +158,9 @@ noremap ; :
 nnoremap <silent> <C-c> :noh<return><C-c>
 nnoremap <esc>^[ <esc>^[
 
-" Space as leader key.
-map <Space> <Nop>
-let mapleader = " "
+" Don't convert to lowercase by accident.
+vnoremap u <Nop>
+vnoremap <C-u> u
 
 " Line navigation.
 noremap H ^
@@ -167,8 +170,16 @@ noremap L $
 nnoremap <silent> <C-t> :tabe<return>
 " nnoremap <C-H> :tabm -1<return>
 " nnoremap <C-L> :tabm +1<return>
-nnoremap <C-h> gT
-nnoremap <C-l> gt
+
+" Window navigation.
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Space as leader key.
+map <Space> <Nop>
+let mapleader = " "
 
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
@@ -182,15 +193,7 @@ nnoremap <leader>l :Loremipsum<return>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<return>
-
-" Navigation between windows.
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
-" Write file with sudo permissions.
-cmap w!! w !sudo tee % >/dev/null
+nnoremap <leader>e :Errors<return><C-w>j
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
@@ -207,11 +210,17 @@ function! ResumeCursorPosition()
 endfunction
 autocmd BufReadPost * call ResumeCursorPosition()
 
+" Write file with sudo permissions.
+cmap w!! w !sudo tee % >/dev/null
+
 " Highlight long lines.
 " match Error /\%80v.\+/
 
 " Highlight trailing whitespace.
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
+
+" Fix autoread in console Vim.
+" au FocusGained * :echotime
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
