@@ -54,7 +54,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_max_diagnostics_to_display = 10
-let g:ycm_key_invoke_completion = '<C-Space>'
+let g:ycm_key_invoke_completion = '<c-Space>'
 let g:ycm_key_list_select_completion=['<tab>', '<down>', '<c-j>']
 let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
 let g:ycm_seed_identifiers_with_syntax = 1
@@ -141,64 +141,6 @@ if exists('g:colors_name') && g:colors_name == 'hybrid'
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Key bindings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Disable features.
-map q: <Nop>
-map Q <Nop>
-map <F1> <Nop>
-map <esc> <Nop>
-imap <esc> <Nop>
-
-" Fix block editing.
-inoremap <C-c> <esc>
-
-" No shift for command mode.
-noremap ; :
-
-" Hide highlights.
-nnoremap <silent> <C-c> :noh<return><C-c>
-nnoremap <esc>^[ <esc>^[
-
-" Don't convert to lowercase by accident.
-vnoremap u <Nop>
-vnoremap <C-u> u
-
-" Line navigation.
-noremap H ^
-noremap L $
-
-" Tab navigation.
-nnoremap <silent> <C-t> :tabe<return>
-" nnoremap <C-H> :tabm -1<return>
-" nnoremap <C-L> :tabm +1<return>
-
-" Window navigation.
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Space as leader key.
-map <Space> <Nop>
-let mapleader = " "
-
-" Leader key shortcuts.
-nnoremap <leader>s :%s//g<left><left>
-vnoremap <leader>s :s//g<left><left>
-" vnoremap <leader>f mzvipgq`z
-nnoremap <leader>f gqap
-vnoremap <leader>f gq
-nnoremap <leader>r :source ~/.vimrc<return>
-nnoremap <leader>R :tabedit ~/.vimrc<return>
-nnoremap <leader>l :Loremipsum<return>
-nnoremap <leader>a mzggVGy`z
-nnoremap <leader>q @q
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<return>
-nnoremap <leader>e :Errors<return><C-w>j
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -224,6 +166,81 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Fix autoread in console Vim.
 " au FocusGained * :echotime
+
+" Focus right split or otherwise next tab.
+function! RightWindowOrTab()
+  let win_no = winnr()
+  wincmd l
+  if win_no == winnr()
+    normal gt
+  endif
+endfunction
+
+" Focus left split or otherwise previous tab.
+function! LeftWindowOrTab()
+  let win_no = winnr()
+  wincmd h
+  if win_no == winnr()
+    normal gT
+  endif
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Key bindings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Disable features.
+map q: <nop>
+map Q <nop>
+map <f1> <nop>
+map <esc> <nop>
+imap <esc> <nop>
+
+" Fix block editing.
+inoremap <c-c> <esc>
+
+" No shift for command mode.
+noremap ; :
+
+" Hide highlights.
+nnoremap <silent> <c-c> :noh<cr><c-c>
+nnoremap <esc>^[ <esc>^[
+
+" Don't convert to lowercase by accident.
+vnoremap u <nop>
+vnoremap <c-u> u
+
+" Line navigation.
+noremap H ^
+noremap L $
+
+" Navigate windows and tabs.
+nnoremap <silent> <c-t> :tabe<cr>
+nnoremap <c-h> :call LeftWindowOrTab()<cr>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> :call RightWindowOrTab()<cr>
+" nnoremap <c-H> :tabm -1<cr>
+" nnoremap <c-L> :tabm +1<cr>
+
+
+" Space as leader key.
+map <Space> <nop>
+let mapleader = " "
+
+" Leader key shortcuts.
+nnoremap <leader>s :%s//g<left><left>
+vnoremap <leader>s :s//g<left><left>
+" vnoremap <leader>f mzvipgq`z
+nnoremap <leader>f gqap
+vnoremap <leader>f gq
+nnoremap <leader>r :source ~/.vimrc<cr>
+nnoremap <leader>R :tabedit ~/.vimrc<cr>
+nnoremap <leader>l :Loremipsum<cr>
+nnoremap <leader>a mzggVGy`z
+nnoremap <leader>q @q
+nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<cr>
+nnoremap <leader>e :Errors<cr><c-w>j
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
