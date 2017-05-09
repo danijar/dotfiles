@@ -16,6 +16,7 @@ set_from_resource $COLOR_BG background #3a3a3a
 set_from_resource $COLOR_FG foreground #adada2
 set_from_resource $COLOR_PR color19    #7f9f7f
 set_from_resource $COLOR_AC color21    #8cd0d3
+set $COLOR_LG #777772
 
 # Autostart
 exec --no-startup-id ~/bin/windows.sh
@@ -183,8 +184,8 @@ bar {
     statusline $COLOR_FG
 
     # class            border    backgr.   text
-    focused_workspace  $COLOR_PR $COLOR_PR $COLOR_BG
-    active_workspace   $COLOR_PR $COLOR_PR $COLOR_BG
+    focused_workspace  $COLOR_FG $COLOR_FG $COLOR_BG
+    active_workspace   $COLOR_FG $COLOR_FG $COLOR_BG
     inactive_workspace $COLOR_BG $COLOR_BG $COLOR_FG
     urgent_workspace   $COLOR_AC $COLOR_AC $COLOR_BG
     binding_mode       $COLOR_AC $COLOR_AC $COLOR_BG
@@ -196,9 +197,9 @@ new_window normal 0
 
 # Define window colors using the palette.
 # class                 border    backgr.   text      indicator
-client.focused          $COLOR_PR $COLOR_PR $COLOR_BG $COLOR_PR
-client.focused_inactive $COLOR_FG $COLOR_FG $COLOR_BG $COLOR_FG
-client.unfocused        $COLOR_FG $COLOR_FG $COLOR_BG $COLOR_FG
+client.focused          $COLOR_FG $COLOR_FG $COLOR_BG $COLOR_FG
+client.focused_inactive $COLOR_LG $COLOR_LG $COLOR_BG $COLOR_LG
+client.unfocused        $COLOR_LG $COLOR_LG $COLOR_BG $COLOR_LG
 client.urgent           $COLOR_AC $COLOR_AC $COLOR_BG $COLOR_AC
 client.placeholder      #000000   $COLOR_BG $COLOR_FG   #000000
 client.background       $COLOR_BG

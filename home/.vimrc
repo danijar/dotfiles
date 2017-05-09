@@ -132,9 +132,12 @@ colorscheme hybrid
 " w0ng/vim-hybrid
 if exists('g:colors_name') && g:colors_name == 'hybrid'
   highlight CursorLineNr ctermbg=black
-  highlight ErrorMsg ctermfg=red
-  highlight SpellBad cterm=none ctermbg=red ctermfg=black
-  highlight SyntasticErrorSign ctermbg=none ctermfg=red
+  highlight ErrorMsg cterm=none ctermfg=red ctermbg=none
+  highlight SpellBad cterm=none ctermfg=black ctermbg=red
+  highlight SyntasticErrorSign ctermfg=red ctermbg=none
+  highlight TabLine cterm=none ctermfg=gray ctermbg=black
+  highlight TabLineFill cterm=none ctermfg=none ctermbg=black
+  highlight TabLineSel cterm=bold ctermfg=gray ctermbg=none
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
