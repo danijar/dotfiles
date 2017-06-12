@@ -24,3 +24,4 @@ URxvt.keysym.C-0x2d: perl:font-size:decrease
 
 ! Behavior
 URxvt*print-pipe: cat > $HOME/urxvt.print
+URxvt.buffered: true

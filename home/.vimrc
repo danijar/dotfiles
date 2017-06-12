@@ -91,6 +91,7 @@ let g:hybrid_custom_term_colors = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set encoding=utf-8
+set lazyredraw
 set clipboard=unnamedplus
 set hidden
 set hlsearch incsearch
@@ -126,7 +127,8 @@ set autoread
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256
-set background=dark
+" set background=dark
+set background=light
 colorscheme hybrid
 
 " w0ng/vim-hybrid
@@ -256,7 +258,7 @@ autocmd FileType python setlocal conceallevel=0
 
 let g:tex_conceal = ""
 
-autocmd FileType markdown,asciidoc call pencil#init()
+" autocmd FileType markdown,asciidoc call pencil#init()
 
 autocmd FileType python setlocal ts=2 sw=2 sts=2
 autocmd BufRead,BufEnter */mindpark/*.py setlocal ts=4 sw=4 sts=4
