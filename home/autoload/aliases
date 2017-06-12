@@ -1,27 +1,37 @@
+#!/bin/sh
+
 . ~/autoload/path_variable
 
+# List directories.
 alias l='command ls --color=auto --group-directories-first'
 alias ls='l -lhA --time-style long-iso'
-alias cdm='cd `ls -t | head -n 1`'
-alias clip='xclip -selection c'
+alias ll='tree -aL 2'
+
+# Git.
 alias gs='git status'
-alias gd='git diff'
-alias gdc='git diff --cached'
 alias gl='git log'
 alias ga='git add -A'
 alias gc='git commit -m '
-alias gf='git fetch --all'
-alias gr='git rebase'
-alias pym='python3 -m'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gr='git rebase -i'
+alias ge='git diff --name-only | uniq | xargs vim -p'
+
+# Python.
 alias np='ipython -i -c " \
   import numpy as np; \
-  import matplotlib.pyplot as plt"'
+  import matplotlib.pyplot as plt; \
+  import gym"'
 alias tf='ipython -i -c " \
   import numpy as np; \
   import matplotlib.pyplot as plt; \
-  import tensorflow as tf"'
-alias cmc='rm CMakeCache.txt && rm -rf CMakeFiles'
-alias ll='tree -aL 2'
-alias remove_broken_links='find -xtype l -delete'
-alias tfpython='LD_PRELOAD=/usr/lib/libtcmalloc.so python'
-alias tmux='tmux -f ~/.config/tmux/tmux.conf'
+  import tensorflow as tf; \
+  import gym"'
+alias tc='LD_PRELOAD=/usr/lib/libtcmalloc.so python -O'
+
+# Cleanup.
+alias clean-cmake='rm CMakeCache.txt && rm -rf CMakeFiles'
+alias clean-symlinks='find -xtype l -delete'
+
+# Other.
+alias clip='xclip -selection c'
