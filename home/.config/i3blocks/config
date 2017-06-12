@@ -1,4 +1,4 @@
-command=/usr/local/libexec/i3blocks/$BLOCK_NAME
+command=/usr/lib/i3blocks/$BLOCK_NAME
 markup=none
 
 # [load_average]
@@ -7,18 +7,18 @@ markup=none
 
 [cpu_usage]
 label=CPU
-command=/usr/local/libexec/i3blocks/cpu_usage -d 0
-interval=10
+command=$HOME/bin/cpu_usage
+interval=5
 
 [gpu_usage]
 label=GPU
 command=nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | sed -r 's/\s//'
-interval=10
+interval=5
 
 [memory]
 label=MEM
 command=echo "$(($(sed -rn 's/MemTotal[^0-9]+([0-9]+).*/\1/p' /proc/meminfo) / $(sed -rn 's/MemAvailable[^0-9]+([0-9]+).*/\1/p' /proc/meminfo)))%"
-interval=10
+interval=5
 
 [disk]
 label=DSK
@@ -26,21 +26,21 @@ instance=/
 interval=10
 
 [iface]
-interval=10
+interval=1
 
 [wifi]
-interval=10
+interval=1
 
 [volume]
 label=VOL
 instance=Master
-interval=once
+interval=1
 signal=10
 
 [battery]
-label=BAT
+command=$HOME/bin/battery
 interval=10
 
 [time]
-command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%Y-%m-%d %H:%M:%S '
 interval=1
