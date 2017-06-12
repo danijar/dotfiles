@@ -200,7 +200,7 @@ new_window normal 0
 client.focused          $COLOR_FG $COLOR_FG $COLOR_BG $COLOR_FG
 client.focused_inactive $COLOR_LG $COLOR_LG $COLOR_BG $COLOR_LG
 client.unfocused        $COLOR_LG $COLOR_LG $COLOR_BG $COLOR_LG
-client.urgent           $COLOR_AC $COLOR_AC $COLOR_BG $COLOR_AC
+client.urgent           $COLOR_BG $COLOR_BG $COLOR_AC $COLOR_BG
 client.placeholder      #000000   $COLOR_BG $COLOR_FG   #000000
 client.background       $COLOR_BG
 
