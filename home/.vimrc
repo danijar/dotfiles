@@ -64,7 +64,7 @@ let g:ycm_semantic_triggers = {'tex': ['\ref{','\cite{']}
 " syntastic
 let g:syntastic_check_on_open = 1
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_post_args = '--ignore=F403,E402,E111,E114,E302,E306,E125'
+let g:syntastic_python_flake8_post_args = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731'
 
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'
@@ -127,8 +127,8 @@ set autoread
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set t_Co=256
-" set background=dark
-set background=light
+set background=dark
+" set background=light
 colorscheme hybrid
 
 " w0ng/vim-hybrid
@@ -205,7 +205,7 @@ inoremap <c-c> <esc>
 noremap ; :
 
 " Hide highlights.
-nnoremap <silent> <c-c> :noh<cr><c-c>
+nnoremap <silent> <c-c> :noh<cr>
 nnoremap <esc>^[ <esc>^[
 
 " Don't convert to lowercase by accident.
@@ -217,14 +217,13 @@ noremap H ^
 noremap L $
 
 " Navigate windows and tabs.
-nnoremap <silent> <c-t> :tabe<cr>
-nnoremap <c-h> :call LeftWindowOrTab()<cr>
+nnoremap <c-t> :tabe<cr>:e<space>
+nnoremap <silent> <c-h> :call LeftWindowOrTab()<cr>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
-nnoremap <c-l> :call RightWindowOrTab()<cr>
+nnoremap <silent> <c-l> :call RightWindowOrTab()<cr>
 " nnoremap <c-H> :tabm -1<cr>
 " nnoremap <c-L> :tabm +1<cr>
-
 
 " Space as leader key.
 map <Space> <nop>
@@ -233,7 +232,6 @@ let mapleader = " "
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
-" vnoremap <leader>f mzvipgq`z
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
 nnoremap <leader>r :source ~/.vimrc<cr>

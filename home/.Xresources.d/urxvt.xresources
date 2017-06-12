@@ -22,6 +22,12 @@ URxvt.keysym.C-0x2b: perl:font-size:increase
 URxvt.keysym.C-0x2d: perl:font-size:decrease
 ! URxvt.keysym.Control-0x2d: perl:font-size:reset
 
+! Missing keys
+! URxvt.vt100.translations: #override \
+!   Ctrl ~Meta Shift <Key>a: string(0x1b) string("[65;5u") \n\
+!   Ctrl ~Meta Shift <Key>b: string(0x1b) string("[66;5u") \n\
+!   Ctrl ~Meta Shift <Key>f: string(0x1b) string("[70;5u")
+
 ! Behavior
 URxvt*print-pipe: cat > $HOME/urxvt.print
 URxvt.buffered: true

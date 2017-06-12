@@ -3,4 +3,4 @@
 #include ".Xresources.d/colors.xresources"
 #include ".Xresources.d/font.xresources"
 #include ".Xresources.d/urxvt.xresources"
-#include ".Xresources.d/dmenu.xresources"
+! #include ".Xresources.d/dmenu.xresources"
