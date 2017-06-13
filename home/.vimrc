@@ -16,6 +16,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'christoomey/vim-conflicted'
+Plug 'vim-scripts/loremipsum'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -133,13 +136,17 @@ colorscheme hybrid
 
 " w0ng/vim-hybrid
 if exists('g:colors_name') && g:colors_name == 'hybrid'
-  highlight CursorLineNr ctermbg=black
-  highlight ErrorMsg cterm=none ctermfg=red ctermbg=none
-  highlight SpellBad cterm=none ctermfg=black ctermbg=red
-  highlight SyntasticErrorSign ctermfg=red ctermbg=none
-  highlight TabLine cterm=none ctermfg=gray ctermbg=black
-  highlight TabLineFill cterm=none ctermfg=none ctermbg=black
-  highlight TabLineSel cterm=bold ctermfg=gray ctermbg=none
+  hi CursorLineNr ctermbg=black
+  hi ErrorMsg           cterm=none ctermfg=red   ctermbg=none
+  hi SpellBad           cterm=none ctermfg=black ctermbg=red
+  hi TabLine            cterm=none ctermfg=gray  ctermbg=black
+  hi MatchParen         cterm=none ctermfg=lightgray  ctermbg=lightblue
+  hi TabLineFill        cterm=none ctermfg=none  ctermbg=black
+  hi TabLineSel         cterm=bold ctermfg=gray  ctermbg=none
+  hi DiffAdd            cterm=none ctermfg=none  ctermbg=green
+  hi DiffChange         cterm=none ctermfg=none  ctermbg=blue
+  hi DiffDelete         cterm=none ctermfg=none  ctermbg=red
+  hi SyntasticErrorSign cterm=none ctermfg=red   ctermbg=none
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -234,8 +241,9 @@ nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
-nnoremap <leader>r :source ~/.vimrc<cr>
-nnoremap <leader>R :tabedit ~/.vimrc<cr>
+nnoremap <leader>r :checktime<cr>
+nnoremap <leader>c :source ~/.vimrc<cr>
+nnoremap <leader>C :tabedit ~/.vimrc<cr>
 nnoremap <leader>l :Loremipsum<cr>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
