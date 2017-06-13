@@ -48,7 +48,6 @@ printf "%d%%\n", $cpu_usage;
 # Print color, if needed
 if ($cpu_usage >= $t_crit) {
  	print "#$ENV{'COLOR_01'}\n";
-  exit 33;
 } elsif ($cpu_usage >= $t_warn) {
  	print "#$ENV{'COLOR_03'}\n";
 }
