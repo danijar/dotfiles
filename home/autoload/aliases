@@ -18,6 +18,7 @@ alias gr='git rebase -i'
 alias ge='git diff --name-only | uniq | xargs vim -p'
 
 # Python.
+alias p='python'
 alias np='ipython -i -c " \
   import numpy as np; \
   import matplotlib.pyplot as plt; \
@@ -34,4 +35,8 @@ alias clean-cmake='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias clean-symlinks='find -xtype l -delete'
 
 # Other.
+alias mk='mkdir'
+alias pm='sudo pacman -S'
+alias ya='yaourt'
+alias pg='ping 8.8.8.8'
 alias clip='xclip -selection c'
