@@ -28,17 +28,19 @@ interval=5
 [disk]
 label=DSK
 instance=/
-interval=10
-
-[iface]
-interval=1
+interval=20
 
 [wifi]
-interval=1
+label=WFI
+command=$HOME/bin/wifi
+interval=5
+
+# [iface]
+# interval=1
 
 [volume]
 label=VOL
-command=/usr/local/libexec/i3blocks/volume 5% pulse
+command=/usr/lib/i3blocks/volume 5% pulse
 instance=Master
 interval=1
 signal=10

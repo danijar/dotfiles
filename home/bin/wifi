@@ -1,0 +1,28 @@
+#!/bin/python3
+import os
+import argparse
+import sh
+
+
+def main(args):
+  table = sh.nmcli('-c no dev wifi'.split()).splitlines()
+  header, info = [line for line in table if line.startswith('*')]
+  network = info[header.index('SSID'): header.index('MODE')].strip()
+  signal = int(info[header.index('SIGNAL'): header.index('BARS')].strip())
+  print(args.format.format(signal, network))  # Short text.
+  print(args.format.format(signal, network))  # Long text.
+  if signal < args.critical:
+    print('#' + os.environ['COLOR_01'])
+  elif signal < args.warning:
+    print('#' + os.environ['COLOR_03'])
+  else:
+    print('#' + os.environ['COLOR_06'])
+
+
+if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--format', type=str, default='{:>1}% {}')
+  parser.add_argument('--warning', type=int, default=60)
+  parser.add_argument('--critical', type=int, default=40)
+  args = parser.parse_args()
+  main(args)

@@ -29,6 +29,8 @@ alias tf='ipython -i -c " \
   import tensorflow as tf; \
   import gym"'
 alias tc='LD_PRELOAD=/usr/lib/libtcmalloc.so python -O'
+alias pi='sudo pip install'
+alias pu='sudo pip uninstall'
 
 # Cleanup.
 alias clean-cmake='rm CMakeCache.txt && rm -rf CMakeFiles'
