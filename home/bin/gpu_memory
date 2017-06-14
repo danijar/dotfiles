@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import argparse
+import os
 import sh
 
 
@@ -18,9 +19,9 @@ def main(args):
   print(args.format.format(percentage))  # Short text.
   print(args.format.format(percentage))  # Full text.
   if percentage > args.critical:
-    print(sh.echo('$COLOR_01'))
+    print('#' + os.environ['COLOR_01'])
   elif percentage > args.warning:
-    print(sh.echo('$COLOR_03'))
+    print('#' + os.environ['COLOR_03'])
 
 
 if __name__ == '__main__':

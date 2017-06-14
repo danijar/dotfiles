@@ -11,7 +11,7 @@ command=$HOME/bin/cpu_usage
 interval=5
 
 [memory]
-label=MEM
+label=RAM
 command=echo "$(($(sed -rn 's/MemTotal[^0-9]+([0-9]+).*/\1/p' /proc/meminfo) / $(sed -rn 's/MemAvailable[^0-9]+([0-9]+).*/\1/p' /proc/meminfo)))%"
 interval=5
 
@@ -21,7 +21,7 @@ command=nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | sed -r 's
 interval=5
 
 [gpu_memory]
-label=GME
+label=VRM
 command=$HOME/bin/gpu_memory
 interval=5
 
