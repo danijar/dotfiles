@@ -100,7 +100,6 @@ set hidden
 set hlsearch incsearch
 set ignorecase smartcase
 set nofoldenable
-set noswapfile
 set viminfo^=%
 set completeopt-=preview
 set scrolloff=100
@@ -124,6 +123,20 @@ set number
 set ruler
 set mouse=a
 set autoread
+set undofile
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Directories
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+silent call system('mkdir -p $HOME/.vim/undo')
+set undodir=$HOME/.vim/undo//
+
+silent call system('mkdir -p $HOME/.vim/swap')
+set directory=$HOME/.vim/swap//
+
+silent call system('mkdir -p $HOME/.vim/backup')
+set backupdir=$HOME/.vim/backup//
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Color scheme
