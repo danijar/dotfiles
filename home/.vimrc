@@ -45,6 +45,9 @@ Plug 'jnurmine/Zenburn'
 Plug 'easysid/mod8.vim'
 Plug 'w0ng/vim-hybrid'
 
+" Behavior.
+Plug 'amerlyq/vim-focus-autocmd'
+
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -184,10 +187,11 @@ cmap w!! w !sudo tee % >/dev/null
 " match Error /\%80v.\+/
 
 " Highlight trailing whitespace.
-" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 
 " Fix autoread in console Vim.
-" au FocusGained * :echotime
+autocmd FocusGained,BufEnter * checktime
+" autocmd FocusLost * stopinsert
 
 " Focus right split or otherwise next tab.
 function! RightWindowOrTab()
@@ -224,20 +228,20 @@ inoremap <c-c> <esc>
 " No shift for command mode.
 noremap ; :
 
-" Hide highlights.
-nnoremap <silent> <c-c> :noh<cr>
-nnoremap <esc>^[ <esc>^[
-
 " Don't convert to lowercase by accident.
 vnoremap u <nop>
 vnoremap <c-u> u
+
+" Hide highlights.
+nnoremap <silent> <c-c> :noh<cr>
+nnoremap <esc>^[ <esc>^[
 
 " Line navigation.
 noremap H ^
 noremap L $
 
 " Navigate windows and tabs.
-nnoremap <c-t> :tabe<cr>:e<space>
+nnoremap <c-t> :call feedkeys(':tabe<space><tab>', 't')<cr>
 nnoremap <silent> <c-h> :call LeftWindowOrTab()<cr>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -262,6 +266,7 @@ nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<cr>
 nnoremap <leader>e :Errors<cr><c-w>j
+nnoremap <leader>e :call feedkeys(':e<space><tab>', 't')<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
