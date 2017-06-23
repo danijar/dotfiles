@@ -191,7 +191,7 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 
 " Fix autoread in console Vim.
 autocmd FocusGained,BufEnter * checktime
-" autocmd FocusLost * stopinsert
+" autocmd FocusLost * call feedkeys("\<C-\>\<C-n>")
 
 " Focus right split or otherwise next tab.
 function! RightWindowOrTab()
@@ -265,8 +265,10 @@ nnoremap <leader>l :Loremipsum<cr>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<cr>
-nnoremap <leader>e :Errors<cr><c-w>j
-nnoremap <leader>e :call feedkeys(':e<space><tab>', 't')<cr>
+" nnoremap <leader>e :Errors<cr><c-w>j
+" nnoremap <leader>e :call feedkeys(':e<space><tab>', 't')<cr>
+nnoremap <leader>e :Errors<cr>:lclose<cr>:lnext<cr>
+nnoremap <leader>E :Errors<cr>:lclose<cr>:lprev<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages

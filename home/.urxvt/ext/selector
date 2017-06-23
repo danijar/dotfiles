@@ -1,0 +1,422 @@
+# vim: ft=perl
+# @ref: selector (c) amerlyq, 2015: GPLv3
+# @brief: Select path and url by hints
+# @inspiration:
+#   http://www.github.com/muennich/urxvt-perls
+#   https://github.com/5digits/dactyl
+
+# LOADED: package $pkg; use strict 'vars'; use utf8; no warnings 'utf8';
+use lib "$ENV{HOME}/.urxvt/ext";
+use urxcommon qw(:API);
+use Data::Dump qw(dump);  # NEED libdata-dump-perl
+use Term::ANSIColor qw(:constants);
+# use Devel::Peek; # SEE http://www.perlmonks.org/?node_id=801229
+# use List::MoreUtils qw();
+use List::Util qw(first min max);
+
+#                                   .-> search
+# keymap --> actions --> switchers ---> patterns
+#            options -----^         `-> viewers
+
+# PROC:
+#   Selection in visible area only (shift area by M-j/k) -- useful for TUI
+
+# =================== CONFIG ========================
+
+sub cfg_options {
+    my ($self) = @_;
+
+    $self->{options} = {
+        $self->sxdef(pattern => 'path'),
+        $self->sxdef(direction => 'up'),  # up | down | both
+        $self->bxdef(autocopy  => 0),
+        $self->bxdef(underline => 1),
+    };
+    # dump($self->{options});
+
+    local *def = sub { $self->sxdef('open', @_) };
+    $self->{viewers} = {
+        # Operations
+        def(default => ''),
+        def(clipboard => '|xsel -ib'),
+        def(snippets => '|copyq tab URxvt add -'),
+        # def(insert => '&$self->on_write("%")'),
+        # Interpret
+        def(terminal => 'x-terminal-emulator -cd %'),
+        def(editor => 'x-terminal-emulator -e $ENV{EDITOR} %'),
+        def(filemanager => 'x-terminal-emulator -cd % -e $ENV{SHELL} -ic ranger-auto'),
+        def(browser => 'x-www-browser %'),
+    };
+    # dump($self->{viewers});
+}
+
+sub cfg_keymap {
+    my ($self) = @_;
+    local *staying = sub { hashcurry($self->{actions}, @_) };
+    local *closing = sub { staying(@_, 'close') };
+
+    $self->{keymap} = {
+        paired(qw( q C-c Escape ) => closing()),
+
+        # View scrolling
+        paired(qw( C-y M-j ) => staying('scr_line_dn')),
+        paired(qw( C-e M-k ) => staying('scr_line_up')),
+        paired(qw( C-d M-n ) => staying('scr_half_dn')),
+        paired(qw( C-u M-o M-p ) => staying('scr_half_up')),
+        paired(qw( C-f C-p Prior Page_Up ) => staying('scr_page_up')),
+        paired(qw( C-b C-n Next Page_Down ) => staying('scr_page_dn')),
+
+        # Actions on selection
+        y => staying( 'yank'),
+        o => staying('openx'),  # Both for file and dir
+        # e => closing('editx'),  # edit in copyq and keep in "+?
+        # c => closing('chdir'),  # Both for file and dir
+        paired(qw( O Return ) => closing('openx')),
+        paired(qw( Y )        => closing('yank')),
+        # TODO Assign color changes when active
+
+        # Move selection
+        (map {uc substr($_,0,1) => staying("pt/".$_, 'nearest')}
+            keys %{$self->{patterns}}),
+
+        # NEED L,H,M and global 'gg', 'G' -- in whole scrollback
+        paired(qw( g C-Home ) => staying('home')),
+        paired(qw( G C-End  ) => staying('end')),
+        paired(qw( 0 Home ) => staying('lbeg')),
+        paired(qw( $ End  ) => staying('lend')),
+
+        paired(qw( j Down ) => staying('down')),
+        paired(qw( k Up   ) => staying('up')),
+        paired(qw( h Left ) => staying('left')),
+        paired(qw( l Right) => staying('right')),
+        # paired(qw( C-f C-p Prior  Page_Up ) => staying('pgup')),
+        # paired(qw( C-b C-n Next Page_Down ) => staying('pgdn')),
+    };
+    # dump($self->{keymap});
+
+    # DEV use this to link regexes and viewers
+    $self->{viewmap} = {
+        paired(qw(text, file, sresult) => 'editor'),
+        dir => 'filemanager', url => 'browser'
+    };
+}
+
+sub cfg_actions {
+    my ($self) = @_;
+    my $p = sub { print GREEN, @_, RESET, "\n"; };
+
+    $self->{actions} = {
+        start => sub { $p->("\nstart"); $self->activate(); },
+        close => sub { $p->("close\n"); $self->deactivate(); },
+        openx => sub { $p->("open"); $self->execute(); },
+         yank => sub { $p->("yank"); $self->select_pattern(@_); },
+
+        home => sub { $p->("home"); $self->{row} = $self->top_row - 1; },
+        end  => sub { $p->("end"); $self->{row} = $self->nrow; },
+        scr_line_up => sub { $p->("scr_Lup"); $self->set_viewport(-3); },
+        scr_line_dn => sub { $p->("scr_Ldn"); $self->set_viewport(3); },
+        scr_half_up => sub { $p->("scr_Hup"); $self->set_viewport(-($self->nrow>>1)); },
+        scr_half_dn => sub { $p->("scr_Hdn"); $self->set_viewport($self->nrow>>1); },
+        scr_page_up => sub { $p->("scr_Pup"); $self->set_viewport(-$self->nrow); },
+        scr_page_dn => sub { $p->("scr_Pdn"); $self->set_viewport( $self->nrow); },
+
+        (map { my $v=$_; $v => sub { $p->("dir $v"); $self->search($v)} }
+            qw(up down left right nearest)),
+
+        (map { my $v=$_; "pt/".$v => sub { $p->("pset $v");
+            $self->{current}->{patt} = $self->{patterns}->{$v}} }
+            keys %{$self->{patterns}}),
+    };
+    # dump($self->{actions});
+}
+
+sub cfg_patterns {
+    my ($self) = @_;
+
+    local *def = sub { $self->sxdef('patterns', @_) };
+    $self->{patterns} = {
+        def(line => qr{ ^.*$ }x),
+        # Very prompt-dependent
+        def(zshprompt => qr{
+            (?:^        # Left part of prompt
+                (?:└|╚)\S*?
+                (?:╼|╢)\s+
+            )\K
+            (?:(?!\s*   # All but right prompt (cmdline)
+                (?:\d+↵\s)?
+                (?:[RV]{1,2})?
+                ─\S{10}$
+            ).)+
+        }x),
+        # Very individually for filetype. --THINK What I implied?
+        def(chunk=> qr{ \b([\w-_:\.]|(?:\\) )+\b }x),
+        def(word => qr{ \b([\w-_:\.]|(?:\\) )+\b }x),
+        def(ipadr=> qr{ (\d{1,3}\.){3}\d{1,3} }x),
+        def(path => qr{
+            (?:~|\.)?/?\b(  # BUG Can't support path with repeatable //
+                (\S*\S/\S\S*)+
+                |  # DEV need different processing for opening this
+                \S+:\d+:(?:\s)
+            )\b/?  # ATTENTION drops last path symbols if not characters
+        }x),
+        def(url => qr{
+            (?:https?://|ftp://|news://|mailto:|file://|\bwww\.)
+            [\w\-\@;\/?:&=%\$.+!*\x27,~#]*
+            ( # Allow a pair of matched parentheses
+                \([\w\-\@;\/?:&=%\$.+!*\x27,~#]*\)
+                |  # exclude some trailing characters (heuristic)
+                [\w\-\@;\/?:&=%\$+*~]
+            )+
+        }x),
+    };
+}
+
+# ================== LOGIC ========================
+
+sub set_viewport { my ($self, $n) = @_;
+    $self->view_start(max($self->top_row+1, min(0, $self->view_start() + $n)));
+}
+
+# THINK -- cache last search starting position
+# to prevent searching whole empty scrollback
+sub search { my ($self, $dir, @args) = @_;
+    my $fnm = 'search_' . $dir;
+    $self->$fnm(@args);
+}
+
+sub choose { my ($self, $line, @pp) = @_;
+    $self->{current}->{pos} = [ map {$line->coord_of($_)} @pp ];
+    $self->{current}->{text} = substr($line->t, $pp[0], $pp[1]-$pp[0]);
+    $self->want_refresh();
+
+    1;
+}
+
+sub gravity { my ($lc, $rc, $li, $ri) = @_;
+    # = search nearest in all directions
+# TODO = keep ppos -- for last manually choosen selection -- and compare with all other
+    return ($ri - $li) if ($li<=$lc && $ri>=$rc) or ($li>=$lc && $ri<=$rc);
+    return ($ri - $lc) if ($li < $lc) and ($lc <= $ri && $ri <= $rc);
+    return ($rc - $li) if ($lc <= $li && $li <= $rc) and ($ri > $rc);
+    return ($ri - $lc) if ($li < $lc && $ri < $lc);
+    return ($rc - $li) if ($li > $rc && $ri > $rc);
+    # return abs(($ri + $li)/2 - ($rc + $lc)/2);
+}
+
+sub pos_to_offs { my ($self, @pos) = @_;
+    # THINK cache beg/end in offs[0..1] instead of re-evaluate
+    my $line = $self->line($pos[0]);
+    return map {$line->offset_of(@$_)} [@pos[0..1]], [@pos[2..3]];
+}
+
+# DEV w/ or w/o auto scrolling when patt outside screen range
+# := NEED two bounds on each side. USE universal function?
+sub seek_up { my ($self, $line) = @_;
+    do {  # print @{$num_for}{@columns};
+        my $row = $line->beg - 1;
+        print "U:",$row,"\n";
+        return () if ($row < $self->view_start());  # $self->top_row
+        $line = $self->line($row);
+    } until ($line->t =~ /$self->{current}->{patt}/);
+    return $line;
+}
+
+sub seek_down { my ($self, $line) = @_;
+    do {
+        my $row = $line->end + 1;
+        print "D:",$row,"/",$self->nrow,"\n";  # D: cursor pos relative to term
+        return () if ($row >= $self->view_start() + $self->nrow);  # $self->nrow
+        $line = $self->line($row);
+    } until ($line->t =~ /$self->{current}->{patt}/);
+    return $line;
+}
+
+## TODO: split this func back to chunks? But subjugate checkings in shared funcs.
+# Need virtual positions inside next line:
+sub seek_entry { my ($self, $dir, $line) = @_;
+    return () unless $line;
+    my ($beg, $end) = $self->pos_to_offs(@{$self->{current}->{pos}});
+    dump(b => $beg, e => $end);  # REMOVE
+
+    # DEV sort block -> funcs {left, right, nearest}
+    local *seek_at = {
+        nearest => sub { sort {$b->[2] <=> $a->[2]}
+            map {[ @$_, gravity($beg, $end, @$_) ]} @_ },
+        left => sub { grep {$_->[1] <= $beg} reverse @_ },
+        right => sub { grep {$_->[0] >= $end} @_ },
+    }->{$dir};
+
+    my @pp = seek_at(matches($line->t, $self->{current}->{patt}));
+    dump(P => @pp);  # REMOVE
+    return () unless @pp;
+
+    # TODO: move to search() last instruction
+    $self->choose($line, @{$pp[0]}[0..1]);
+}
+
+sub nearest_line { my ($self, $line) = @_;
+    my ($sup, $sdn) = $self->seek_up($line), $self->seek_down($line);
+    # Inside them there is 'seek_entry'
+    # DEV search in directions by order, compare distance
+    $self->search($self->{options}->{direction});
+    # search_up && search_dn -- preferring one from ->{direction} if same distance
+}
+
+sub search_nearest { my ($self) = @_;
+    my $line = $self->line($self->{current}->{pos}[0]);
+    $self->seek_entry('nearest', $line) || $self->nearest_line($line);
+}
+
+## Patterns may be spanned, so use appropriate [0] or [2] on ends
+## THINK but then all algs will be more complex. Now them are sinle-lined.
+##      Maybe nearest_line may compensate that behaviour for multiline-spanned
+#       :> However, spanned patts have not much meaning for everyday usage.
+#       (I can only think for vim:wrap -- but line numbers will obstruct it)
+## TODO move these one-liners to ->{actions} initializer
+sub search_left { my ($self) = @_;
+    $self->seek_entry('left', $self->line($self->{current}->{pos}[0]));
+}
+sub search_right { my ($self) = @_;
+    $self->seek_entry('right', $self->line($self->{current}->{pos}[2]));
+}
+sub search_up { my ($self) = @_;
+    $self->seek_entry('nearest',
+        $self->seek_up($self->line($self->{current}->{pos}[0])));
+}
+sub search_down { my ($self) = @_;
+    $self->seek_entry('nearest',
+        $self->seek_down($self->line($self->{current}->{pos}[2])));
+}
+
+sub select_pattern { my ($self, $event) = @_;
+    # return unless $self->{autocopy};
+    # return unless $self->{found};
+
+    my @pos = @{$self->{current}->{pos}};
+    dump("s:",@pos," -- ", $self->top_row, ",", $self->nrow);
+
+    # NOTE used only for copying to PRIMARY
+    $self->selection_beg($pos[0], $pos[1]);
+    $self->selection_end($pos[2], $pos[3]);
+    $self->selection_make($event->{time});
+    # EXPL used to clear selection after copying
+    $self->selection_beg(1, 0);
+    $self->selection_end(1, 0);
+}
+
+# =================== IMPL ========================
+
+sub exec_str { my ($self, $viewer, $text) = @_;
+    # WARNING this split will break escaped spaces and quoted args!
+    my @cmd = map {$_ eq '%'? $text: $_} split /\s+/, $viewer;
+    # % -> current url, else file name will be added as last arg
+    # else { push $text, @cmd; }
+    dump(@cmd);
+    $self->exec_async(@cmd);
+}
+
+sub exec_pipe { my ($self, $viewer, $text) = @_;
+    return err_run($viewer) unless (open(PIPESTD, $viewer));
+    utf8::encode $text;
+    print PIPESTD $text;
+    close(PIPESTD);
+}
+
+sub execute { my ($self) = @_;
+    # DEV if mixed regex content -- you need alg to determine type!
+    my $v = $self->{viewers}->{$self->{options}->{default}};
+
+    my $t = $self->{current}->{text};
+    dump(T=>$t, V=>$v);
+
+    if (substr($v, 0, 1) eq '|') {
+        $self->exec_pipe($v, $t)
+    } else { $self->exec_str($v, $t) }
+}
+
+sub status_osd { my ($self, $pref, $str) = @_;
+    my $status = $pref .': ';
+    $status .= $str if $str;
+    $status .= $self->view_start() . '/' . $self->top_row;
+    # top     -81/-81
+    # middle  -40/-81
+    # bottom    0/-81
+
+    $self->{overlay}->set(0,0, $self->special_encode($status));
+}
+
+# =================== HOOKS ========================
+
+sub paint { my ($self) = @_;
+    $self->scr_xor_span(@{$self->{current}->{pos}}, urxvt::RS_RVid);
+    ()
+}
+
+sub dispatcher { my ($self, $event, $keysym, $string) =  @_;
+    my $key = fmt_key($self, $event, $keysym);
+    # Check on white list: $action =~ m/[0-9][a-z]/i
+    ($self->{keymap}->{$key} || sub {})->($self, $key);
+    $self->status_osd($key);
+}
+
+sub activate { my ($self) = @_;
+    $self->{overlay}->show();
+    $self->enable(%{$self->{hooks}});
+}
+
+sub deactivate { my ($self) = @_;
+    $self->{overlay}->hide();
+    $self->disable(keys %{$self->{hooks}});
+    $self->want_refresh();
+}
+
+# =================== EVENTS ========================
+
+sub on_user_command { $_[1] =~ s/^selector:// and on_action(@_); }
+sub on_action { my ($self, $cmd) = @_;
+    $_ = $cmd;
+    if (/^run$/) {
+        $self->status_osd("Run? (y/n)");
+        hashcurry($self->{actions}, 'nearest', 'start')->();
+    } else { err_cmd($cmd); }
+
+    ()
+}
+
+sub on_start { my ($self) = @_;
+
+    $self->cfg_options();
+    $self->cfg_patterns();
+    $self->cfg_actions();
+    $self->cfg_keymap();
+
+    $self->{hooks} = {
+        refresh_begin => sub { paint(@_); () },
+        refresh_end   => sub { paint(@_); () },
+        key_press => sub { dispatcher(@_); 1 },
+        tt_write  => sub { 1 },  # EXPL intercept all
+    };
+
+    # $self->enable(line_update => \&line_update)
+    #     if {$self->{options}->{underline}};
+
+    $self->{current} = {
+        pos => [0,0,0,0],
+        text => '',
+        patt => $self->{patterns}->{$self->{options}->{pattern}},
+        # from, till, offs
+    };
+    # dump($self->{current});
+
+    $self->{overlay} = $self->overlay(0,-1, $self->ncol,1, urxvt::OVERLAY_RSTYLE, 0);
+    $self->{overlay}->hide();
+
+    ()
+}
+
+sub on_destroy { my ($self) = @_;
+    $self->deactivate();
+    delete $self->{overlay} if $self->{overlay};
+
+    ()
+}

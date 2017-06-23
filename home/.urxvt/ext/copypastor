@@ -1,0 +1,153 @@
+# vim: ft=perl
+# @ref: copypastor (c) amerlyq, 2015: GPLv3
+# @brief: Shell independent copy-paste extension for clipboard by keyboard.
+# @inspiration:
+#   http://www.github.com/muennich/urxvt-perls
+
+# LOADED: package $pkg; use strict 'vars'; use utf8; no warnings 'utf8';
+use lib "$ENV{HOME}/.urxvt/ext";
+use urxcommon qw(&err_cmd &err_run &text_metrics);
+use Term::ANSIColor qw(:constants);
+
+# =================== CONFIG ========================
+
+sub cfg_modes {
+    my ($self) = @_;
+    $self->{snippets} = {
+        # For serial ps
+        ps1 => 'export PS1="'. CYAN .'\D{%H:%M:%S}'. GREEN .'\u'. BOLD .'@'.
+                '\h'. '['. YELLOW .'\w'. GREEN .']\n'. RED .'# '. RESET .'"',
+    };
+
+    $self->{modes} = {
+        default => sub { $_[0]; },
+        # Escape each character, specific for shell.
+        escaped => sub { $_[0] =~ s/([!#\$%&\*\(\) ='"\\\|\[\]`~,<>\?])/\\$1/gr; },
+        # Trim spaces and compress line breaks, append <CR>.
+        execute => sub { (($_[0] =~ s/^\s*|\s*$//gr) =~ s/\s*\n+\s*/\n/gr) . "\n"; },
+        # For serial ports / ssh connections: fast-setup
+        stty => sub { $_[0] = "stty rows ${\$self->nrow()} cols ${\$self->ncol()}\n"; },
+    };
+}
+
+# =================== IMPL ========================
+
+sub status_osd
+{
+    my ($self, $pref, $msel) = @_;
+    my $status = $pref .': '. ($msel ? text_metrics($msel): "(none)");
+    $self->{overlay}->set(0,0, $self->special_encode($status));
+    $self->{overlay}->show();
+    $self->{timer}->after(1);  # CHECK Can't call method "set" on an undefined value
+}
+
+sub copy
+{
+    my ($self) = @_;
+    my $msel = $self->selection();
+    if ($msel) {
+        my $cmd = $self->{copy_cmd};
+        return err_run($cmd) unless (open(CLIPBOARD, "| $cmd"));
+        utf8::encode $msel;
+        print CLIPBOARD $msel;
+        close(CLIPBOARD);
+    }
+    $self->status_osd("copied", $msel);
+}
+
+# THINK could filter from text shortcuts for ZSH like ',s' and ',d'
+sub paste
+{
+    my ($self, $nm) = @_;
+    # EXPL need local value to refer it inside subroutines
+    my $str = `$self->{paste_cmd}`;
+    return err_run($self->{paste_cmd}) if $?;
+    # Default: paste str as raw text, converting all NL to CR.
+    # If execute -- insert and execute str line by line (need for ZSH)
+    my $fpaste = 'tt_paste';
+    $fpaste = 'tt_write_user_input' if $nm == "execute";
+    # WARNING don't use $self->locale_encode() for utf8:
+    #   or multibyte will be splitted into ascii chars
+    $self->$fpaste($self->{modes}->{$nm}->($str));
+    printf("%s -> %s\n", $str, $self->{modes}->{$nm}->($str));  # REMOVE
+    $self->status_osd($nm, $str);
+}
+
+# =================== EVENTS ========================
+sub on_user_command { $_[1] =~ s/^copypastor:// and on_action(@_); }
+sub on_action
+{
+    my ($self, $cmd) = @_; $_ = $cmd;
+    if (/^copy$/) {
+        $self->copy();
+
+    } elsif (/^paste:\w+/) {
+        /:(\w+)$/;
+        return err_cmd($_) unless $self->{modes}->{$1};
+        $self->paste($1);
+    } else { err_cmd($_); }
+
+    ()  # return false : else <consume event>
+}
+
+sub on_start
+{
+    my ($self) = @_;
+    $self->{copy_cmd}  = $self->x_resource('%.copycmd')  || 'xsel -ib';
+    $self->{paste_cmd} = $self->x_resource('%.pastecmd') || 'xsel -ob';
+    if ($self->x_resource_boolean('%.autocopy')) {
+        # Returning a true value aborts selection grabbing. It will still be highlighted.
+        $self->enable(sel_grab => sub { $_[0]->copy; ()});
+    }
+
+    $self->cfg_modes();
+
+    my $osdw = 18;
+    $self->{overlay} = $self->overlay(-1,-1, $osdw,1, urxvt::OVERLAY_RSTYLE, 0);
+    $self->{timer} = urxvt::timer ->new ->cb ( sub {
+            $self->{overlay}->hide();
+            $self->{overlay}->set(0, 0, " " x $osdw);  # Clear overlay.
+        } );
+    ()
+}
+
+sub on_destroy
+{
+    my ($self) = @_;
+    delete $self->{timer} if $self->{timer};
+    delete $self->{overlay} if $self->{overlay};
+}
+
+
+# ==================== MERGE =================
+
+sub leave {
+    my ($self) = @_;
+    $self->{pastestr} = undef;
+    $self->{overlay}->hide();
+    $self->disable("key_press");
+}
+
+sub key_press {
+    my ($self, $event, $keysym, $string) =  @_;
+    if ($keysym == 121) { # y
+        $self->tt_paste(${$self->{pastestr}});
+        $self->leave();
+    } elsif ($keysym == 110) { # n
+        $self->leave();
+    }
+
+    1  # EXPL intercept all keys until confirm choice
+}
+
+sub on_tt_paste {
+    my ($self, $octets) = @_;
+    return unless ($octets =~ tr/\012\015//);
+
+    $self->{pastestr} = \$octets;
+    # BUG timer must be disabled until leave event
+    $self->status_osd("sure? (y/n)", $self->locale_decode($octets));
+    $self->enable (key_press => \&key_press);
+
+    1  # EXPL interrupt paste process
+}

@@ -1,0 +1,28 @@
+! vim: ft=xdefaults
+! WARNING: For urxvt <=9.19 you need to use prefix 'perl:'.
+! So instead 'on_action' will be used 'on_user_command'.
+
+!! === Copypastor ========================
+URxvt*copypastor.copycmd:    xsel -ib
+URxvt*copypastor.pastecmd:   xsel -ob
+! ALT:
+!   xclip -selection clipboard -i / -o
+!   pbcopy / pbpaste
+
+! updated whenever the PRIMARY selection changes
+URxvt*copypastor.autocopy:   true
+
+! URxvt*keysym.M-z:    perl:copypastor:menu
+URxvt*keysym.M-c:    perl:copypastor:copy
+URxvt*keysym.M-v:    perl:copypastor:paste:default
+URxvt*keysym.M-m:    perl:copypastor:paste:execute
+URxvt*keysym.M-C-v:  perl:copypastor:paste:escaped
+URxvt*keysym.M-C-S-V: perl:copypastor:paste:stty
+! Usual default shortcuts:
+URxvt*keysym.C-S-C:  perl:copypastor:copy
+URxvt*keysym.C-S-V:  perl:copypastor:paste:default
+
+
+!! === Selector ==========================
+! URxvt*keysym.M-e:    perl:selector:run
+URxvt*keysym.M-x:    perl:selector:run
