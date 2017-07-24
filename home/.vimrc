@@ -237,6 +237,11 @@ nnoremap <silent> <c-c> :noh<cr>
 nnoremap <esc>^[ <esc>^[
 
 " Line navigation.
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+noremap k gk
 noremap H ^
 noremap L $
 
@@ -246,8 +251,9 @@ nnoremap <silent> <c-h> :call LeftWindowOrTab()<cr>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <silent> <c-l> :call RightWindowOrTab()<cr>
-" nnoremap <c-H> :tabm -1<cr>
-" nnoremap <c-L> :tabm +1<cr>
+
+nnoremap <esc>h :tabm -1<cr>
+nnoremap <esc>l :tabm +1<cr>
 
 " Space as leader key.
 map <Space> <nop>
@@ -266,9 +272,9 @@ nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<cr>
 " nnoremap <leader>e :Errors<cr><c-w>j
-" nnoremap <leader>e :call feedkeys(':e<space><tab>', 't')<cr>
 nnoremap <leader>e :Errors<cr>:lclose<cr>:lnext<cr>
 nnoremap <leader>E :Errors<cr>:lclose<cr>:lprev<cr>
+nnoremap <leader>m :make<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages

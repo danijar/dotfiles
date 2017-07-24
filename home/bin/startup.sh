@@ -8,7 +8,6 @@ startup () {
 }
 
 # Try to start tray applications.
-startup nm-applet
 startup cbatticon -n
 startup insync start
 startup screencloud

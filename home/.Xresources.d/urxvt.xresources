@@ -1,34 +1,39 @@
+! URxvt configuration.
+! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
+
 ! Appearance
 URxvt.scrollBar: false
 URxvt.saveLines: 10000
 URxvt.fading: 30
 URxvt.depth: 32
 URxvt.intensityStyles: false
-! URxvt.internalBorder: 0
-! URxvt.letterSpace: -1
-
-! Extensions
-! #include "../.urxvt/ext/config"
-URxvt.altSendsEscape: true
-URxvt.perl-ext-common: default,clipboard,font-size,focus-events
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-URxvt.clipboard.copycmd:  xclip -i -sel clip
-URxvt.clipboard.pastecmd: xclip -o -sel clip
-
-! Keybinds
-URxvt.keysym.C-C: perl:clipboard:copy
-URxvt.keysym.C-V: perl:clipboard:paste
-URxvt.keysym.C-0x2b: perl:font-size:increase
-URxvt.keysym.C-0x2d: perl:font-size:decrease
-! URxvt.keysym.Control-0x2d: perl:font-size:reset
-
-! Missing keys
-! URxvt.vt100.translations: #override \
-!   Ctrl ~Meta Shift <Key>a: string(0x1b) string("[65;5u") \n\
-!   Ctrl ~Meta Shift <Key>b: string(0x1b) string("[66;5u") \n\
-!   Ctrl ~Meta Shift <Key>f: string(0x1b) string("[70;5u")
+URxvt.urgentOnBell: True
 
 ! Behavior
-URxvt*print-pipe: cat > $HOME/urxvt.print
+URxvt.print-pipe: cat > $HOME/urxvt.print
 URxvt.buffered: true
+URxvt.trimSelection: true
+
+! Extensions
+URxvt.perl-ext-common: default,clipboard,font-size,focus-events,keyboard-select
+URxvt.clipboard.copycmd: xclip -i -sel clip
+URxvt.clipboard.pastecmd: xclip -o -sel clip
+URxvt.font-size.step: 4
+
+! Keybinds
+URxvt.keysym.C-C:          perl:clipboard:copy
+URxvt.keysym.C-V:          perl:clipboard:paste
+URxvt.keysym.C-equal:      perl:font-size:increase
+URxvt.keysym.C-0x2d:       perl:font-size:decrease
+URxvt.keysym.C-0:          perl:font-size:reset
+URxvt.keysym.M-Escape:     perl:keyboard-select:activate
+
+! Forward scape sequences
+URxvt.eightBitInput: false
+URxvt.metaSendsEscape: true
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.keysym.C-H: \033h
+URxvt.keysym.C-J: \033j
+URxvt.keysym.C-K: \033k
+URxvt.keysym.C-L: \033l
