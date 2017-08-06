@@ -145,9 +145,9 @@ set backupdir=$HOME/.vim/backup//
 " Color scheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set t_Co=256
-set background=dark
-" set background=light
+" set t_Co=256
+" set background=dark
+set background=light
 colorscheme hybrid
 
 " w0ng/vim-hybrid
@@ -225,6 +225,9 @@ imap <esc> <nop>
 " Fix block editing.
 inoremap <c-c> <esc>
 
+" Handle focus events.
+inoremap <esc>[O <esc>:stopinsert<cr>
+
 " No shift for command mode.
 noremap ; :
 
@@ -251,7 +254,6 @@ nnoremap <silent> <c-h> :call LeftWindowOrTab()<cr>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <silent> <c-l> :call RightWindowOrTab()<cr>
-
 nnoremap <esc>h :tabm -1<cr>
 nnoremap <esc>l :tabm +1<cr>
 

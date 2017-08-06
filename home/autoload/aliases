@@ -45,3 +45,6 @@ alias ya='yaourt'
 alias pg='ping 8.8.8.8'
 alias clip='xclip -selection c'
 alias wifi='nmtui'
+mknice() {
+  renice -n 20 -p $(pgrep $1)
+}
