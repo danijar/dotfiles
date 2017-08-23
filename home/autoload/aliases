@@ -12,10 +12,14 @@ alias gs='git status'
 alias gl='git log'
 alias ga='git add -A'
 alias gc='git commit -m '
+alias go='git checkout'
+alias gb='git branch'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias gr='git rebase -i'
 alias ge='git diff --name-only | uniq | xargs vim -p'
+gr() {
+  git rebase -i HEAD~$1
+}
 
 # Python.
 alias p='python'

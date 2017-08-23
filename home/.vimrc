@@ -146,8 +146,8 @@ set backupdir=$HOME/.vim/backup//
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " set t_Co=256
-" set background=dark
-set background=light
+set background=dark
+" set background=light
 colorscheme hybrid
 
 " w0ng/vim-hybrid
@@ -227,6 +227,7 @@ inoremap <c-c> <esc>
 
 " Handle focus events.
 inoremap <esc>[O <esc>:stopinsert<cr>
+inoremap <esc>[I :mode<cr>
 
 " No shift for command mode.
 noremap ; :

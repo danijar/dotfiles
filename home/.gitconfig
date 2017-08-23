@@ -7,3 +7,7 @@
 	rebase = true
 [rebase]
 	autostash = true
+[alias]
+	append = commit --amend --no-edit
+	reword = commit --amend
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short

@@ -1,0 +1,51 @@
+#!/usr/bin/python
+
+import gtk
+import os
+import sys
+
+
+def drag_data_get(widget, context, sel, info, time):
+  paths = map(os.path.abspath, sys.argv[1:])
+  sel.set_uris(map(lambda p: 'file://' + p, paths))
+
+
+def create_window():
+  win = gtk.Window(gtk.WINDOW_POPUP)
+  win.resize(150, 150)
+  win.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse('#4286f4'))
+  return win
+
+
+def register_drag_event(win):
+  win.drag_source_set(
+      gtk.gdk.BUTTON1_MASK, [('text/uri-list', 0, 0)], gtk.gdk.ACTION_COPY)
+  win.connect('drag-data-get', drag_data_get)
+  win.connect('drag-end', lambda *args: gtk.main_quit())
+
+
+def add_icon(win, name=gtk.STOCK_FILE):
+  image = gtk.Image()
+  image.set_from_stock(name, gtk.ICON_SIZE_LARGE_TOOLBAR)
+  win.add(image)
+
+
+def position_window_at_curor(win, offset=10):
+  mouse = win.get_screen().get_root_window().get_pointer()
+  win.move(mouse[0] + offset, mouse[1] + offset)
+
+
+def main():
+  if len(sys.argv) < 2:
+    print 'usage: dropme <path>'
+    sys.exit(1)
+  win = create_window()
+  register_drag_event(win)
+  add_icon(win)
+  position_window_at_curor(win)
+  win.show_all()
+  gtk.main()
+
+
+if __name__ == '__main__':
+  main()

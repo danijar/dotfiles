@@ -4,8 +4,8 @@
 # Enable command completion
 autoload -U compinit && compinit
 
-# Key bindings
-bindkey "^R" history-incremental-search-backward
+# Enable text reflow in terminal.
+printf '\e[99999;H\n\e[H'
 
 # History
 SAVEHIST=10000

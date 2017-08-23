@@ -40,7 +40,7 @@ interval=5
 
 [volume]
 label=VOL
-command=/usr/lib/i3blocks/volume 5% pulse
+command=$HOME/bin/volume 5% pulse
 instance=Master
 interval=1
 signal=10

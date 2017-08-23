@@ -207,3 +207,4 @@ client.background       $COLOR_BG
 # Hide title bar for some applications.
 for_window [title="Google Chrome"] border pixel 0
 for_window [title="Android Studio"] border pixel 0
+for_window [title="Simulate"] floating enable
