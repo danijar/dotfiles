@@ -50,7 +50,7 @@ Plug 'amerlyq/vim-focus-autocmd'
 call plug#end()
 
 " Google.
-if empty(glob('/usr/share/vim/google/google.vim'))
+if glob('/usr/share/vim/google/google.vim')
   source /usr/share/vim/google/google.vim
 endif
 
