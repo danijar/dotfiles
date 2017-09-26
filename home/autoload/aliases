@@ -37,18 +37,21 @@ alias tf='ipython -i -c " \
 alias tc='LD_PRELOAD=/usr/lib/libtcmalloc.so python -O'
 alias pi='sudo pip install'
 alias pu='sudo pip uninstall'
+alias pr='sudo pip uninstall'
+alias pd='python -m pdb -c continue'
 
 # Cleanup.
 alias clean-cmake='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias clean-symlinks='find -xtype l -delete'
 
 # Other.
-alias mk='mkdir'
+alias mk='mkdir -p'
 alias pm='sudo pacman -S'
 alias ya='yaourt'
 alias pg='ping 8.8.8.8'
 alias clip='xclip -selection c'
 alias wifi='nmtui'
+alias dark='xbacklight -set 0'
 mknice() {
   renice -n 20 -p $(pgrep $1)
 }

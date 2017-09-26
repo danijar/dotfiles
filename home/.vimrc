@@ -194,7 +194,7 @@ cmap w!! w !sudo tee % >/dev/null
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 
 " Fix autoread in console Vim.
-autocmd FocusGained,BufEnter * checktime
+autocmd FocusGained,BufEnter * mode
 " autocmd FocusLost * call feedkeys("\<C-\>\<C-n>")
 
 " Focus right split or otherwise next tab.
@@ -271,7 +271,7 @@ nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
-nnoremap <leader>r :checktime<cr>
+nnoremap <leader>r :mode<cr>:checktime<cr>
 nnoremap <leader>c :source ~/.vimrc<cr>
 nnoremap <leader>C :tabedit ~/.vimrc<cr>
 nnoremap <leader>l :Loremipsum<cr>
