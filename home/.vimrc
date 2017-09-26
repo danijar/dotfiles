@@ -26,14 +26,13 @@ Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
 
 " Codel intel.
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-Plug 'bjoernd/vim-ycm-tex'
+" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+" Plug 'bjoernd/vim-ycm-tex'
 " Plug 'davidhalter/jedi-vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'pycqa/flake8', {'do': 'pip install --user flake8'}
 
 " Languages
-Plug 'yaml.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'asciidoc/vim-asciidoc'
 Plug 'leafgarland/typescript-vim'
@@ -49,6 +48,11 @@ Plug 'w0ng/vim-hybrid'
 Plug 'amerlyq/vim-focus-autocmd'
 
 call plug#end()
+
+" Google.
+if empty(glob('/usr/share/vim/google/google.vim'))
+  source /usr/share/vim/google/google.vim
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings

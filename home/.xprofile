@@ -1,17 +1,17 @@
 #!/bin/sh
 
 ################################################################
-# Startup script for GDM, KDM, LightDM, LXDM, SSDM.
+# User defined startup script.
 ################################################################
 
-# Load Xorg configuration.
+# Load Xorg resources.
 [ -f ~/.Xresources ] && xrdb -all -load ~/.Xresources
 
-# Expose Xresources as environment variables.
+# Expose Xorg colors as environment variables.
 . ~/bin/colors.sh
 
-# Background applications.
+# Launch background applications.
 . ~/bin/startup.sh &
 
-# Keyboard layout and bindings.
+# Set keyboard layout and bindings.
 . ~/bin/keyboard.sh &

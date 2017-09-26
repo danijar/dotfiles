@@ -14,6 +14,7 @@ startup screencloud
 startup redshift-gtk
 startup unclutter
 startup volumeicon
+startup /usr/share/goobuntu-indicator/goobuntu_indicator.py
 
 # Set wallpaper or color.
 startup hsetroot -solid "#$COLOR_BG"

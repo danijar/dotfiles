@@ -1,14 +1,9 @@
 #!/bin/sh
 
 ################################################################
-# Startup script for startx, xinit, XDM, SLIM.
+# Startup script for Debian-based distributions; runs for all
+# session types.
 ################################################################
-
-# Load default configuration.
-[ -f /etc/xprofile ] && . /etc/xprofile
 
 # Load user configuration.
 [ -f ~/.xprofile ] && . ~/.xprofile
-
-# Start window manager.
-exec i3
