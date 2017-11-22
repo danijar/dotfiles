@@ -19,6 +19,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-conflicted'
 Plug 'vim-scripts/loremipsum'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -26,9 +28,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
 
 " Codel intel.
-" Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-" Plug 'bjoernd/vim-ycm-tex'
-" Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'zchee/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'pycqa/flake8', {'do': 'pip install --user flake8'}
 
@@ -46,11 +48,12 @@ Plug 'w0ng/vim-hybrid'
 
 " Behavior.
 Plug 'amerlyq/vim-focus-autocmd'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
 call plug#end()
 
-" Google.
-if glob('/usr/share/vim/google/google.vim')
+if ! empty(glob('/usr/share/vim/google/google.vim'))
   source /usr/share/vim/google/google.vim
 endif
 
@@ -58,18 +61,21 @@ endif
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" YouCompleteMe
-let g:ycm_path_to_python_interpreter = '/usr/bin/python2'
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_max_diagnostics_to_display = 10
-let g:ycm_key_invoke_completion = '<c-Space>'
-let g:ycm_key_list_select_completion=['<tab>', '<down>', '<c-j>']
-let g:ycm_key_list_previous_completion=['<s-tab>', '<up>', '<c-k>']
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_filetype_specific_completion_to_disable = {'python': 1}
-let g:ycm_semantic_triggers = {'tex': ['\ref{','\cite{']}
+" Shougo/deoplete.nvim
+let g:deoplete#enable_at_startup = 1
+inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<c-j>"
+inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
+let g:deoplete#enable_smart_case = 1
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" zchee/deoplete-jedi
+" let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3.6'
+
+" davidhalter/jedi-vim
+let g:jedi#completions_enabled = 0
+let g:jedi#force_py_version = 3
+let g:jedi#use_tabs_not_buffers = 1
 
 " syntastic
 let g:syntastic_check_on_open = 1
@@ -108,7 +114,7 @@ set hlsearch incsearch
 set ignorecase smartcase
 set nofoldenable
 set viminfo^=%
-set completeopt-=preview
+set completeopt-=preview  " Disable docstring window for completions.
 set scrolloff=100
 set splitbelow
 set splitright
@@ -149,7 +155,6 @@ set backupdir=$HOME/.vim/backup//
 " Color scheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set t_Co=256
 set background=dark
 " set background=light
 colorscheme hybrid
@@ -223,8 +228,6 @@ endfunction
 map q: <nop>
 map Q <nop>
 map <f1> <nop>
-map <esc> <nop>
-imap <esc> <nop>
 
 " Fix block editing.
 inoremap <c-c> <esc>
@@ -266,19 +269,19 @@ nnoremap <esc>l :tabm +1<cr>
 map <Space> <nop>
 let mapleader = " "
 
+" File search using fzf.
+" nnoremap <c-p> :Files<cr>
+
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
-nnoremap <leader>r :mode<cr>:checktime<cr>
 nnoremap <leader>c :source ~/.vimrc<cr>
 nnoremap <leader>C :tabedit ~/.vimrc<cr>
 nnoremap <leader>l :Loremipsum<cr>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
-nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<cr>
-" nnoremap <leader>e :Errors<cr><c-w>j
 nnoremap <leader>e :Errors<cr>:lclose<cr>:lnext<cr>
 nnoremap <leader>E :Errors<cr>:lclose<cr>:lprev<cr>
 nnoremap <leader>m :make<cr>
@@ -294,10 +297,4 @@ autocmd BufNewFile,BufRead *.cls set filetype=tex
 autocmd FileType json   setlocal conceallevel=0
 autocmd FileType tex    setlocal conceallevel=0
 autocmd FileType python setlocal conceallevel=0
-
-let g:tex_conceal = ""
-
-" autocmd FileType markdown,asciidoc call pencil#init()
-
 autocmd FileType python setlocal ts=2 sw=2 sts=2
-autocmd BufRead,BufEnter */mindpark/*.py setlocal ts=4 sw=4 sts=4
