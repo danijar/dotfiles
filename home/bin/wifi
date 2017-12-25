@@ -6,11 +6,12 @@ import sh
 
 def main(args):
   table = sh.nmcli('-c no dev wifi'.split()).splitlines()
+  header = table[0]
   marked = [line for line in table if line.startswith('*')]
-  if not len(marked) == 2:
+  if not len(marked) == 1:
     print('')
     return
-  header, info = marked
+  info = marked[0]
   network = info[header.index('SSID'): header.index('MODE')].strip()
   signal = int(info[header.index('SIGNAL'): header.index('BARS')].strip())
   print(args.format.format(signal, network))  # Short text.
