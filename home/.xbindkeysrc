@@ -7,11 +7,11 @@
     XF86MonBrightnessDown
 
 # Volume.
-"amixer set Master unmute 5%+"
+"amixer -D pulse set Master 5%+ unmute"
     XF86AudioRaiseVolume
-"amixer set Master 5%-"
+"amixer -D pulse set Master 5%-"
     XF86AudioLowerVolume
-"amixer set Master mute"
+"amixer -D pulse set Master mute"
     XF86AudioMute
 
 # Mouse.
