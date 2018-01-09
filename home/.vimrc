@@ -285,6 +285,7 @@ nnoremap <leader>q @q
 nnoremap <leader>e :Errors<cr>:lclose<cr>:lnext<cr>
 nnoremap <leader>E :Errors<cr>:lclose<cr>:lprev<cr>
 nnoremap <leader>m :make<cr>
+nnoremap <leader>d :cd %:h<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
@@ -298,3 +299,15 @@ autocmd FileType json   setlocal conceallevel=0
 autocmd FileType tex    setlocal conceallevel=0
 autocmd FileType python setlocal conceallevel=0
 autocmd FileType python setlocal ts=2 sw=2 sts=2
+
+function! PythonSyntax()
+  syntax match MyPythonSelf "\<self\>\.\?"
+  syntax match MyPythonLibrary "\<np\.\|\<tf\.\|\<scipy\.\<os\."
+  syntax match MyPythonKwarg "\((\| \)\@<=\<[A-Za-z0-9_]\+\>="
+  syntax match MyPythonNumber "\<[0-9.]\+\>\.\?"
+  hi MyPythonSelf    cterm=none ctermfg=gray ctermbg=none
+  hi MyPythonLibrary cterm=none ctermfg=gray ctermbg=none
+  hi MyPythonKwarg   cterm=none ctermfg=magenta ctermbg=none
+  hi MyPythonNumber  cterm=none ctermfg=red ctermbg=none
+endfunction
+autocmd! filetype python call PythonSyntax()
