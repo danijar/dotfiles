@@ -1,9 +1,0 @@
-#!/bin/sh
-
-################################################################
-# Startup script for Debian-based distributions; runs for all
-# session types.
-################################################################
-
-# Load user configuration.
-[ -f ~/.xprofile ] && . ~/.xprofile
