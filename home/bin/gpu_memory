@@ -7,6 +7,8 @@ import sh
 def query_gpu(key):
   nvidia_smi = sh.Command('nvidia-smi')
   output = nvidia_smi('--query-gpu=' + key, '--format=csv,noheader')
+  if '\n' in output:  # Support multiple GPUs.
+    output = output.split('\n')[0]
   return output.strip()
 
 
