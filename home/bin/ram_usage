@@ -1,0 +1,33 @@
+#!/usr/bin/python3
+import argparse
+import os
+import sh
+
+
+def query_ram():
+  output = sh.cat('/proc/meminfo')
+  output = output.strip().split('\n')
+  stats = {row.split()[0][:-1]: int(row.split()[1]) for row in output}
+  return stats
+
+
+def main(args):
+  stats = query_ram()
+  fraction = 1 - stats['MemAvailable'] / stats['MemTotal']
+  percentage = int(100 * fraction)
+  print(args.format.format(percentage))  # Short text.
+  print(args.format.format(percentage))  # Full text.
+  if percentage > args.critical:
+    print('#' + os.environ['COLOR_01'])
+  elif percentage > args.warning:
+    print('#' + os.environ['COLOR_03'])
+
+
+if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--format', type=str, default='{:>1}%')
+  parser.add_argument('--warning', type=int, default=60)
+  parser.add_argument('--critical', type=int, default=85)
+  parser.add_argument('--interval', type=float, default=1)
+  args = parser.parse_args()
+  main(args)
