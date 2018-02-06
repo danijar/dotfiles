@@ -1,0 +1,31 @@
+#!/usr/bin/python3
+import argparse
+import os
+import sh
+
+
+def query_gpu(key):
+  nvidia_smi = sh.Command('nvidia-smi')
+  output = nvidia_smi('--query-gpu=' + key, '--format=csv,noheader')
+  if '\n' in output:  # Support multiple GPUs.
+    output = output.split('\n')[0]
+  return output.strip()
+
+
+def main(args):
+  percentage = int(query_gpu('utilization.gpu').strip('%'))
+  print(args.format.format(percentage))  # Short text.
+  print(args.format.format(percentage))  # Full text.
+  if percentage > args.critical:
+    print('#' + os.environ['COLOR_01'])
+  elif percentage > args.warning:
+    print('#' + os.environ['COLOR_03'])
+
+
+if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--format', type=str, default='{:>1}%')
+  parser.add_argument('--warning', type=int, default=60)
+  parser.add_argument('--critical', type=int, default=85)
+  args = parser.parse_args()
+  main(args)

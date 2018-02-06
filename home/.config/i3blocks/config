@@ -17,7 +17,7 @@ interval=5
 
 [gpu_usage]
 label=GPU
-command=nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | sed -r 's/\s//' | head -n 1
+command=$HOME/bin/gpu_usage
 interval=5
 
 [gpu_memory]
@@ -40,7 +40,7 @@ interval=1
 
 [volume]
 label=VOL
-command=$HOME/bin/volume 5% pulse
+command=$HOME/bin/volume 5%
 instance=Master
 interval=1
 signal=10
