@@ -18,7 +18,7 @@ URxvt.trimSelection: true
 URxvt.perl-ext-common: default,clipboard,font-size,focus-events,keyboard-select
 URxvt.clipboard.copycmd: xclip -i -sel clip
 URxvt.clipboard.pastecmd: xclip -o -sel clip
-URxvt.font-size.step: 4
+URxvt.font-size.step: 2
 
 ! Keybinds
 URxvt.keysym.C-C:          perl:clipboard:copy

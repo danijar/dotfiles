@@ -4,6 +4,13 @@
 # User defined startup script.
 ################################################################
 
+# Run a command in background if it exists.
+startup () {
+    if hash $1 2> /dev/null; then
+        $@ &
+    fi
+}
+
 # Load Xorg resources.
 [ -f ~/.Xresources ] && xrdb -all -load ~/.Xresources
 
@@ -15,3 +22,7 @@
 
 # Set keyboard layout and bindings.
 . ~/bin/keyboard.sh &
+
+# Cinnamon settings.
+startup /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-xsettings
+startup /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-xrandr

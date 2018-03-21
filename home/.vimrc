@@ -31,14 +31,14 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'pycqa/flake8', {'do': 'pip install --user flake8'}
+Plug 'w0rp/ale'
 
 " Languages
 Plug 'plasticboy/vim-markdown'
 Plug 'asciidoc/vim-asciidoc'
 Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex'
+" Plug 'edliaw/vim-python'
 
 " Visuals.
 Plug 'morhetz/gruvbox'
@@ -53,10 +53,6 @@ Plug 'roxma/vim-hug-neovim-rpc'
 
 call plug#end()
 
-if ! empty(glob('/usr/share/vim/google/google.vim'))
-  source /usr/share/vim/google/google.vim
-endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -69,24 +65,24 @@ let g:deoplete#enable_smart_case = 1
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" zchee/deoplete-jedi
-" let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python3.6'
-
 " davidhalter/jedi-vim
 let g:jedi#completions_enabled = 0
 let g:jedi#force_py_version = 3
 let g:jedi#use_tabs_not_buffers = 1
 
-" syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_post_args = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731'
-
+" w0rp/ale
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_python_flake8_options = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731'
+" " let g:ale_python_pylint_optoins = "--indent-string '  '"
+let g:ale_pattern_options = {
+\ '/google/src/.*': {'ale_enabled': 0},
+\}
+"
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_user_command = {'types': {
-    \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
-    \ }, 'fallback': 'find %s -type f'}
+\ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
+\ }, 'fallback': 'find %s -type f'}
 
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
@@ -107,7 +103,7 @@ let g:hybrid_custom_term_colors = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set encoding=utf-8
-set lazyredraw
+" set lazyredraw
 set clipboard=unnamedplus
 set hidden
 set hlsearch incsearch
@@ -192,14 +188,12 @@ autocmd BufReadPost * call ResumeCursorPosition()
 " Write file with sudo permissions.
 cmap w!! w !sudo tee % >/dev/null
 
-" Highlight long lines.
-" match Error /\%80v.\+/
-
 " Highlight trailing whitespace.
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 
 " Fix autoread in console Vim.
-autocmd FocusGained,BufEnter * mode
+autocmd FocusGained,BufEnter * checktime
+" autocmd FocusGained,BufEnter * mode
 " autocmd FocusLost * call feedkeys("\<C-\>\<C-n>")
 
 " Focus right split or otherwise next tab.
@@ -285,7 +279,9 @@ nnoremap <leader>q @q
 nnoremap <leader>e :Errors<cr>:lclose<cr>:lnext<cr>
 nnoremap <leader>E :Errors<cr>:lclose<cr>:lprev<cr>
 nnoremap <leader>m :make<cr>
-nnoremap <leader>d :cd %:h<cr>
+nnoremap <leader>h :cd %:h<cr>
+nnoremap <leader>v vipo
+vnoremap <leader>o :sort<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
@@ -299,6 +295,7 @@ autocmd FileType json   setlocal conceallevel=0
 autocmd FileType tex    setlocal conceallevel=0
 autocmd FileType python setlocal conceallevel=0
 autocmd FileType python setlocal ts=2 sw=2 sts=2
+autocmd FileType python setlocal tw=79
 
 function! PythonSyntax()
   syntax match MyPythonSelf "\<self\>\.\?"
@@ -310,4 +307,4 @@ function! PythonSyntax()
   hi MyPythonKwarg   cterm=none ctermfg=magenta ctermbg=none
   hi MyPythonNumber  cterm=none ctermfg=red ctermbg=none
 endfunction
-autocmd! filetype python call PythonSyntax()
+autocmd FileType python call PythonSyntax()
