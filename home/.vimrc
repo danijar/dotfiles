@@ -280,7 +280,7 @@ nnoremap <leader>e :Errors<cr>:lclose<cr>:lnext<cr>
 nnoremap <leader>E :Errors<cr>:lclose<cr>:lprev<cr>
 nnoremap <leader>m :make<cr>
 nnoremap <leader>h :cd %:h<cr>
-nnoremap <leader>v vipo
+nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
