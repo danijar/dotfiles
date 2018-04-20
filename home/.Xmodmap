@@ -1,5 +1,21 @@
-! Key Shift+Key mode_switch+Key mode_switch+Shift+Key AltGr+Key AltGr+Shift+Key
+! Update with `xmodmap ~/.Xmodmap`.
+
+! Use capslock as control key.
 clear lock
 clear control
 add control = Control_L Control_R
 keycode 66 = Control_L
+
+! The assignment corresponds to following modified keys:
+! Key Shift+Key unknown unknown AltGr+Key AltGr+Shift+Key
+
+! Wide minus character.
+keycode 20 = minus underscore minus underscore U2212 U2212
+
+! Greek letters.
+keycode 38 = a A a A Greek_alpha Greek_ALPHA
+keycode 56 = b B b B Greek_beta Greek_BETA
+keycode 54 = c C c C Greek_gamma Greek_GAMMA
+keycode 40 = d D d D Greek_delta Greek_DELTA
+keycode 28 = t T t T Greek_tau Greek_TAU
+keycode 46 = l L l L Greek_lambda Greek_LAMBDA
