@@ -45,6 +45,7 @@ Plug 'morhetz/gruvbox'
 Plug 'jnurmine/Zenburn'
 Plug 'easysid/mod8.vim'
 Plug 'w0ng/vim-hybrid'
+Plug 'ap/vim-css-color'
 
 " Behavior.
 Plug 'amerlyq/vim-focus-autocmd'

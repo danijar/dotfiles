@@ -27,19 +27,21 @@ gr() {
 # Python.
 alias p='python'
 alias np='ipython -i -c " \
+  import functools, itertools, os, shutil; \
   import numpy as np; \
   import matplotlib.pyplot as plt; \
+  import scipy.stats; \
   import gym"'
-alias tf='ipython -i -c " \
+alias tf='nogpu ipython -i -c " \
+  import functools, itertools, os, shutil; \
   import numpy as np; \
   import matplotlib.pyplot as plt; \
   import tensorflow as tf; \
-  import gym"'
-alias tc='LD_PRELOAD=/usr/lib/libtcmalloc.so python -O'
+  import gym; \
+  tfd = tf.contrib.distributions; \
+  sess = tf.InteractiveSession();"'
+alias tc='LD_PRELOAD=/usr/lib/libtcmalloc.so python3 -O'
 alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
-alias pi='sudo pip install'
-alias pu='sudo pip uninstall'
-alias pr='sudo pip uninstall'
 alias pd='python -m pdb -c continue'
 
 # Cleanup.

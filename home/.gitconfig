@@ -1,13 +1,13 @@
 [user]
-	email = mail@danijar.com
-	name = Danijar Hafner
+  email = mail@danijar.com
+  name = Danijar Hafner
 [push]
-	default = current
+  default = current
 [pull]
-	rebase = true
+  rebase = true
 [rebase]
-	autostash = true
+  autostash = true
 [alias]
-	append = commit --amend --no-edit
-	reword = commit --amend
-	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  append = commit --amend --no-edit
+  reword = commit --amend
+  list = log --name-only
