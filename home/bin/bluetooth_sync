@@ -1,0 +1,10 @@
+#!/bin/sh
+
+card=$(pacmd list-cards | grep -oP 'name: <\K(bluez[^>]*)')
+
+echo Switching $card to HSP
+pacmd set-card-profile $card headset_head_unit
+sleep 1
+
+echo Switching $card to A2DP
+pacmd set-card-profile $card a2dp_sink
