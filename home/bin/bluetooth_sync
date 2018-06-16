@@ -1,10 +1,22 @@
 #!/bin/sh
 
+device=$(echo -e 'list' | bluetoothctl | grep Device)
+name=$(echo $device | sed -n 's/.* [0-9A-C:]\{17\} \(.*\)/\1/p')
+address=$(echo $device | awk '{ print $4; }')
+
+echo "Disconnect $name ($device)"
+echo -e "disconnect $address" | bluetoothctl
+sleep 7
+
+echo "Connect $name ($device)"
+echo -e "connect $address" | bluetoothctl
+sleep 7
+
 card=$(pacmd list-cards | grep -oP 'name: <\K(bluez[^>]*)')
 
-echo Switching $card to HSP
-pacmd set-card-profile $card headset_head_unit
-sleep 1
+# echo Switching $card to HSP
+# pacmd set-card-profile $card headset_head_unit
+# sleep 1
 
-echo Switching $card to A2DP
+echo "Switching $card to A2DP"
 pacmd set-card-profile $card a2dp_sink
