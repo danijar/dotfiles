@@ -48,6 +48,12 @@ zle -N x-paste
 bindkey -M vicmd "y" x-yank
 bindkey -M vicmd "Y" x-cut
 bindkey -M vicmd "p" x-paste
+bindkey -M vicmd "^K" up-history
+bindkey -M vicmd "^J" down-history
+
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 # Start line editor in command mode.
 zle-line-init() { zle vi-cmd-mode; }

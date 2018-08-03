@@ -1,0 +1,32 @@
+#!/bin/sh
+
+function git_snapshot() {
+  # Usage: SNAPSHOT=$(git_snapshot <backup_branch> "<commit message>")
+  set -e
+
+  # Save the current state.
+  BEFORE=$(git rev-parse --abbrev-ref HEAD)
+  if [[ "$BEFORE" == 'HEAD' ]]; then
+    BEFORE=$(git rev-parse HEAD)
+  fi
+  (>&2 echo "Starting at $BEFORE.")
+  git stash push --include-untracked
+  (>&2 echo "Stashed changes ($(git rev-parse stash@{0})).")
+
+  # Commit files to other BEFORE.
+  git checkout "$1"
+  git read-tree -um $BEFORE
+  git commit -m "$2"
+  (>&2 echo "Saved last commit ($(git rev-parse HEAD)).")
+  git stash apply --index stash@{0}
+  git add -A
+  git commit --amend --no-edit
+  (>&2 echo "Patched uncommitted changes ($(git rev-parse HEAD)).")
+  SNAPSHOT=$(git rev-parse HEAD)
+  echo $SNAPSHOT
+
+  # Switch back and restore state.
+  git checkout $BEFORE
+  git stash apply --index stash@{0}
+  (echo "Restored changes.")
+}
