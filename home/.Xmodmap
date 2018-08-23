@@ -1,4 +1,6 @@
-! Update with `xmodmap ~/.Xmodmap`.
+! Update with `xmodmap ~/.Xmodmap` or better `./bin/keyboard.sh`.
+! Use `xmodmap -pke` to find key codes and used symbol names.
+! `/usr/include/X11/keysymdef.h` includes all symbol names.
 
 ! Use capslock as control key.
 clear lock
@@ -9,8 +11,13 @@ keycode 66 = Control_L
 ! The assignment corresponds to following modified keys:
 ! Key Shift+Key unknown unknown AltGr+Key AltGr+Shift+Key
 
-! Wide minus character.
+! Wide minus.
 keycode 20 = minus underscore minus underscore U2212 U2212
+
+! Mathematical operators.
+keycode 59 = comma less comma less lessthanequal
+keycode 60 = period greater period greater greaterthanequal
+keycode 49 = grave asciitilde grave asciitilde approxeq approxeq
 
 ! Greek letters.
 keycode 38 = a A a A Greek_alpha Greek_ALPHA
