@@ -26,6 +26,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
+Plug 'reedes/vim-pencil'
 
 " Codel intel.
 Plug 'Shougo/deoplete.nvim'
@@ -134,6 +135,7 @@ set ruler
 set mouse=a
 set autoread
 set undofile
+set modeline  " Support in-file Vim settings.
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Directories
@@ -283,6 +285,8 @@ nnoremap <leader>m :make<cr>
 nnoremap <leader>h :cd %:h<cr>
 nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
+nnoremap <leader>j vipJ^
+nnoremap <leader>p Biprint(<esc>Ea)<esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages

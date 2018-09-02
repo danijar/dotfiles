@@ -1,3 +1,5 @@
+# Reload with `bind -f ~/.inputrc`.
 set editing-mode vi
 set keymap vi
 set convert-meta on
+set keyseq-timeout 10

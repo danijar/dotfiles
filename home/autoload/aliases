@@ -13,6 +13,7 @@ alias sudo='sudo '
 # Git.
 alias gs='git status'
 alias gl='git log'
+alias gls='git log --stat'
 alias ga='git add -A'
 alias gc='git commit -m '
 alias go='git checkout'
@@ -31,15 +32,18 @@ alias np='ipython -i -c " \
   import numpy as np; \
   import matplotlib.pyplot as plt; \
   import scipy.stats; \
-  import gym"'
+  import gym; \
+  random = np.random.RandomState(seed=0);"'
 alias tf='nogpu ipython -i -c " \
   import functools, itertools, os, shutil; \
   import numpy as np; \
   import matplotlib.pyplot as plt; \
   import tensorflow as tf; \
+  import tensorflow_probability as tfp; \
+  from tensorflow_probability import distributions as tfd; \
   import gym; \
-  tfd = tf.contrib.distributions; \
-  sess = tf.InteractiveSession();"'
+  random = np.random.RandomState(seed=0); \
+  sess = tf.Session();"'
 alias tc='LD_PRELOAD=/usr/lib/libtcmalloc.so python3 -O'
 alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
 alias pd='python -m pdb -c continue'

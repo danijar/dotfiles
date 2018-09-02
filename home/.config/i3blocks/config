@@ -27,7 +27,7 @@ interval=5
 
 [disk]
 label=DSK
-instance=/
+command=df -h ~ | tail -1 | awk '{ print $4 }'
 interval=20
 
 [wifi]
