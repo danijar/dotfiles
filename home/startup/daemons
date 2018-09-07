@@ -29,3 +29,7 @@ startup xautolock -time 10 -lockaftersleep -locker "i3lock -c '$COLOR_BG'"
 if python -mplatform | grep -q Ubuntu; then
     startup unity-settings-daemon
 fi
+
+# Cinnamon settings.
+startup /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-xsettings
+startup /usr/lib/x86_64-linux-gnu/cinnamon-settings-daemon/csd-xrandr
