@@ -1,0 +1,131 @@
+#!/usr/bin/python3
+"""Rename or delete things via your text editor.
+
+Requires sh.py that can be installed via `pip install sh`.
+
+Usage example:
+
+edit_list --content-cmd 'ls $PWD' --rename-cmd 'mv {} {}' --delete-cmd 'rm -rf {}'
+"""
+
+import argparse
+import os
+import subprocess
+import tempfile
+
+import sh
+
+
+__author__ = 'Danijar Hafner'
+
+
+def user_edit_text(text):
+  editor = sh.Command(os.environ.get('EDITOR', 'vim'))
+  with tempfile.NamedTemporaryFile('w+', suffix='.tmp') as file_:
+    file_.write(text)
+    file_.flush()
+    editor(file_.name, _fg=True)
+    file_.seek(0)
+    return file_.read()
+
+
+def read_changes(items, edited):
+  edited = [line.strip() for line in edited.strip().split('\n')]
+  edited = [line.split(' ', 1) for line in edited if line]
+  edited = {int(index): dir_ for index, dir_ in edited}
+  keeps, renames, deletes = [], [], []
+  for index, dir_ in enumerate(items):
+    if index not in edited:
+      deletes.append(dir_)
+    elif edited[index] != dir_:
+      renames.append((dir_, edited[index]))
+    else:
+      keeps.append(dir_)
+  return keeps, renames, deletes
+
+
+def preview_changes(keeps, renames, deletes):
+  if keeps:
+    print('Unchanged:')
+    print(''.join('- {}\n'.format(x) for x in keeps))
+  if renames:
+    print('Rename:')
+    print(''.join('- {}\n  {}\n'.format(*x) for x in renames))
+  if deletes:
+    print('Delete:')
+    print(''.join('- {}\n'.format(x) for x in deletes))
+  try:
+    if input('Looks good? [Ny]: ') == 'y':
+      return True
+  except KeyboardInterrupt:
+    print('')
+  print('No changes made.')
+  return False
+
+
+def resolve_bg_commands(commands):
+  failures = 0
+  for command in commands:
+    try:
+      command.wait()
+    except sh.ErrorReturnCode as e:
+      print(e)
+      failures += 1
+  return failures
+
+
+def execute_changes(renames, deletes, args):
+  # Delete first so renamed entries can take their place without being deleted.
+  failures = 0
+  delete = sh.Command(args.delete_cmd.split(' ', 1)[0])
+  params = args.delete_cmd.split(' ', 1)[1]
+  commands = []
+  for dir_ in deletes:
+    commands.append(delete(*params.format(dir_).split(), _bg=True))
+  failures += resolve_bg_commands(commands)
+  rename = sh.Command(args.rename_cmd.split(' ', 1)[0])
+  params = args.rename_cmd.split(' ', 1)[1]
+  commands = []
+  for source, target in renames:
+    commands.append(rename(*params.format(source, target).split(), _bg=True))
+  failures += resolve_bg_commands(commands)
+  return failures
+
+
+def read_list(content_cmd):
+  content = subprocess.getoutput(content_cmd)
+  items = content.strip().split('\n')
+  text = ''.join('{} {}\n'.format(*x) for x in enumerate(items))
+  return items, text
+
+
+def main(args):
+  items, initial = read_list(args.content_cmd)
+  current = initial
+  while True:
+    edited = user_edit_text(current)
+    if initial.strip() == edited.strip():
+      print('No changes made.')
+      return
+    keeps, renames, deletes = read_changes(items, edited)
+    if not preview_changes(keeps, renames, deletes):
+      return
+    failures = execute_changes(renames, deletes, args)
+    message = '{} changes failed. Re-edit change list? [Ny]: '
+    if failures and input(message.format(failures)) == 'y':
+      items, initial = read_list(args.content_cmd)
+      current = edited
+      continue
+    else:
+      break
+  print('Done.')
+
+
+if __name__ == '__main__':
+  description = 'Rename or delete things via your text editor.'
+  parser = argparse.ArgumentParser(description=description)
+  parser.add_argument('--content-cmd', type=str, required=True)
+  parser.add_argument('--rename-cmd', type=str, required=True)
+  parser.add_argument('--delete-cmd', type=str, required=True)
+  args = parser.parse_args()
+  main(args)
