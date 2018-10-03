@@ -7,18 +7,22 @@ import sh
 def query_gpu(key):
   nvidia_smi = sh.Command('nvidia-smi')
   output = nvidia_smi('--query-gpu=' + key, '--format=csv,noheader')
-  if '\n' in output:  # Support multiple GPUs.
-    output = output.split('\n')[0]
-  return output.strip()
+  output = output.strip().split('\n')
+  return output
 
 
 def main(args):
-  percentage = int(query_gpu('utilization.gpu').strip('%'))
-  print(args.format.format(percentage))  # Short text.
-  print(args.format.format(percentage))  # Full text.
-  if percentage > args.critical:
+  utilization = query_gpu('utilization.gpu')
+  memory = query_gpu('memory.total')
+  utilization = [int(line.strip('%')) for line in utilization]
+  memory = [int(line.rstrip(' MiB')) for line in memory]
+  index = max(enumerate(memory), key=lambda x: x[1])[0]
+  utilization = utilization[index]
+  print(args.format.format(utilization))  # Short text.
+  print(args.format.format(utilization))  # Full text.
+  if utilization > args.critical:
     print('#' + os.environ['COLOR_01'])
-  elif percentage > args.warning:
+  elif utilization > args.warning:
     print('#' + os.environ['COLOR_03'])
 
 

@@ -7,16 +7,17 @@ import sh
 def query_gpu(key):
   nvidia_smi = sh.Command('nvidia-smi')
   output = nvidia_smi('--query-gpu=' + key, '--format=csv,noheader')
-  if '\n' in output:  # Support multiple GPUs.
-    output = output.split('\n')[0]
-  return output.strip()
+  output = output.strip().split('\n')
+  return output
 
 
 def main(args):
   total = query_gpu('memory.total')
   used = query_gpu('memory.used')
-  total = int(total.rstrip(' MiB'))
-  used = int(used.rstrip(' MiB'))
+  total = [int(line.rstrip(' MiB')) for line in total]
+  used = [int(line.rstrip(' MiB')) for line in used]
+  index = max(enumerate(total), key=lambda x: x[1])[0]
+  total, used = total[index], used[index]
   percentage = round(100 * used / total)
   print(args.format.format(percentage))  # Short text.
   print(args.format.format(percentage))  # Full text.
