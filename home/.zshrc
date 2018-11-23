@@ -7,6 +7,9 @@ autoload -U compinit && compinit
 # Enable text reflow in terminal.
 printf '\e[99999;H\n\e[H'
 
+# Trick Vim into using all colors even inside tmux.
+export TERM="xterm-256color"
+
 # History
 SAVEHIST=10000
 HISTSIZE=20000
@@ -92,3 +95,5 @@ setopt promptsubst
 for script in ~/autoload/*; do
     . $script;
 done
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

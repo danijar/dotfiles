@@ -40,7 +40,7 @@ font pango:DejaVu Sans Mono 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtcd
+bindsym $mod+Return exec urxvtcd -name "" -e tmux
 
 # kill focused window
 mode "kill" {
@@ -207,5 +207,7 @@ client.background       $COLOR_BG
 
 # Hide title bar for some applications.
 for_window [title="Google Chrome"] border pixel 0
+for_window [title="Mozilla Firefox"] border pixel 0
 for_window [title="Android Studio"] border pixel 0
-for_window [title="Simulate"] floating enable
+# for_window [title="Simulate"] floating enable
+for_window [title="mujoco_py"] floating enable
