@@ -217,6 +217,11 @@ function! LeftWindowOrTab()
   endif
 endfunction
 
+
+autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter *
+  \ call system("tmux rename-window '" . expand("%:t") . "'")
+autocmd VimLeave * call system("tmux setw automatic-rename")
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key bindings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
