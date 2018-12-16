@@ -1,0 +1,8 @@
+[Service]
+Type=forking
+ExecStart=tmux new -s dummy -d
+ExecStop=-tmux kill-server
+Restart=on-success
+
+[Install]
+WantedBy=default.target
