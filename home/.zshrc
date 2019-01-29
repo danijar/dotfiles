@@ -96,4 +96,7 @@ for script in ~/autoload/*; do
     . $script;
 done
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Start tmux automatically with SSH.
+if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
+    tmux
+fi
