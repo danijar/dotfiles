@@ -30,8 +30,8 @@ Plug 'reedes/vim-pencil'
 
 " Codel intel.
 Plug 'Shougo/deoplete.nvim'
-Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
+" Plug 'zchee/deoplete-jedi'
+" Plug 'davidhalter/jedi-vim'
 Plug 'w0rp/ale'
 
 " Languages
@@ -61,16 +61,16 @@ call plug#end()
 
 " Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
-inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<c-j>"
-inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
 let g:deoplete#enable_smart_case = 1
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<c-j>"
+inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " davidhalter/jedi-vim
-let g:jedi#completions_enabled = 0
-let g:jedi#force_py_version = 3
-let g:jedi#use_tabs_not_buffers = 1
+" let g:jedi#completions_enabled = 0
+" let g:jedi#force_py_version = 3
+" let g:jedi#use_tabs_not_buffers = 1
 
 " w0rp/ale
 let g:ale_linters = {'python': ['flake8']}
@@ -99,6 +99,9 @@ let g:gruvbox_italic = 1
 
 " w0ng/vim-hybrid
 let g:hybrid_custom_term_colors = 1
+
+" Yggdroot/indentLine
+let g:indentLine_setConceal = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
@@ -136,6 +139,7 @@ set mouse=a
 set autoread
 set undofile
 set modeline  " Support in-file Vim settings.
+set shortmess=A
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Directories
@@ -301,11 +305,9 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
 autocmd BufNewFile,BufRead *.cls set filetype=tex
 
-autocmd FileType json   setlocal conceallevel=0
-autocmd FileType tex    setlocal conceallevel=0
-autocmd FileType python setlocal conceallevel=0
-autocmd FileType python setlocal ts=2 sw=2 sts=2
-autocmd FileType python setlocal tw=79
+autocmd FileType python   setlocal ts=2 sw=2 sts=2
+autocmd FileType python   setlocal tw=79
+autocmd FileType python   setlocal tw=79
 
 function! PythonSyntax()
   syntax match MyPythonSelf "\<self\>\.\?"
