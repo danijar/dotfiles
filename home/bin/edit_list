@@ -1,17 +1,21 @@
 #!/usr/bin/python3
 """Rename or delete things via your text editor.
 
-Requires sh.py that can be installed via `pip install sh`.
+Requires sh.py that can be installed via `pip3 install --user sh`.
 
 Usage example:
 
-edit_list --content-cmd 'ls $PWD' --rename-cmd 'mv {} {}' --delete-cmd 'rm -rf {}'
+edit_list \
+    --content-cmd 'ls $PWD' \
+    --rename-cmd 'mv {} {}' \
+    --delete-cmd 'rm -rf {}'
 """
 
 import argparse
 import os
 import subprocess
 import tempfile
+import threading
 
 import sh
 
@@ -79,16 +83,27 @@ def execute_changes(renames, deletes, args):
   failures = 0
   delete = sh.Command(args.delete_cmd.split(' ', 1)[0])
   params = args.delete_cmd.split(' ', 1)[1]
+  semaphore = threading.Semaphore(args.max_parallel)
+  def done_fn(cmd, success, exit_code):
+    if args.print_progress:
+      print('.', end='', flush=True)
+    semaphore.release()
   commands = []
   for dir_ in deletes:
-    commands.append(delete(*params.format(dir_).split(), _bg=True))
+    semaphore.acquire()
+    values = params.format(dir_).split()
+    commands.append(delete(*values, _bg=True, _done=done_fn))
   failures += resolve_bg_commands(commands)
   rename = sh.Command(args.rename_cmd.split(' ', 1)[0])
   params = args.rename_cmd.split(' ', 1)[1]
   commands = []
   for source, target in renames:
-    commands.append(rename(*params.format(source, target).split(), _bg=True))
+    semaphore.acquire()
+    values = params.format(source, target).split()
+    commands.append(rename(*values, _bg=True, _done=done_fn))
   failures += resolve_bg_commands(commands)
+  if args.print_progress:
+    print('')
   return failures
 
 
@@ -122,10 +137,13 @@ def main(args):
 
 
 if __name__ == '__main__':
+  boolean = lambda x: bool(['False', 'True'].index(x))
   description = 'Rename or delete things via your text editor.'
   parser = argparse.ArgumentParser(description=description)
   parser.add_argument('--content-cmd', type=str, required=True)
   parser.add_argument('--rename-cmd', type=str, required=True)
   parser.add_argument('--delete-cmd', type=str, required=True)
+  parser.add_argument('--max-parallel', type=int, default=100)
+  parser.add_argument('--print-progress', type=boolean, default=False)
   args = parser.parse_args()
   main(args)

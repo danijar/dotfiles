@@ -19,8 +19,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-conflicted'
 Plug 'vim-scripts/loremipsum'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -285,7 +285,7 @@ nnoremap <leader>f gqap
 vnoremap <leader>f gq
 nnoremap <leader>c :source ~/.vimrc<cr>
 nnoremap <leader>C :tabedit ~/.vimrc<cr>
-nnoremap <leader>l :Loremipsum<cr>
+nnoremap <leader>l :mode<cr>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
 nnoremap <leader>e :Errors<cr>:lclose<cr>:lnext<cr>
@@ -295,7 +295,9 @@ nnoremap <leader>h :cd %:h<cr>
 nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
-nnoremap <leader>p Biprint(<esc>Ea)<esc>
+nnoremap <leader>p mz^iprint(<esc>A)<esc>`z6l
+nnoremap <leader>d mzoprint('-' * 79)<esc>`z
+nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
