@@ -306,10 +306,11 @@ nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
 autocmd BufNewFile,BufRead *.cls set filetype=tex
+autocmd BufNewFile,BufRead *.tex set conceallevel=0
 
-autocmd FileType python   setlocal ts=2 sw=2 sts=2
-autocmd FileType python   setlocal tw=79
-autocmd FileType python   setlocal tw=79
+autocmd FileType python setlocal ts=2 sw=2 sts=2
+autocmd FileType python setlocal tw=79
+autocmd FileType python setlocal tw=79
 
 function! PythonSyntax()
   syntax match MyPythonSelf "\<self\>\.\?"
@@ -322,3 +323,9 @@ function! PythonSyntax()
   hi MyPythonNumber  cterm=none ctermfg=red ctermbg=none
 endfunction
 autocmd FileType python call PythonSyntax()
+
+augroup pencil
+  autocmd!
+  autocmd FileType tex call pencil#init({'wrap': 'soft'})
+  autocmd FileType text,markdown call pencil#init({'wrap': 'hard'})
+augroup END
