@@ -235,8 +235,11 @@ map q: <nop>
 map Q <nop>
 map <f1> <nop>
 
-" Fix block editing.
+" Leaving insert mode.
 inoremap <c-c> <esc>
+inoremap <c-v> <esc>
+vnoremap <c-c> <esc>
+vnoremap <c-v> <esc>
 
 " Handle focus events.
 inoremap <esc>[O <esc>:stopinsert<cr>
@@ -295,7 +298,7 @@ nnoremap <leader>h :cd %:h<cr>
 nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
-nnoremap <leader>p mz^iprint(<esc>A)<esc>`z6l
+nnoremap <leader>p mz^ipprint.pprint(<esc>A)<esc>Oimport pprint<esc>`z14l
 nnoremap <leader>d mzoprint('-' * 79)<esc>`z
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 
@@ -327,5 +330,5 @@ autocmd FileType python call PythonSyntax()
 augroup pencil
   autocmd!
   autocmd FileType tex call pencil#init({'wrap': 'soft'})
-  autocmd FileType text,markdown call pencil#init({'wrap': 'hard'})
+  " autocmd FileType text,markdown call pencil#init({'wrap': 'hard'})
 augroup END

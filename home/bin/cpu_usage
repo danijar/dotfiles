@@ -6,7 +6,7 @@ import sh
 
 def query_cpu(interval):
   mpstat = sh.Command('mpstat')
-  output = mpstat(interval, 1)
+  output = mpstat(interval, 1, _env={'S_COLORS': 'never'})
   output = output.strip().split('\n')[-1]
   output = float(output.split()[2][:-1])
   return output
