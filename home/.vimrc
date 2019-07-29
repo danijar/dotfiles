@@ -62,7 +62,7 @@ call plug#end()
 " Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('_', 'matchers', ['ale', 'matcher_full_fuzzy'])
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<c-j>"
 inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -75,11 +75,12 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " w0rp/ale
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_python_flake8_options = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731'
-" " let g:ale_python_pylint_optoins = "--indent-string '  '"
+let g:ale_python_pylint_optoins = "--indent-string '  '"
+let b:ale_fixers = ['isort']
 let g:ale_pattern_options = {
 \ '/google/src/.*': {'ale_enabled': 0},
 \}
-"
+
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_user_command = {'types': {
@@ -286,13 +287,13 @@ nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
-nnoremap <leader>c :source ~/.vimrc<cr>
+nnoremap <leader>c :source ~/.vimrc<cr>:doautoall FileType<cr>
 nnoremap <leader>C :tabedit ~/.vimrc<cr>
 nnoremap <leader>l :mode<cr>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
-nnoremap <leader>e :Errors<cr>:lclose<cr>:lnext<cr>
-nnoremap <leader>E :Errors<cr>:lclose<cr>:lprev<cr>
+nnoremap <leader>e :ALENext<cr>
+nnoremap <leader>E :ALEPrevious<cr>
 nnoremap <leader>m :make<cr>
 nnoremap <leader>h :cd %:h<cr>
 nnoremap <leader>o vipo:sort<cr>
@@ -306,15 +307,6 @@ nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 " Languages
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
-autocmd BufNewFile,BufRead *.cls set filetype=tex
-autocmd BufNewFile,BufRead *.tex set conceallevel=0
-
-autocmd FileType python setlocal ts=2 sw=2 sts=2
-autocmd FileType python setlocal tw=79
-autocmd FileType python setlocal tw=79
-
 function! PythonSyntax()
   syntax match MyPythonSelf "\<self\>\.\?"
   syntax match MyPythonLibrary "\<np\.\|\<tf\.\|\<scipy\.\<os\."
@@ -325,7 +317,16 @@ function! PythonSyntax()
   hi MyPythonKwarg   cterm=none ctermfg=magenta ctermbg=none
   hi MyPythonNumber  cterm=none ctermfg=red ctermbg=none
 endfunction
+
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
+autocmd BufNewFile,BufRead *.cls set filetype=tex
+
+autocmd FileType python setlocal ts=2 sw=2 sts=2
+autocmd FileType python setlocal tw=79
 autocmd FileType python call PythonSyntax()
+" autocmd FileType python,sh setlocal iskeyword-=_
+autocmd FileType tex set conceallevel=0
 
 augroup pencil
   autocmd!

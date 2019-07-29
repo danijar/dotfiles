@@ -31,7 +31,7 @@ alias ge='git diff --name-only | uniq | xargs vim -p'
 gr() { git rebase -i HEAD~$1 }
 
 # Python.
-alias p='python'
+alias py='python3'
 alias np='ipython -i -c " \
   import functools, itertools, os, shutil; \
   import numpy as np; \
@@ -49,15 +49,16 @@ alias tf='nogpu ipython -i -c " \
   import gym; \
   random = np.random.RandomState(seed=0); \
   tf.enable_eager_execution();"'
-alias tc='LD_PRELOAD=/usr/lib/libtcmalloc.so python3 -O'
-alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
-alias pd='python -m pdb -c continue'
+alias pytc='LD_PRELOAD=/usr/lib/libtcmalloc.so python3 -O'
+alias pypdb='python3 -m pdb -c continue'
+alias pyprof='python3 -m cProfile -s time'  # Use as pyprof main.py > profile.txt
 
 # Cleanup.
 alias clean-cmake='rm CMakeCache.txt && rm -rf CMakeFiles'
 alias clean-symlinks='find -xtype l -delete'
 
 # Other.
+alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
 alias clip='xclip -selection c'
 alias dark='xbacklight -set 0'
 make_nice() {
