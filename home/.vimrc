@@ -49,7 +49,7 @@ Plug 'w0ng/vim-hybrid'
 Plug 'ap/vim-css-color'
 
 " Behavior.
-Plug 'amerlyq/vim-focus-autocmd'
+" Plug 'amerlyq/vim-focus-autocmd'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
@@ -110,6 +110,9 @@ let g:indentLine_setConceal = 0
 
 set encoding=utf-8
 " set lazyredraw
+" set nolazyredraw
+set lazyredraw
+set ttyfast
 set clipboard=unnamedplus
 set hidden
 set hlsearch incsearch
@@ -243,8 +246,8 @@ vnoremap <c-c> <esc>
 vnoremap <c-v> <esc>
 
 " Handle focus events.
-inoremap <esc>[O <esc>:stopinsert<cr>
-inoremap <esc>[I :mode<cr>
+" inoremap <esc>[O <esc>:stopinsert<cr>
+" inoremap <esc>[I :mode<cr>
 
 " No shift for command mode.
 noremap ; :
