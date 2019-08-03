@@ -9,7 +9,7 @@ alias ll='tree -aL 2'
 ed() {
   if [ -z "$1" ]; then; 1=$PWD; fi
   ~/bin/edit_list \
-      --content-cmd "ls $1" \
+      --content-cmd "find $1" \
       --rename-cmd 'mv {} {}' \
       --delete-cmd 'rm -rf {}'
 }

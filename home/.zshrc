@@ -8,7 +8,8 @@ autoload -U compinit && compinit
 printf '\e[99999;H\n\e[H'
 
 # Trick Vim into using all colors even inside tmux.
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
+# export TERM="screen-256color"
 
 # History
 SAVEHIST=10000
