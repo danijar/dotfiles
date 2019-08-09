@@ -193,8 +193,9 @@ endif
 " Scripts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Remove trailing whitespace on save.
-autocmd BufWritePre * :%s/\s\+$//e
+" Remove trailing whitespace on save for most file types.
+let allowTrailingSpaces = ['snippets']
+autocmd BufWritePre * if index(allowTrailingSpaces, &ft) < 0 | %s/\s\+$//e
 
 " Return to last edit position when opening files.
 function! ResumeCursorPosition()
@@ -208,7 +209,8 @@ autocmd BufReadPost * call ResumeCursorPosition()
 cmap w!! w !sudo tee % >/dev/null
 
 " Highlight trailing whitespace.
-autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
+" autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
+autocmd BufRead,BufNewFile * match Error /\s\+$/
 
 " Fix autoread in console Vim.
 autocmd FocusGained,BufEnter * checktime
@@ -296,6 +298,7 @@ nnoremap <leader>f gqap
 vnoremap <leader>f gq
 nnoremap <leader>c :source ~/.vimrc<cr>:doautoall FileType<cr>
 nnoremap <leader>C :tabedit ~/.vimrc<cr>
+nnoremap <leader>S :tabedit ~/.vim/snippet/python.snippets<cr>
 nnoremap <leader>l :mode<cr>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q

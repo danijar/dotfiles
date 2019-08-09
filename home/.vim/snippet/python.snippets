@@ -1,4 +1,58 @@
-snippet main "Python Main" b
+# vim: set textwidth=0 wrapmargin=0 :
+# See :help UltiSnips, especially section Snippet Options.
+
+###############################################################################
+# Text editing
+###############################################################################
+
+snippet "(\w+)\)" "parenthesis" r
+(`!p snip.rv = match.group(1)`$1)$0
+endsnippet
+
+###############################################################################
+# Import statements
+###############################################################################
+
+# This snippet has an intentional trailing space.
+snippet i "import" b
+import 
+endsnippet
+
+snippet "import n" "import numpy" br
+import numpy as np
+endsnippet
+
+snippet "import p" "import pyplot" br
+import matplotlib.pyplot as plt
+endsnippet
+
+snippet "import t" "import tensorflow" br
+import tensorflow as tf
+endsnippet
+
+snippet "import tfp" "import tfp" br
+import tensorflow_probability as tfp
+endsnippet
+
+snippet "import tfd" "import tfp distributions" br
+from tensorflow_probability import distributions as tfd
+endsnippet
+
+###############################################################################
+# Python syntax
+###############################################################################
+
+snippet d "def" bm
+def ${1}(${2}):
+  $3
+
+endsnippet
+
+###############################################################################
+# Templates
+###############################################################################
+
+snippet main "main" b
 import argparse
 
 
@@ -9,4 +63,38 @@ def main(args):
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   main(parser.parse_args())
+endsnippet
+
+snippet fig "pyplot figure" b
+fig, ax = plt.subplots()
+ax.plot(${1:${VISUAL}})
+ax.legend()
+fig.tight_layout()
+endsnippet
+
+snippet figs "pyplot figures" b
+fig, axes = plt.subplots(ncols=${1:2}, nrows=${2:1}, figsize=($2, $1))
+axes = axes.flatten()
+$3
+fig.tight_layout()
+endsnippet
+
+snippet fig "pyplot figure with handout" "re.search(r'(\w+) = handout\.Handout', ''.join(snip.buffer))" be
+fig, ax = plt.subplots()
+ax.plot(${1:${VISUAL}})
+ax.legend()
+fig.tight_layout()
+`!p snip.rv = snip.context.group(1)`.add_figure(fig, show=True)
+endsnippet
+
+snippet doc "handout" b
+import pathlib
+import handout
+
+
+doc = handout.Handout(pathlib.Path(__file__).stem)
+
+$1
+
+doc.show()
 endsnippet
