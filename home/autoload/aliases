@@ -20,14 +20,10 @@ alias sudo='sudo '
 # Git.
 alias gs='git status'
 alias gl='git log'
-alias gls='git log --stat'
 alias ga='git add -A'
 alias gc='git commit -m '
-alias go='git checkout'
-alias gb='git branch'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias ge='git diff --name-only | uniq | xargs vim -p'
 gr() { git rebase -i HEAD~$1 }
 
 # Python.
@@ -52,10 +48,6 @@ alias tf='nogpu ipython -i -c " \
 alias pytc='LD_PRELOAD=/usr/lib/libtcmalloc.so python3 -O'
 alias pypdb='python3 -m pdb -c continue'
 alias pyprof='python3 -m cProfile -s time'  # Use as pyprof main.py > profile.txt
-
-# Cleanup.
-alias clean-cmake='rm CMakeCache.txt && rm -rf CMakeFiles'
-alias clean-symlinks='find -xtype l -delete'
 
 # Other.
 alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'

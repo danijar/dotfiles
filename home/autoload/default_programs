@@ -4,7 +4,6 @@
 . ~/autoload/aliases
 
 export EDITOR='vim'
-alias vim='/usr/local/bin/vim'
 
 alias chrome='google-chrome-stable'
 

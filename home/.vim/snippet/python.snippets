@@ -1,0 +1,12 @@
+snippet main "Python Main" b
+import argparse
+
+
+def main(args):
+  ${0:${VISUAL}}
+
+
+if __name__ == '__main__':
+  parser = argparse.ArgumentParser()
+  main(parser.parse_args())
+endsnippet

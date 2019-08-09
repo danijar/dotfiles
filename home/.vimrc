@@ -19,14 +19,14 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-conflicted'
 Plug 'vim-scripts/loremipsum'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
+Plug 'chaoren/vim-wordmotion'
 Plug 'reedes/vim-pencil'
+Plug 'SirVer/ultisnips'
 
 " Codel intel.
 Plug 'Shougo/deoplete.nvim'
@@ -36,7 +36,6 @@ Plug 'w0rp/ale'
 
 " Languages
 Plug 'plasticboy/vim-markdown'
-Plug 'asciidoc/vim-asciidoc'
 Plug 'leafgarland/typescript-vim'
 Plug 'lervag/vimtex'
 " Plug 'edliaw/vim-python'
@@ -87,6 +86,12 @@ let g:ctrlp_user_command = {'types': {
 \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
 \ }, 'fallback': 'find %s -type f'}
 
+" SirVer/ultisnips
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_math = 1
@@ -109,11 +114,8 @@ let g:indentLine_setConceal = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set encoding=utf-8
-" set lazyredraw
-" set nolazyredraw
 set lazyredraw
 set ttyfast
-set clipboard=unnamedplus
 set hidden
 set hlsearch incsearch
 set ignorecase smartcase
@@ -144,6 +146,12 @@ set autoread
 set undofile
 set modeline  " Support in-file Vim settings.
 set shortmess=A
+
+if has('mac')
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Directories
@@ -225,7 +233,7 @@ function! LeftWindowOrTab()
   endif
 endfunction
 
-
+" Show filenames in tmux window.
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter *
   \ call system("tmux rename-window '" . expand("%:t") . "'")
 autocmd VimLeave * call system("tmux setw automatic-rename")
@@ -250,7 +258,7 @@ vnoremap <c-v> <esc>
 " inoremap <esc>[I :mode<cr>
 
 " No shift for command mode.
-noremap ; :
+nnoremap ; :
 
 " Don't convert to lowercase by accident.
 vnoremap u <nop>
@@ -258,14 +266,13 @@ vnoremap <c-u> u
 
 " Hide highlights.
 nnoremap <silent> <c-c> :noh<cr>
-nnoremap <esc>^[ <esc>^[
+" nnoremap <esc>^[ <esc>^[
 
 " Line navigation.
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
-noremap k gk
+" noremap j gj
+" noremap k gk
+" noremap gj j
+" noremap gk k
 noremap H ^
 noremap L $
 
@@ -281,9 +288,6 @@ nnoremap <esc>l :tabm +1<cr>
 " Space as leader key.
 map <Space> <nop>
 let mapleader = " "
-
-" File search using fzf.
-" nnoremap <c-p> :Files<cr>
 
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
