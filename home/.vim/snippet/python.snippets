@@ -2,11 +2,18 @@
 # See :help UltiSnips, especially section Snippet Options.
 
 ###############################################################################
-# Text editing
+# Generic text editing
 ###############################################################################
 
 snippet "(\w+)\)" "parenthesis" r
 (`!p snip.rv = match.group(1)`$1)$0
+endsnippet
+
+snippet ## "comment headline" b
+###############################################################################
+# ${1:Title}
+###############################################################################
+
 endsnippet
 
 ###############################################################################
@@ -42,15 +49,76 @@ endsnippet
 # Python syntax
 ###############################################################################
 
-snippet d "def" bm
-def ${1}(${2}):
-  $3
+snippet "^    d" "method unindent" r
+
+  def ${1:method}(self, ${2}):
+    ${3:pass}
+endsnippet
+
+snippet "^  d" "method" r
+
+  def ${1:method}(self, ${2}):
+    ${3:pass}
+endsnippet
+
+snippet "^d" "function" r
+
+def ${1:function}(${2}):
+  ${3:pass}
 
 endsnippet
 
+snippet class "class" b
+class ${1:Class}:
+
+  def __init__(self, $2):
+		${3:pass}
+
+endsnippet
+
+snippet s "private member" b
+self._${1:member}
+endsnippet
+
+snippet for "for loop" b
+for ${1:index} in ${1:range()}:
+	${3:pass}
+endsnippet
+
 ###############################################################################
-# Templates
+# Lines
 ###############################################################################
+
+snippet p "print" b
+print(${1:${VISUAL}})
+endsnippet
+
+snippet -- "print line" b
+print('-' * 79)
+endsnippet
+
+snippet parser "argparse add parser" b
+parser.add_argument('--${1:name}', type=${2:str}, default=${3:None})
+endsnippet
+
+snippet parser "argparse add parser" b
+parser.add_argument('--${1:name}', type=${2:str}, default=${3:None})
+endsnippet
+
+snippet rand "random state" b
+random = np.random.RandomState(${1:seed=0})
+endsnippet
+
+###############################################################################
+# Code blocks
+###############################################################################
+
+snippet pp "debug print" b
+print('-' * 79)
+import pprint
+pprint.pprint(${1:${VISUAL}})
+print('-' * 79)
+endsnippet
 
 snippet main "main" b
 import argparse
@@ -97,4 +165,10 @@ doc = handout.Handout(pathlib.Path(__file__).stem)
 $1
 
 doc.show()
+endsnippet
+
+snippet norm "tensorflow parameterized normal" b
+mean, rawstd = tf.split(${VISUAL:hidden}, 2, -1)
+std = tf.math.softplus(rawstd + 0.55) + 1e-3
+${2:dist =} tfd.Independent(tfd.Normal(mean, std), ${1:1})
 endsnippet
