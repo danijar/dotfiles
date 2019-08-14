@@ -27,6 +27,7 @@ Plug 'nelstrom/vim-visual-star-search'
 Plug 'chaoren/vim-wordmotion'
 Plug 'reedes/vim-pencil'
 Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-commentary'
 
 " Codel intel.
 Plug 'Shougo/deoplete.nvim'
@@ -91,6 +92,11 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+
+" tpope/vim-commentary
+xmap < <Plug>Commentary
+nmap < <Plug>Commentary
+omap < <Plug>Commentary
 
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
@@ -309,9 +315,8 @@ nnoremap <leader>h :cd %:h<cr>
 nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
-nnoremap <leader>p mz^ipprint.pprint(<esc>A)<esc>Oimport pprint<esc>`z14l
-nnoremap <leader>d mzoprint('-' * 79)<esc>`z
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
+nmap <leader>k mz<ip`z
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
