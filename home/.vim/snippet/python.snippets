@@ -85,6 +85,11 @@ for ${1:index} in ${2:range()}:
 	${3:pass}
 endsnippet
 
+snippet "def __g" "getattr" b
+def __getattr__(self, name):
+  return getattr(${1:self._inner}, name)
+endsnippet
+
 ###############################################################################
 # Lines
 ###############################################################################
@@ -155,20 +160,39 @@ fig.tight_layout()
 `!p snip.rv = snip.context.group(1)`.add_figure(fig, show=True)
 endsnippet
 
-snippet doc "handout" b
-import pathlib
-import handout
-
-
-doc = handout.Handout(pathlib.Path(__file__).stem)
-
-$1
-
-doc.show()
-endsnippet
-
 snippet norm "tensorflow parameterized normal" b
 mean, rawstd = tf.split(${VISUAL:hidden}, 2, -1)
 std = tf.math.softplus(rawstd + 0.55) + 1e-3
 ${2:dist =} tfd.Independent(tfd.Normal(mean, std), ${1:1})
+endsnippet
+
+snippet handout "handout template" b
+"""
+# ${1:Document Title}
+
+`date +%Y-%m-%d`, Danijar Hafner
+"""
+import functools
+import os
+import pathlib
+import re
+
+import handout
+import matplotlib.pyplot as plt
+import numpy as np
+import tensorflow as tf
+import tensorflow_probability as tfp
+from tensorflow_probability import distributions as tfd
+
+tf.enable_v2_behavior()
+doc = handout.Handout(pathlib.Path(__file__).stem)
+
+$2
+
+fig, axes = plt.subplots(2, 2, figsize=(8, 8))
+axes = axes.flatten()
+
+fig.tight_layout()
+doc.add_figure(fig, width=1)
+doc.show()
 endsnippet

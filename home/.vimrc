@@ -74,7 +74,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " w0rp/ale
 let g:ale_linters = {'python': ['flake8']}
-let g:ale_python_flake8_options = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731'
+let g:ale_python_flake8_options = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305'
 let g:ale_python_pylint_optoins = "--indent-string '  '"
 let b:ale_fixers = ['isort']
 let g:ale_pattern_options = {
@@ -94,9 +94,9 @@ let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " tpope/vim-commentary
-xmap < <Plug>Commentary
-nmap < <Plug>Commentary
-omap < <Plug>Commentary
+" xmap < <Plug>Commentary
+" nmap < <Plug>Commentary
+" omap < <Plug>Commentary
 
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
@@ -316,7 +316,8 @@ nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
-nmap <leader>k mz<ip`z
+nmap <leader>k mzgcip`z
+nmap <leader>p "0p
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages
