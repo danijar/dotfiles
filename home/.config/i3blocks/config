@@ -3,7 +3,7 @@ markup=none
 
 # [load_average]
 # label=LOAD
-# interval=10
+# interval=5
 
 [cpu_usage]
 label=CPU
@@ -30,10 +30,10 @@ label=DSK
 command=df -h ~ | tail -1 | awk '{ print $4 }'
 interval=20
 
-[wifi]
-label=WFI
-command=$HOME/bin/wifi
-interval=1
+# [wifi]
+# label=WFI
+# command=$HOME/bin/wifi
+# interval=1
 
 # [iface]
 # interval=1
@@ -45,9 +45,9 @@ instance=Master
 interval=1
 signal=10
 
-[battery]
-command=$HOME/bin/battery
-interval=10
+# [battery]
+# command=$HOME/bin/battery
+# interval=10
 
 [time]
 command=date '+%Y-%m-%d %H:%M:%S '

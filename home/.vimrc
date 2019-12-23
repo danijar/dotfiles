@@ -24,7 +24,7 @@ Plug 'vim-scripts/loremipsum'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'chaoren/vim-wordmotion'
+" Plug 'chaoren/vim-wordmotion'
 Plug 'reedes/vim-pencil'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
@@ -74,7 +74,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " w0rp/ale
 let g:ale_linters = {'python': ['flake8']}
-let g:ale_python_flake8_options = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305'
+let g:ale_python_flake8_options = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129'
 let g:ale_python_pylint_optoins = "--indent-string '  '"
 let b:ale_fixers = ['isort']
 let g:ale_pattern_options = {
