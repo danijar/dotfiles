@@ -17,12 +17,16 @@ snippet ## "comment headline" b
 endsnippet
 
 ###############################################################################
-# Import statements
+# Imports
 ###############################################################################
 
 # This snippet has an intentional trailing space.
 snippet i "import" b
 import 
+endsnippet
+
+snippet "import a" "import argparse" br
+import argparse
 endsnippet
 
 snippet "import n" "import numpy" br
@@ -37,57 +41,16 @@ snippet "import t" "import tensorflow" br
 import tensorflow as tf
 endsnippet
 
-snippet "import tfp" "import tfp" br
+snippet "import tfp" "import tensorflow probability" br
 import tensorflow_probability as tfp
 endsnippet
 
-snippet "import tfd" "import tfp distributions" br
+snippet "import tfd" "import tensorflow probability distributions" br
 from tensorflow_probability import distributions as tfd
 endsnippet
 
-###############################################################################
-# Python syntax
-###############################################################################
-
-snippet "^    d" "method unindent" r
-
-  def ${1:method}(self, ${2}):
-    ${3:pass}
-endsnippet
-
-snippet "^  d" "method" r
-
-  def ${1:method}(self, ${2}):
-    ${3:pass}
-endsnippet
-
-snippet "^d" "function" r
-
-def ${1:function}(${2}):
-  ${3:pass}
-
-endsnippet
-
-snippet class "class" b
-class ${1:Class}:
-
-  def __init__(self, $2):
-		${3:pass}
-
-endsnippet
-
-snippet s "private member" b
-self._${1:member}
-endsnippet
-
-snippet for "for loop" b
-for ${1:index} in ${2:range()}:
-	${3:pass}
-endsnippet
-
-snippet "def __g" "getattr" b
-def __getattr__(self, name):
-  return getattr(${1:self._inner}, name)
+snippet "import tfl" "import tensorflow keras layers" br
+import tensorflow.keras.layers as tfl
 endsnippet
 
 ###############################################################################
@@ -106,93 +69,59 @@ snippet parser "argparse add parser" b
 parser.add_argument('--${1:name}', type=${2:str}, default=${3:None})
 endsnippet
 
-snippet parser "argparse add parser" b
-parser.add_argument('--${1:name}', type=${2:str}, default=${3:None})
-endsnippet
-
-snippet rand "random state" b
+snippet r "random state" b
 random = np.random.RandomState(${1:seed=0})
 endsnippet
 
+snippet boolean "boolean argparse type" b
+boolean = lambda x: bool(['False', 'True'].index(x))
+endsnippet
+
 ###############################################################################
-# Code blocks
+# Blocks
 ###############################################################################
 
-snippet pp "debug print" b
-print('-' * 79)
-import pprint
-pprint.pprint(${1:${VISUAL}})
-print('-' * 79)
-endsnippet
-
-snippet main "main" b
-import argparse
-
-
-def main(args):
-  ${0:${VISUAL}}
-
-
-if __name__ == '__main__':
-  parser = argparse.ArgumentParser()
-  main(parser.parse_args())
-endsnippet
-
-snippet fig "pyplot figure" b
-fig, ax = plt.subplots()
-ax.plot(${1:${VISUAL}})
-ax.legend()
-fig.tight_layout()
-endsnippet
-
-snippet figs "pyplot figures" b
+snippet fig "subplots" b
 fig, axes = plt.subplots(ncols=${1:2}, nrows=${2:1}, figsize=($2, $1))
 axes = axes.flatten()
 $3
 fig.tight_layout()
 endsnippet
 
-snippet fig "pyplot figure with handout" "re.search(r'(\w+) = handout\.Handout', ''.join(snip.buffer))" be
-fig, ax = plt.subplots()
-ax.plot(${1:${VISUAL}})
-ax.legend()
-fig.tight_layout()
-`!p snip.rv = snip.context.group(1)`.add_figure(fig, show=True)
-endsnippet
-
-snippet norm "tensorflow parameterized normal" b
+snippet dist "tfd normal" b
 mean, rawstd = tf.split(${VISUAL:hidden}, 2, -1)
 std = tf.math.softplus(rawstd + 0.55) + 1e-3
 ${2:dist =} tfd.Independent(tfd.Normal(mean, std), ${1:1})
 endsnippet
 
-snippet handout "handout template" b
-"""
-# ${1:Document Title}
+snippet main "main" b
 
-`date +%Y-%m-%d`, Danijar Hafner
-"""
-import functools
-import os
-import pathlib
-import re
+def main(args):
+	pass
 
-import handout
-import matplotlib.pyplot as plt
-import numpy as np
-import tensorflow as tf
-import tensorflow_probability as tfp
-from tensorflow_probability import distributions as tfd
 
-tf.enable_v2_behavior()
-doc = handout.Handout(pathlib.Path(__file__).stem)
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser()
+	main(parser.parse_args())
+endsnippet
 
-$2
+###############################################################################
+# Syntax
+###############################################################################
 
-fig, axes = plt.subplots(2, 2, figsize=(8, 8))
-axes = axes.flatten()
+snippet class "class" b
+class ${1:Class}:
 
-fig.tight_layout()
-doc.add_figure(fig, width=1)
-doc.show()
+  def __init__(self, $2):
+		${3:pass}
+
+endsnippet
+
+snippet s "private member" b
+self._${1:member}
+endsnippet
+
+snippet "def __g" "getattr" b
+def __getattr__(self, name):
+  return getattr(${1:self._inner}, name)
 endsnippet

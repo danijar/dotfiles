@@ -12,3 +12,5 @@
   reword = commit --amend
   list = log --name-only
   wip = !git add -A && git commit -m 'WIP' && git show
+[core]
+	excludesfile = ~/.gitignore_global

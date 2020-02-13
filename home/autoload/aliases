@@ -43,11 +43,10 @@ alias tf='nogpu ipython -i -c " \
   import tensorflow_probability as tfp; \
   from tensorflow_probability import distributions as tfd; \
   import gym; \
-  random = np.random.RandomState(seed=0); \
-  tf.enable_eager_execution();"'
+  random = np.random.RandomState(seed=0);"'
 alias pytc='LD_PRELOAD=/usr/lib/libtcmalloc.so python3 -O'
 alias pypdb='python3 -m pdb -c continue'
-alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof main.py > profile.txt
+alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof script.py > profile.txt
 
 # Other.
 alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'

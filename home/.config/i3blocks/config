@@ -8,22 +8,22 @@ markup=none
 [cpu_usage]
 label=CPU
 command=$HOME/bin/cpu_usage
-interval=5
+interval=1
 
 [memory]
 label=RAM
 command=$HOME/bin/ram_usage
-interval=5
+interval=1
 
 [gpu_usage]
 label=GPU
 command=$HOME/bin/gpu_usage
-interval=5
+interval=1
 
 [gpu_memory]
 label=VRM
 command=$HOME/bin/gpu_memory
-interval=5
+interval=1
 
 [disk]
 label=DSK
