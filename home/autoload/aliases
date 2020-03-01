@@ -26,6 +26,13 @@ alias gd='git diff HEAD'
 alias gdc='git diff --cached'
 gr() { git rebase -i HEAD~$1 }
 
+# Mercurial.
+alias hs='hg status'
+alias hd='hg diff'
+alias ha='hg addremove'
+alias hc='hg commit -m '
+alias hl='hg log'
+
 # Python.
 alias py='python3'
 alias np='ipython -i -c " \

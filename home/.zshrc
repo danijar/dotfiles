@@ -23,9 +23,6 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt hist_reduce_blanks
 
-# Include Z
-. ~/bin/z.sh
-
 # Vi commands
 bindkey -v
 export KEYTIMEOUT=1

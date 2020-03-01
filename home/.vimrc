@@ -74,12 +74,13 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " w0rp/ale
 let g:ale_linters = {'python': ['flake8']}
-let g:ale_python_flake8_options = '--ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129'
-let g:ale_python_pylint_optoins = "--indent-string '  '"
+let g:ale_python_flake8_options = "--ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129"
+" let g:ale_python_pylint_optoins = "--indent-string '  '"
 let b:ale_fixers = ['isort']
 let g:ale_pattern_options = {
 \ '/google/src/.*': {'ale_enabled': 0},
 \}
+" \ '/google/src/.*/google3/experimental/users/danijar/planet/.*': {'ale_enabled': 1},
 
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'

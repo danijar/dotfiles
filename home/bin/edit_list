@@ -83,9 +83,9 @@ def execute_changes(renames, deletes, args):
   failures = 0
   delete = sh.Command(args.delete_cmd.split(' ', 1)[0])
   params = args.delete_cmd.split(' ', 1)[1]
-  semaphore = threading.Semaphore(args.max_parallel)
+  semaphore = threading.Semaphore(args.parallel)
   def done_fn(cmd, success, exit_code):
-    if args.print_progress:
+    if args.progress:
       print('.', end='', flush=True)
     semaphore.release()
   commands = []
@@ -102,7 +102,7 @@ def execute_changes(renames, deletes, args):
     values = params.format(source, target).split()
     commands.append(rename(*values, _bg=True, _done=done_fn))
   failures += resolve_bg_commands(commands)
-  if args.print_progress:
+  if args.progress:
     print('')
   return failures
 
@@ -143,7 +143,7 @@ if __name__ == '__main__':
   parser.add_argument('--content-cmd', type=str, required=True)
   parser.add_argument('--rename-cmd', type=str, required=True)
   parser.add_argument('--delete-cmd', type=str, required=True)
-  parser.add_argument('--max-parallel', type=int, default=100)
-  parser.add_argument('--print-progress', type=boolean, default=False)
+  parser.add_argument('--parallel', type=int, default=1)
+  parser.add_argument('--progress', type=boolean, default=False)
   args = parser.parse_args()
   main(args)
