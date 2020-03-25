@@ -2,3 +2,11 @@
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.gem/ruby/2.3.0/bin
+
+# MuJoCo.
+export MUJOCO_HOME=$HOME/.mujoco/mjpro150
+export PATH=$PATH:~/.mujoco/mjpro150/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.mujoco/mjpro150/bin
+
+# Software configuration.
+export HOMEBREW_NO_AUTO_UPDATE=1
