@@ -1,3 +1,6 @@
+# Configuration is reloaded on save. To enable verbose output for debugging,
+# stop skhd service and run `skhd -V` in the terminal.
+
 alt + shift - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 alt - return : osascript -e 'tell application "iTerm2" to create window with default profile'
 
@@ -14,6 +17,16 @@ alt + shift - l : yabai -m window --warp east
 alt - v : yabai -m window --toggle split
 alt - f : yabai -m window --toggle zoom-fullscreen
 alt - space : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
+
+:: default : yabai -m config window_border off
+:: resize @ : yabai -m config window_border on
+alt - r ; resize
+resize < escape ; default
+resize < return ; default
+resize < h : yabai -m window --resize left:100:0  ; yabai -m window --resize right:-100:0
+resize < j : yabai -m window --resize top:0:-100  ; yabai -m window --resize bottom:0:100
+resize < k : yabai -m window --resize top:0:100   ; yabai -m window --resize bottom:0:-100
+resize < l : yabai -m window --resize left:-100:0 ; yabai -m window --resize right:100:0
 
 alt - 1 : yabai -m space --focus 1
 alt - 2 : yabai -m space --focus 2
@@ -35,3 +48,4 @@ alt + shift - 7 : yabai -m window --space 7
 alt + shift - 8 : yabai -m window --space 8
 alt + shift - 9 : yabai -m window --space 9
 
+# ctrl - l : skhd --key "cmd - l"

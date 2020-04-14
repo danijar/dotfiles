@@ -33,3 +33,4 @@ for display in displays:
       output.append(f'.{index}.')
   output.append('  ')
 print('' + ''.join(output) + '| font="andale mono"')
+
