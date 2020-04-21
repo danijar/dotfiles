@@ -2,9 +2,11 @@
 
 . ~/autoload/path_variable
 
-# List and edit directories.
-# alias l='command ls --color=auto --group-directories-first'
-# alias ls='l -lhA --time-style long-iso'
+export EDITOR='vim'
+
+# Filesystem interaction.
+alias l='command ls --color=auto --group-directories-first'
+alias ls='l -lhA --time-style long-iso'
 alias ll='tree -aL 2'
 ed() {
   if [ -z "$1" ]; then; 1=$PWD; fi
@@ -16,6 +18,9 @@ ed() {
 
 # Resolve aliases for sudo.
 alias sudo='sudo '
+
+# Other.
+alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
 
 # Git.
 alias gs='git status'
@@ -55,19 +60,19 @@ alias pytc='LD_PRELOAD=/usr/lib/libtcmalloc.so python3 -O'
 alias pypdb='python3 -m pdb -c continue'
 alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof script.py > profile.txt
 
-# Other.
-alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
-alias clip='xclip -selection c'
-alias dark='xbacklight -set 0'
-make_nice() {
-  renice -n 20 -p $(pgrep $1)
-}
+# Default programs.
+alias chrome='google-chrome-stable'
+alias ipython='ipython3'
+alias pip='pip3'
+alias python='python3'
+alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
-# Fuzzy searches.
-alias v="
-  find $PWD | fzf --bind 'return:execute(vim {1} < /dev/tty)+abort' \
-    --preview '(highlight -O ansi -l {} || head -100 {}) 2> /dev/null | head -100'"
-alias ap="
-  apt-cache search '.*' | grep -Eo '^[^ ]+' | \
-  fzf --bind 'return:execute(sudo apt-get install {})+abort' \
-  --preview 'apt-cache show {}'"
+# Mac specific.
+if [ -x "$(command -v brew)" ]; then
+  alias vim='/homebrew/Cellar/macvim/8.2-162/bin/vim'
+  alias chrome='open -a "Google Chrome"'
+  alias l="$HOME/homebrew/opt/coreutils/libexec/gnubin/ls --color=auto --group-directories-first"
+  alias cp="$HOME/homebrew/opt/coreutils/libexec/gnubin/cp"
+  alias mv="$HOME/homebrew/opt/coreutils/libexec/gnubin/mv"
+  alias rm="$HOME/homebrew/opt/coreutils/libexec/gnubin/rm"
+fi

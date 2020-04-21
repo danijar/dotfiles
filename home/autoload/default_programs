@@ -2,12 +2,3 @@
 
 . ~/autoload/path_variable
 . ~/autoload/aliases
-
-export EDITOR='vim'
-
-alias chrome='google-chrome-stable'
-
-if [ -x "$(command -v ipython3)" ]; then alias ipython='ipython3'; fi
-# if [ -x "$(command -v python3)" ]; then alias python='python3'; fi
-# if [ -x "$(command -v pip3)" ]; then alias pip='pip3'; fi
-alias tmux='tmux -f ~/.config/tmux/tmux.conf'
