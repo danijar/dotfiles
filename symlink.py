@@ -11,13 +11,14 @@ def is_child(child, parent):
 
 
 def remove_broken_links(repo, user):
-  # Only search in directories that are mirrored in the repository and only
-  # report broken links that point to the repository. It's good to be careful
-  # because links in mounted network drives may been broken from the client.
+  # Only search in one level into directories that are mirrored in the
+  # repository and only report broken links that point to the repository. It's
+  # good to be careful because links in mounted network drives may seem broken
+  # for the client.
   for directory in repo.glob('**/*'):
     if not directory.is_dir():
       continue
-    for path in (user / directory.relative_to(repo)).glob('*'):
+    for path in (user / directory.relative_to(repo)).glob('*/*'):
       target = path.resolve()
       if is_child(target, repo) and not target.exists():
         print('Broken:', path)
