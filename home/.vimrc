@@ -86,7 +86,7 @@ let g:ale_pattern_options = {
 let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_user_command = {'types': {
 \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
-\ }, 'fallback': 'find %s -type f'}
+\ }, 'fallback': 'find -L %s -type f'}
 
 " SirVer/ultisnips
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']

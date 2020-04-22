@@ -1,12 +1,8 @@
 #!/bin/sh
 
-. ~/autoload/path_variable
-
-export EDITOR='vim'
-
 # Filesystem interaction.
 alias l='command ls --color=auto --group-directories-first'
-alias ls='l -lhA --time-style long-iso'
+alias ls='command ls --color=auto --group-directories-first -lhA --time-style long-iso'
 alias ll='tree -aL 2'
 ed() {
   if [ -z "$1" ]; then; 1=$PWD; fi
@@ -69,10 +65,19 @@ alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
 # Mac specific.
 if [ -x "$(command -v brew)" ]; then
-  alias vim='/homebrew/Cellar/macvim/8.2-162/bin/vim'
+  alias vim="~/homebrew/Cellar/macvim/8.2-162/bin/vim"
   alias chrome='open -a "Google Chrome"'
-  alias l="$HOME/homebrew/opt/coreutils/libexec/gnubin/ls --color=auto --group-directories-first"
-  alias cp="$HOME/homebrew/opt/coreutils/libexec/gnubin/cp"
-  alias mv="$HOME/homebrew/opt/coreutils/libexec/gnubin/mv"
-  alias rm="$HOME/homebrew/opt/coreutils/libexec/gnubin/rm"
+  alias l="~/homebrew/opt/coreutils/libexec/gnubin/ls --color=auto --group-directories-first"
+  alias ls="~/homebrew/opt/coreutils/libexec/gnubin/ls --color=auto --group-directories-first -lhA --time-style long-iso"
+  alias cp="~/homebrew/opt/coreutils/libexec/gnubin/cp"
+  alias mv="~/homebrew/opt/coreutils/libexec/gnubin/mv"
+  alias rm="~/homebrew/opt/coreutils/libexec/gnubin/rm"
 fi
+
+# Change directory hooks.
+cd () {
+    builtin cd "$*"
+    l
+    defer ~/bin/git_fetch_status
+}
+

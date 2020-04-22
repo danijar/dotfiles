@@ -1,23 +1,22 @@
 #!/usr/bin/python3
-"""
-Edit directories via your text editor.
-
-Requires sh.py that can be installed via `pip3 install --user sh`.
-"""
-
 import argparse
 import multiprocessing.dummy as mp
 import os
-import sh
+import pathlib
+import sh  # pip install sh
 import tempfile
-
-__author__ = 'Danijar Hafner'
 
 
 def user_edit_text(text):
   editor = sh.Command(os.environ.get('EDITOR', 'vim'))
-
+  path = pathlib.Path('/tmp/edit_dirs')
+  with path.open('w') as f:
+    f.write(text)
+  editor(str(path), _fg=True)
+  with path.open('r') as f:
+    return f.read()
   with tempfile.NamedTemporaryFile('w+', suffix='.tmp') as file_:
+    print(file_.name)
     file_.write(text)
     file_.flush()
     editor(file_.name, _fg=True)
@@ -37,8 +36,6 @@ def read_changes(dirs, edited):
       renames.append((entry, edited[index]))
     else:
       keeps.append(entry)
-  renames = list(sorted(renames))
-  removes = list(sorted(removes))
   return keeps, renames, removes
 
 
@@ -62,45 +59,43 @@ def preview_changes(keeps, renames, removes):
 
 
 def execute_changes(renames, removes, args):
-  def remove(before):
+  def rename(before_after):
+    before, after = before_after
     try:
-      run_cmd(args.remove, before)
+      for cmd in args.rename:
+        params = cmd.split(' ', 1)[1].format(before, after)
+        sh.Command(cmd.split(' ', 1)[0])(*params.split())
     except sh.ErrorReturnCode as e:
       print(e)
       return 1
     return 0
-  def rename(before_after):
-    before, after = before_after
+  def remove(before):
     try:
-      run_cmd(args.mkdirs, os.path.dirname(after))
-      run_cmd(args.rename, before, after)
+      for cmd in args.remove:
+        params = cmd.split(' ', 1)[1].format(before)
+        sh.Command(cmd.split(' ', 1)[0])(*params.split())
     except sh.ErrorReturnCode as e:
       print(e)
       return 1
     return 0
   failures = 0
   pool = mp.Pool(20)
-  # Execute removes first so that renamed files are not removed.
   failures += sum(pool.map(remove, removes))
   failures += sum(pool.map(rename, renames))
   return failures
 
 
-def read_directory_list(cmd):
-  dirs = run_cmd(args.list, args.root).split('\n')
+def read_directory_list(content_cmd):
+  content = sh.Command(content_cmd.split(' ', 1)[0])
+  params = content_cmd.split(' ', 1)[1]
+  maybe_root = [args.root] if args.root else []
+  dirs = content(*params.format(*maybe_root).split()).strip().split('\n')
   text = ''.join('{} {}\n'.format(*x) for x in enumerate(dirs))
   return dirs, text
 
 
-def run_cmd(command, *inputs):
-  command = command.format(*inputs)
-  program, flags = command.split(' ', 1)
-  output = sh.Command(program)(*flags.split())
-  return output.strip()
-
-
 def main(args):
-  dirs, initial = read_directory_list(args.list)
+  dirs, initial = read_directory_list(args.content)
   current = initial
   while True:
     edited = user_edit_text(current)
@@ -113,7 +108,7 @@ def main(args):
     failures = execute_changes(renames, removes, args)
     message = '{} changes failed. Re-edit change list? [Ny]: '
     if failures and input(message.format(failures)) == 'y':
-      dirs, initial = read_directory_list(args.list)
+      dirs, initial = read_directory_list(args.content)
       current = edited
       continue
     else:
@@ -122,12 +117,17 @@ def main(args):
 
 
 if __name__ == '__main__':
-  description = 'Edit directories via your text editor.'
+  description = 'Edit directory structures via your text editor.'
   parser = argparse.ArgumentParser(description=description)
-  parser.add_argument('root', nargs='?', default='.')
-  parser.add_argument('--list', default='find {} -maxdepth 5')
-  parser.add_argument('--mkdirs', default='mkdir -p {}')
-  parser.add_argument('--rename', default='mv {} {}')
-  parser.add_argument('--remove', default='rm -rf {}')
+  parser.add_argument(
+      'root', nargs='?', type=str)
+  parser.add_argument(
+      '--content', type=str, default='ls -1 {}')
+  parser.add_argument(
+      '--rename', nargs='+', type=str,
+      default=['mv {} {}'])
+  parser.add_argument(
+      '--remove', nargs='+', type=str,
+      default=['rm -rf {}'])
   args = parser.parse_args()
   main(args)

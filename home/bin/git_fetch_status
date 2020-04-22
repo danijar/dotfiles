@@ -1,0 +1,19 @@
+#!/bin/sh
+
+[[ -d '.git' ]] || return
+[[ -x "$(command -v git)" ]] || return
+git fetch --all > /dev/null || return
+
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse @{u})
+BASE=$(git merge-base @ @{u})
+
+if [ $LOCAL = $REMOTE ]; then
+    echo "git: $(basename $PWD) is up to date"
+elif [ $LOCAL = $BASE ]; then
+    echo "git: $(basename $PWD) is behind"
+elif [ $REMOTE = $BASE ]; then
+    echo "git: $(basename $PWD) is ahead"
+else
+    echo "git: $(basename $PWD) has diverged"
+fi

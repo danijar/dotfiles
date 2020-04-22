@@ -1,4 +1,0 @@
-#!/bin/sh
-
-. ~/autoload/path_variable
-. ~/autoload/aliases
