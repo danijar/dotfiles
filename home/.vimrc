@@ -17,38 +17,31 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
-Plug 'christoomey/vim-conflicted'
 Plug 'vim-scripts/loremipsum'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
-" Plug 'chaoren/vim-wordmotion'
 Plug 'reedes/vim-pencil'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 
 " Codel intel.
 Plug 'Shougo/deoplete.nvim'
-" Plug 'zchee/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'davidhalter/jedi-vim'
-Plug 'w0rp/ale'
-
-" Languages
-Plug 'plasticboy/vim-markdown'
-Plug 'leafgarland/typescript-vim'
-Plug 'lervag/vimtex'
-" Plug 'edliaw/vim-python'
+Plug 'dense-analysis/ale'
 
 " Visuals.
-Plug 'morhetz/gruvbox'
-Plug 'jnurmine/Zenburn'
-Plug 'easysid/mod8.vim'
-Plug 'w0ng/vim-hybrid'
 Plug 'ap/vim-css-color'
+Plug 'plasticboy/vim-markdown'
+" Plug 'morhetz/gruvbox'
+" Plug 'jnurmine/Zenburn'
+" Plug 'easysid/mod8.vim'
+Plug 'w0ng/vim-hybrid'
 
-" Behavior.
+" Polyfills.
 " Plug 'amerlyq/vim-focus-autocmd'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -61,26 +54,28 @@ call plug#end()
 
 " Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-call deoplete#custom#source('_', 'matchers', ['ale', 'matcher_full_fuzzy'])
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<c-j>"
 inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#option('min_pattern_length', 1)
+" call deoplete#custom#option('sources', {'_': 'buffer']})
+
+" deoplete-plugins/deoplete-jedi
+let g:deoplete#sources#jedi#python_path = 'python3'
+let g:deoplete#sources#jedi#enable_typeinfo = 1  " Faster
 
 " davidhalter/jedi-vim
 " let g:jedi#completions_enabled = 0
 " let g:jedi#force_py_version = 3
 " let g:jedi#use_tabs_not_buffers = 1
 
-" w0rp/ale
+" dense-analysis/ale
 let g:ale_linters = {'python': ['flake8']}
-let g:ale_python_flake8_options = "--ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129"
-" let g:ale_python_pylint_optoins = "--indent-string '  '"
-let b:ale_fixers = ['isort']
+let g:ale_python_flake8_options = "--ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,E741"
 let g:ale_pattern_options = {
 \ '/google/src/.*': {'ale_enabled': 0},
 \}
-" \ '/google/src/.*/google3/experimental/users/danijar/planet/.*': {'ale_enabled': 1},
 
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'
@@ -93,11 +88,6 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-
-" tpope/vim-commentary
-" xmap < <Plug>Commentary
-" nmap < <Plug>Commentary
-" omap < <Plug>Commentary
 
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
@@ -128,7 +118,7 @@ set hlsearch incsearch
 set ignorecase smartcase
 set nofoldenable
 set viminfo^=%
-set completeopt-=preview  " Disable docstring window for completions.
+set completeopt-=preview
 set scrolloff=100
 set splitbelow
 set splitright
@@ -317,8 +307,9 @@ nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
+nnoremap <leader>p "0p
 nmap <leader>k mzgcip`z
-nmap <leader>p "0p
+vmap <leader>k gc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Languages

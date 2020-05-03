@@ -18,14 +18,25 @@ if [ -x "$(command -v brew)" ]; then
 
   # Brew.
   export PATH=~/homebrew/bin:$PATH
-  export LD_LIBRARY_PATH=~/homebrew/lib:$LD_LIBRARY_PATH
-  # export DYLD_LIBRARY_PATH=~/homebrew/lib:$DYLD_LIBRARY_PATH
+
+  # export LD_LIBRARY_PATH=~/homebrew/lib:$LD_LIBRARY_PATH
+  # export LD_LIBRARY_PATH=~/homebrew:$LD_LIBRARY_PATH
+  export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:~/homebrew
   # export DYLD_FALLBACK_LIBRARY_PATH=~/homebrew/lib
   export HOMEBREW_NO_AUTO_UPDATE=1
+
+  # export LD_LIBRARY_PATH=~/homebrew/lib:$LD_LIBRARY_PATH
+  # export LD_LIBRARY_PATH=~/homebrew:$LD_LIBRARY_PATH
+  # # export DYLD_LIBRARY_PATH=~/homebrew/lib:$DYLD_LIBRARY_PATH
+  # export DYLD_FALLBACK_LIBRARY_PATH=~/homebrew/lib
+  # export HOMEBREW_NO_AUTO_UPDATE=1
 
   # Ruby.
   export PATH=$PATH:~/.gem/ruby/2.3.0/bin
 
+  # Python.
+  export PATH=$PATH:~/Library/Python/3.7/bin
+
   # Mujoco.
-  export DYLD_LIBRARY_PATH=$MUJOCO_HOME/bin:$DYLD_LIBRARY_PATH
+  # export DYLD_LIBRARY_PATH=$MUJOCO_HOME/bin:$DYLD_LIBRARY_PATH
 fi

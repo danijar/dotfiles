@@ -58,7 +58,7 @@ alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof script.py > pr
 
 # Default programs.
 alias chrome='google-chrome-stable'
-alias ipython='ipython3'
+alias ipython='ipython'
 alias pip='pip3'
 alias python='python3'
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'

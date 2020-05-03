@@ -49,3 +49,6 @@ alt + shift - 8 : yabai -m window --space 8
 alt + shift - 9 : yabai -m window --space 9
 
 # ctrl - l : skhd --key "cmd - l"
+
+# Disable Mac shortcuts.
+cmd - h : echo
