@@ -28,10 +28,10 @@ Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 
 " Codel intel.
+Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim'
 Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'davidhalter/jedi-vim'
-Plug 'dense-analysis/ale'
 
 " Visuals.
 Plug 'ap/vim-css-color'
@@ -45,12 +45,24 @@ Plug 'w0ng/vim-hybrid'
 " Plug 'amerlyq/vim-focus-autocmd'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'dbakker/vim-paragraph-motion'
 
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" dense-analysis/ale
+let g:ale_linters = {'python': ['flake8']}
+let b:ale_fixers = []  " ['isort']
+let g:ale_python_flake8_options = '
+\ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741'
+let g:ale_use_global_executables = 1  " Avoid slow search for virtual envs.
+" let g:ale_lint_on_text_changed = 1
+" let g:ale_pattern_options = {
+" \ '/google/src/.*': {'ale_enabled': 0},
+" \}
 
 " Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
@@ -63,19 +75,12 @@ call deoplete#custom#option('min_pattern_length', 1)
 
 " deoplete-plugins/deoplete-jedi
 let g:deoplete#sources#jedi#python_path = 'python3'
-let g:deoplete#sources#jedi#enable_typeinfo = 1  " Faster
+let g:deoplete#sources#jedi#enable_typeinfo = 0  " Faster
 
 " davidhalter/jedi-vim
 " let g:jedi#completions_enabled = 0
 " let g:jedi#force_py_version = 3
 " let g:jedi#use_tabs_not_buffers = 1
-
-" dense-analysis/ale
-let g:ale_linters = {'python': ['flake8']}
-let g:ale_python_flake8_options = "--ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,E741"
-let g:ale_pattern_options = {
-\ '/google/src/.*': {'ale_enabled': 0},
-\}
 
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'

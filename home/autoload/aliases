@@ -32,7 +32,7 @@ alias hs='hg status'
 alias hd='hg diff'
 alias ha='hg addremove'
 alias hc='hg commit -m '
-alias hl='hg log'
+alias hl='hg xl'
 
 # Python.
 alias py='python3'

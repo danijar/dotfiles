@@ -78,34 +78,6 @@ boolean = lambda x: bool(['False', 'True'].index(x))
 endsnippet
 
 ###############################################################################
-# Blocks
-###############################################################################
-
-snippet fig "subplots" b
-fig, axes = plt.subplots(ncols=${1:2}, nrows=${2:1}, figsize=($2, $1))
-axes = axes.flatten()
-$3
-fig.tight_layout()
-endsnippet
-
-snippet dist "tfd normal" b
-mean, rawstd = tf.split(${VISUAL:hidden}, 2, -1)
-std = tf.math.softplus(rawstd + 0.55) + 1e-3
-${2:dist =} tfd.Independent(tfd.Normal(mean, std), ${1:1})
-endsnippet
-
-snippet main "main" b
-
-def main(args):
-	pass
-
-
-if __name__ == '__main__':
-	parser = argparse.ArgumentParser()
-	main(parser.parse_args())
-endsnippet
-
-###############################################################################
 # Syntax
 ###############################################################################
 
