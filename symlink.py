@@ -1,4 +1,3 @@
-import os
 import pathlib
 
 
@@ -18,7 +17,7 @@ def remove_broken_links(repo, user):
   for directory in repo.glob('**/*'):
     if not directory.is_dir():
       continue
-    for path in (user / directory.relative_to(repo)).glob('*/*'):
+    for path in (user / directory.relative_to(repo)).glob('*'):
       target = path.resolve()
       if is_child(target, repo) and not target.exists():
         print('Broken:', path)
