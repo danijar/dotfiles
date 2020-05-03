@@ -64,7 +64,7 @@ alias python='python3'
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
 # Mac specific.
-if [ "$(uname -s)" == "Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
   alias vim="~/homebrew/Cellar/macvim/8.2-162/bin/vim"
   alias chrome='open -a "Google Chrome"'
   alias l="~/homebrew/opt/coreutils/libexec/gnubin/ls --color=auto --group-directories-first"

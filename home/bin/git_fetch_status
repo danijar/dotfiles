@@ -1,8 +1,9 @@
 #!/bin/sh
+set -e
 
-[[ -d '.git' ]] || return
-[[ -x "$(command -v git)" ]] || return
-git fetch --all > /dev/null || return
+[[ -d '.git' ]] || exit
+[[ -x "$(command -v git)" ]] || exit
+git fetch --all > /dev/null || exit
 
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse @{u})
