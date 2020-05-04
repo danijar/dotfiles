@@ -18,6 +18,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/loremipsum'
+Plug 'majutsushi/tagbar'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -94,6 +95,12 @@ let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
+" majutsushi/tagbar
+let g:tagbar_sort = 0
+let g:tagbar_width = 30
+let g:tagbar_show_visibility = 0
+let g:tagbar_autofocus = 1
+
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_math = 1
@@ -148,6 +155,9 @@ set autoread
 set undofile
 set modeline  " Support in-file Vim settings.
 set shortmess=A
+set updatetime=200
+set laststatus=1
+" set noshowmode
 
 if has('mac')
   set clipboard=unnamed
@@ -313,6 +323,7 @@ vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 nnoremap <leader>p "0p
+nnoremap <leader>t <c-y>:TagbarOpen fjc<cr>
 nmap <leader>k mzgcip`z
 vmap <leader>k gc
 
