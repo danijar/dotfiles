@@ -80,7 +80,7 @@ zstyle ":vcs_info:git:*" formats "%b"
 setopt promptsubst
 (){
     local line
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    if [ -n "$SSH_CONNECTION" ]; then
         line='%B%F{black}%K{red}'
     else
         line='%B%F{black}%K{blue}'
