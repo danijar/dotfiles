@@ -80,12 +80,16 @@ zstyle ":vcs_info:git:*" formats "%b"
 setopt promptsubst
 (){
     local line
-    line='%B%F{black}%K{blue} '
-    line+='◕ %T '
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        line='%B%F{black}%K{red}'
+    else
+        line='%B%F{black}%K{blue}'
+    fi
+    line+=' %T '
     line+='${vcs_info_msg_0_:+± ${vcs_info_msg_0_} }'
     line+='${VIRTUAL_ENV:+↱ venv }'
     line+='%K{yellow} %~ %k%f%b'
-    PS1="$line $ "
+    PS1="$line "
 }
 
 # Run interactive scripts in interactive mode.
