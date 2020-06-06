@@ -4,15 +4,15 @@
 alt + shift - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 alt - return : osascript -e 'tell application "iTerm2" to create window with default profile'
 
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+alt - h : yabai -m window --focus west || yabai -m display --focus west
+alt - j : yabai -m window --focus south || yabai -m display --focus south
+alt - k : yabai -m window --focus north || yabai -m display --focus north
+alt - l : yabai -m window --focus east || yabai -m display --focus east
 
-alt + shift - h : yabai -m window --warp east
-alt + shift - j : yabai -m window --warp south
-alt + shift - k : yabai -m window --warp north
-alt + shift - l : yabai -m window --warp east
+alt + shift - h : yabai -m window --swap west || $(yabai -m window --display west; yabai -m display --focus west)
+alt + shift - j : yabai -m window --swap south || $(yabai -m window --display south; yabai -m display --focus south)
+alt + shift - k : yabai -m window --swap north || $(yabai -m window --display north; yabai -m display --focus north)
+alt + shift - l : yabai -m window --swap east || $(yabai -m window --display east; yabai -m display --focus east)
 
 alt - v : yabai -m window --toggle split
 alt - f : yabai -m window --toggle zoom-fullscreen
