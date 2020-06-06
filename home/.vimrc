@@ -18,7 +18,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/loremipsum'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -96,10 +96,16 @@ let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " majutsushi/tagbar
-let g:tagbar_sort = 0
-let g:tagbar_width = 30
-let g:tagbar_show_visibility = 0
-let g:tagbar_autofocus = 1
+" let g:tagbar_sort = 0
+" let g:tagbar_width = 30
+" let g:tagbar_show_visibility = 0
+" let g:tagbar_autofocus = 1
+" let g:tagbar_autoclose = 1
+" let g:tagbar_compact = 1
+" let g:tagbar_iconchars = [' ', ' ']
+" let g:tagbar_map_close = '<leader>t'
+" autocmd FileType tagbar autocmd BufCreate <c-y>
+" autocmd FileType tagbar autocmd BufDelete <c-e>
 
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
@@ -164,6 +170,35 @@ if has('mac')
 else
   set clipboard=unnamedplus
 endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Status Line
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Only visible with multiple splits or lasstatus=2.
+set statusline=
+set statusline+=%#DiffAdd#%{(mode()=='n')?'\ \ NORMAL\ ':''}
+set statusline+=%#DiffDelete#%{(mode()=='i')?'\ \ INSERT\ ':''}
+set statusline+=%#DiffDelete#%{(mode()=='r')?'\ \ RPLACE\ ':''}
+set statusline+=%#DiffChange#%{(mode()=='v')?'\ \ VISUAL\ ':''}
+set statusline+=%#Cursor#                 " Color
+set statusline+=\ %n\                     " Buffer number
+set statusline+=%#Visual#                 " Color
+set statusline+=%{&paste?'\ PASTE\ ':''}  " Paste mode
+set statusline+=%{&spell?'\ SPELL\ ':''}  " Spell mode
+set statusline+=%#CursorIM#               " Color
+set statusline+=%R                        " Readonly flag
+set statusline+=%M                        " Modified flag
+set statusline+=%#Cursor#                 " Color
+set statusline+=%#CursorLine#             " Color
+set statusline+=\ %t\                     " Short file name
+set statusline+=%=                        " Right align
+set statusline+=%#CursorLine#             " Color
+set statusline+=\ %Y\                     " File type
+set statusline+=%#CursorIM#               " Color
+set statusline+=\ %3l:%-2c\               " Line + column
+set statusline+=%#Cursor#                 " Color
+set statusline+=\ %3p%%\                  " Percentage
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Directories
@@ -323,7 +358,8 @@ vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 nnoremap <leader>p "0p
-nnoremap <leader>t <c-y>:TagbarOpen fjc<cr>
+vnoremap <leader>p "0p
+" nnoremap <leader>t :TagbarOpen j<cr>:TagbarFoldLevel 99<cr>
 nmap <leader>k mzgcip`z
 vmap <leader>k gc
 
