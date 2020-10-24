@@ -17,7 +17,8 @@ if [ -x "$(command -v brew)" ]; then
   export EDITOR=vi
 
   # Brew.
-  export PATH=~/homebrew/bin:$PATH
+  # export PATH=~/homebrew/bin:$PATH
+  export PATH=$PATH:~/homebrew/bin
 
   # export LD_LIBRARY_PATH=~/homebrew/lib:$LD_LIBRARY_PATH
   # export LD_LIBRARY_PATH=~/homebrew:$LD_LIBRARY_PATH

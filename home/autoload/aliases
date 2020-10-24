@@ -35,7 +35,6 @@ alias hc='hg commit -m '
 alias hl='hg xl'
 
 # Python.
-alias py='python3'
 alias np='ipython -i -c " \
   import functools, itertools, pathlib, re; \
   import numpy as np; \
@@ -52,19 +51,16 @@ alias tf='nogpu ipython -i -c " \
   from tensorflow_probability import distributions as tfd; \
   import gym; \
   random = np.random.RandomState(seed=0);"'
-alias pytc='LD_PRELOAD=/usr/lib/libtcmalloc.so python3 -O'
-alias pypdb='python3 -m pdb -c continue'
 alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof script.py > profile.txt
 
 # Default programs.
 alias chrome='google-chrome-stable'
-alias ipython='ipython'
-alias pip='pip3'
-alias python='python3'
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
 
 # Mac specific.
 if [ "$(uname -s)" = "Darwin" ]; then
+  alias python3="/usr/bin/python3"
+  alias pip3="/usr/bin/pip3 --disable-pip-version-check"
   alias vim="~/homebrew/Cellar/macvim/8.2-162/bin/vim"
   alias chrome='open -a "Google Chrome"'
   alias l="~/homebrew/opt/coreutils/libexec/gnubin/ls --color=auto --group-directories-first"

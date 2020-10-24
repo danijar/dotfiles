@@ -33,6 +33,7 @@ Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim'
 Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'davidhalter/jedi-vim'
+Plug 'pangloss/vim-javascript'
 
 " Visuals.
 Plug 'ap/vim-css-color'
@@ -66,6 +67,7 @@ let g:ale_use_global_executables = 1  " Avoid slow search for virtual envs.
 " \}
 
 " Shougo/deoplete.nvim
+let g:python3_host_prog = '/usr/bin/python3'
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<c-j>"
 inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
@@ -75,7 +77,7 @@ call deoplete#custom#option('min_pattern_length', 1)
 " call deoplete#custom#option('sources', {'_': 'buffer']})
 
 " deoplete-plugins/deoplete-jedi
-let g:deoplete#sources#jedi#python_path = 'python3'
+let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
 let g:deoplete#sources#jedi#enable_typeinfo = 0  " Faster
 
 " davidhalter/jedi-vim
