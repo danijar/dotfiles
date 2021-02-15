@@ -38,6 +38,10 @@ URxvt.eightBitInput: false
 URxvt.metaSendsEscape: true
 URxvt.iso14755: false
 URxvt.iso14755_52: false
+! URxvt.keysym.Control-Shift-H: \033h
+! URxvt.keysym.Control-Shift-J: \033j
+! URxvt.keysym.Control-Shift-K: \033k
+! URxvt.keysym.Control-Shift-L: \033l
 URxvt.keysym.C-H: \033h
 URxvt.keysym.C-J: \033j
 URxvt.keysym.C-K: \033k

@@ -59,7 +59,7 @@ call plug#end()
 let g:ale_linters = {'python': ['flake8']}
 let b:ale_fixers = []  " ['isort']
 let g:ale_python_flake8_options = '
-\ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741'
+\ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704'
 let g:ale_use_global_executables = 1  " Avoid slow search for virtual envs.
 " let g:ale_lint_on_text_changed = 1
 " let g:ale_pattern_options = {
@@ -324,15 +324,16 @@ nnoremap <silent> <c-c> :noh<cr>
 " noremap k gk
 " noremap gj j
 " noremap gk k
-noremap H ^
-noremap L $
+" noremap H ^
+" noremap L $
 
 " Navigate windows and tabs.
 nnoremap <c-t> :call feedkeys(':tabe<space><tab>', 't')<cr>
 nnoremap <silent> <c-h> :call LeftWindowOrTab()<cr>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
 nnoremap <silent> <c-l> :call RightWindowOrTab()<cr>
+" Terminal needs to be configured to map Ctrl+Shift+h to Esc,h etc.
 nnoremap <esc>h :tabm -1<cr>
 nnoremap <esc>l :tabm +1<cr>
 
@@ -361,6 +362,7 @@ nnoremap <leader>j vipJ^
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 nnoremap <leader>p "0p
 vnoremap <leader>p "0p
+nnoremap <leader>y mzvipy`z
 " nnoremap <leader>t :TagbarOpen j<cr>:TagbarFoldLevel 99<cr>
 nmap <leader>k mzgcip`z
 vmap <leader>k gc
