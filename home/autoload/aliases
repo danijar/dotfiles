@@ -36,14 +36,14 @@ alias hl='hg xl'
 
 # Python.
 alias np='ipython -i -c " \
-  import functools, itertools, pathlib, re; \
+  import functools, itertools, pathlib, re, json; \
   import numpy as np; \
   import matplotlib.pyplot as plt; \
-  import scipy.stats; \
+  import json; \
   import gym; \
   random = np.random.RandomState(seed=0);"'
 alias tf='nogpu ipython -i -c " \
-  import functools, itertools, os, shutil; \
+  import functools, itertools, pathlib, re, json; \
   import numpy as np; \
   import matplotlib.pyplot as plt; \
   import tensorflow as tf; \
