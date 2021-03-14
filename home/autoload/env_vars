@@ -16,8 +16,11 @@ export LD_LIBRARY_PATH=$MUJOCO_HOME/bin:$LD_LIBRARY_PATH
 if [ -x "$(command -v brew)" ]; then
   export EDITOR=vi
 
+  export PATH=$PATH:/Users/danijar/Library/Python/3.8/bin
+
   # Brew.
   export PATH=$PATH:~/homebrew/bin
   export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:~/homebrew
   export HOMEBREW_NO_AUTO_UPDATE=1
+  export HOMEBREW_NO_ANALYTICS=1
 fi

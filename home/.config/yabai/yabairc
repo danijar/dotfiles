@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Load and reload Yabai
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
 # Behavior
 yabai -m config layout               bsp
 yabai -m config window_placement     second_child
@@ -23,6 +27,7 @@ yabai -m config active_window_border_color 0xff0f75b1
 # Rules
 yabai -m rule --add app='^System Preferences$' manage=off
 yabai -m rule --add app='^GIMP' title!='(^GNU|GIMP$)' manage=off
+yabai -m rule --add app='Python' manage=off
 
 # Signals
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"

@@ -52,3 +52,5 @@ alt + shift - 9 : yabai -m window --space 9
 
 # Disable Mac shortcuts.
 cmd - h : echo
+
+ctrl - space : osascript -e 'tell application "System Events" to keystroke space using {command down}'

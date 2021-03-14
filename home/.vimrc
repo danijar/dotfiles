@@ -25,13 +25,14 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'reedes/vim-pencil'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
+Plug 'bimlas/vim-numutils'
 
 " Codel intel.
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'davidhalter/jedi-vim'
 Plug 'pangloss/vim-javascript'
 
