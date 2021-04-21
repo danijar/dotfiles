@@ -4,13 +4,15 @@
 export EDITOR=vim
 
 # User directories.
-export PATH=$PATH:~/bin
+# export PATH=$PATH:~/bin
+
+# Pip.
 export PATH=$PATH:~/.local/bin
 
 # MuJoCo.
-export MUJOCO_HOME=~/.mujoco/mjpro200
-export PATH=$PATH:$MUJOCO_HOME/bin
-export LD_LIBRARY_PATH=$MUJOCO_HOME/bin:$LD_LIBRARY_PATH
+# export MUJOCO_HOME=~/.mujoco/mjpro200
+# export PATH=$PATH:$MUJOCO_HOME/bin
+# export LD_LIBRARY_PATH=$MUJOCO_HOME/bin:$LD_LIBRARY_PATH
 
 # Mac specific.
 if [ -x "$(command -v brew)" ]; then
