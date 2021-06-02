@@ -35,7 +35,10 @@ def create_links(repo, user):
       dest.symlink_to(path)
       continue
     if dest.is_symlink() and is_child(dest.resolve(), repo):
-      assert dest.resolve() == path, (dest, dest.resolve())
+      if dest.resolve() != path:
+        message = f'Expected existing {dest} to resolve to {path} '
+        message += f'but resolved to {dest.resolve()} instead.'
+        raise RuntimeError(message)
       continue
     print('Exists:', dest)
 
