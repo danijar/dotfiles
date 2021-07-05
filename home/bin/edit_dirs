@@ -8,7 +8,7 @@ import tempfile
 
 
 def user_edit_text(text):
-  editor = sh.Command(os.environ.get('EDITOR', 'vim'))
+  editor = sh.Command('vim')
   path = pathlib.Path('/tmp/edit_dirs')
   with path.open('w') as f:
     f.write(text)

@@ -25,7 +25,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'reedes/vim-pencil'
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'bimlas/vim-numutils'
 
@@ -386,6 +386,7 @@ endfunction
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
 autocmd BufNewFile,BufRead *.cls set filetype=tex
+autocmd BufNewFile,BufRead *.scss set tw=0
 
 autocmd FileType python setlocal ts=2 sw=2 sts=2
 autocmd FileType python setlocal tw=79
