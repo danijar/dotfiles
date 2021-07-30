@@ -19,6 +19,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/loremipsum'
 " Plug 'majutsushi/tagbar'
+Plug 'preservim/nerdtree'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -126,6 +127,29 @@ let g:hybrid_custom_term_colors = 1
 
 " Yggdroot/indentLine
 let g:indentLine_setConceal = 0
+
+" " Netrw
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 25
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
+
+" preservim/nerdtree
+nnoremap <leader>t :NERDTreeToggle<CR>
+let g:NERDTreeWinSize = 40
+let g:NERDTreeQuitOnOpen = 1
+" nnoremap <leader>t :NERDTreeMirror<CR>:NERDTreeFocus<CR>
+" Exit Vim if NERDTree is the only window left.
+" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+" autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings

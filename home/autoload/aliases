@@ -36,28 +36,33 @@ alias hl='hg xl'
 
 # Python.
 alias np='ipython -i -c " \
-  import functools, itertools, pathlib, re, json, collections; \
-  import numpy as np; \
-  import matplotlib.pyplot as plt; \
-  import json; \
-  import gym; \
-  import imageio; \
-  load_json = lambda path: json.loads(pathlib.Path(path).read_text()); \
-  save_json = lambda path, obj: pathlib.Path(path).write_text(json.dumps(obj)); \
-  load_image = lambda path: imageio.imread(path); \
-  save_image = lambda path, array: imageio.imwrite(path, array); \
-  flatten = lambda sequence: sum([list(x) for x in sequence], []); \
-  random = np.random.RandomState(seed=0);"'
-alias tf='nogpu ipython -i -c " \
-  import functools, itertools, pathlib, re, json; \
-  import numpy as np; \
-  import matplotlib.pyplot as plt; \
-  import tensorflow as tf; \
-  import tensorflow_probability as tfp; \
-  from tensorflow_probability import distributions as tfd; \
-  import gym; \
-  random = np.random.RandomState(seed=0);"'
-alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof script.py > profile.txt
+  import sys; \
+  import pathlib; \
+  sys.path.append(str(pathlib.Path.home() / \"scripts\")); \
+  from py_imports import *;"'
+# alias np='ipython -i -c " \
+#   import functools, itertools, pathlib, re, json, collections; \
+#   import numpy as np; \
+#   import matplotlib.pyplot as plt; \
+#   import json; \
+#   import gym; \
+#   import imageio; \
+#   load_json = lambda path: json.loads(pathlib.Path(path).read_text()); \
+#   save_json = lambda path, obj: pathlib.Path(path).write_text(json.dumps(obj)); \
+#   load_image = lambda path: imageio.imread(path); \
+#   save_image = lambda path, array: imageio.imwrite(path, array); \
+#   flatten = lambda sequence: sum([list(x) for x in sequence], []); \
+#   random = np.random.RandomState(seed=0);"'
+# alias tf='nogpu ipython -i -c " \
+#   import functools, itertools, pathlib, re, json; \
+#   import numpy as np; \
+#   import matplotlib.pyplot as plt; \
+#   import tensorflow as tf; \
+#   import tensorflow_probability as tfp; \
+#   from tensorflow_probability import distributions as tfd; \
+#   import gym; \
+#   random = np.random.RandomState(seed=0);"'
+# alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof script.py > profile.txt
 
 # Default programs.
 alias chrome='google-chrome-stable'
