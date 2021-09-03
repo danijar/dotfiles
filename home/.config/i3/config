@@ -40,7 +40,8 @@ font pango:DejaVu Sans Mono 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtcd -name "" -e tmux
+# bindsym $mod+Return exec urxvtcd -name "" -e tmux
+bindsym $mod+Return exec urxvtcd
 
 # kill focused window
 mode "kill" {

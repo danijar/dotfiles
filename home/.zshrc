@@ -100,7 +100,10 @@ done
 
 # Start tmux automatically with SSH.
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
-    tmux
+  # We run tmux in this complicated way so that systemd does not kill the
+  # process on logout when the SSH session ends. For more information:
+  # https://www.freedesktop.org/software/systemd/man/systemd-run.html
+  systemd-run --user --scope tmux
 fi
 
 # The next line updates PATH for the Google Cloud SDK.

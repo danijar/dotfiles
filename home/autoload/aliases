@@ -64,6 +64,11 @@ alias np='ipython -i -c " \
 #   random = np.random.RandomState(seed=0);"'
 # alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof script.py > profile.txt
 
+# Docker
+alias db='docker build -t image .'
+alias dr='docker run --privileged -it --rm --gpus all image'
+alias dbr='db && dr'
+
 # Default programs.
 alias chrome='google-chrome-stable'
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
