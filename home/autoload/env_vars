@@ -14,11 +14,17 @@ export MUJOCO_HOME=~/.mujoco/mjpro200
 # export PATH=$PATH:$MUJOCO_HOME/bin
 export LD_LIBRARY_PATH=$MUJOCO_HOME/bin:$LD_LIBRARY_PATH
 
-# Mac specific.
-if [ -x "$(command -v brew)" ]; then
-  export EDITOR=vi
-  export HOMEBREW_NO_AUTO_UPDATE=1
-  export HOMEBREW_NO_ANALYTICS=1
-  export PATH=$PATH:/Users/danijar/Library/Python/3.9/bin
-  export PATH=$PATH:/Users/danijar/.gem/ruby/2.6.0/bin
-fi
+# # Mac specific.
+# if [ -d "~/homebrew" ]; then
+#   export EDITOR=vi
+#   export HOMEBREW_NO_AUTO_UPDATE=1
+#   export HOMEBREW_NO_ANALYTICS=1
+#   # export PATH=$PATH:/Users/danijar/Library/Python/3.9/bin
+#   # export PATH=$PATH:/Users/danijar/.gem/ruby/2.6.0/bin
+#   export PATH=~/homebrew/bin:~/homebrew/sbin:$PATH
+# fi
+
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_ANALYTICS=1
+export PATH=~/homebrew/bin:~/homebrew/sbin:$PATH
+export PATH=~/homebrew/opt/coreutils/libexec/gnubin:$PATH

@@ -26,14 +26,14 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'reedes/vim-pencil'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'bimlas/vim-numutils'
 
 " Codel intel.
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim'
-" Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'davidhalter/jedi-vim'
 Plug 'pangloss/vim-javascript'
 
@@ -69,7 +69,7 @@ let g:ale_use_global_executables = 1  " Avoid slow search for virtual envs.
 " \}
 
 " Shougo/deoplete.nvim
-let g:python3_host_prog = '/usr/bin/python3'
+" let g:python3_host_prog = '/usr/bin/python3'
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<c-j>"
 inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
@@ -79,7 +79,7 @@ call deoplete#custom#option('min_pattern_length', 1)
 " call deoplete#custom#option('sources', {'_': 'buffer']})
 
 " deoplete-plugins/deoplete-jedi
-let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
+" let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
 let g:deoplete#sources#jedi#enable_typeinfo = 0  " Faster
 
 " davidhalter/jedi-vim
@@ -421,5 +421,5 @@ autocmd FileType tex set conceallevel=0
 augroup pencil
   autocmd!
   autocmd FileType tex call pencil#init({'wrap': 'soft'})
-  " autocmd FileType text,markdown call pencil#init({'wrap': 'hard'})
+  autocmd FileType markdown call pencil#init({'wrap': 'hard'})
 augroup END
