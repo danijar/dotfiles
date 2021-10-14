@@ -90,7 +90,8 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 # SSH shortcuts.
-alias workstation='gcert ; ssh -t danijar@danijar.tor.corp.google.com -L 6007:127.0.0.1:6007 -o ControlPath=none "gcert ; /bin/zsh"'
+alias gssh='gcert ; ssh -t danijar@danijar.tor.corp.google.com -L 6007:127.0.0.1:6007 -o ControlPath=none "gcert ; /bin/zsh"'
+alias gsshfs="sudo killall sshfs -9 ; sudo diskutil unmount force $HOME/mnt/ws ; sshfs danijar@danijar.tor.corp.google.com:/usr/local/google/home/danijar $HOME/mnt/ws"
 
 # Change directory hooks.
 cd () {
