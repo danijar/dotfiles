@@ -67,7 +67,9 @@ alias np='ipython -i -c " \
 # Docker
 alias db='docker build -t image .'
 alias dr='docker run --privileged -it --rm --gpus all image'
+alias drl='docker run --privileged -it --rm --gpus all -v ~/logdir:/logdir image'
 alias dbr='db && dr'
+alias dbrl='db && drl'
 
 # Default programs.
 alias chrome='google-chrome-stable'

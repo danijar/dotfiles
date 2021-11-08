@@ -61,7 +61,7 @@ call plug#end()
 let g:ale_linters = {'python': ['flake8']}
 let b:ale_fixers = []  " ['isort']
 let g:ale_python_flake8_options = '
-\ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704,E701,E702,E722'
+\ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704,E701,E702,E722,E201,E241'
 let g:ale_use_global_executables = 1  " Avoid slow search for virtual envs.
 " let g:ale_lint_on_text_changed = 1
 " let g:ale_pattern_options = {
