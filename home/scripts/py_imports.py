@@ -9,7 +9,10 @@ import gym
 import imageio
 import matplotlib.pyplot as plt
 import numpy as np
+import tensorflow as tf
+import tensorflow_probability as tfp
 from PIL import Image
+from tensorflow_probability import distributions as tfd
 
 random = np.random.RandomState(seed=0)
 
