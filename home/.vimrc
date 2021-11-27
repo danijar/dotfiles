@@ -18,8 +18,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/loremipsum'
-" Plug 'majutsushi/tagbar'
-Plug 'preservim/nerdtree'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -33,15 +31,12 @@ Plug 'bimlas/vim-numutils'
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim'
 Plug 'deoplete-plugins/deoplete-jedi'
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 Plug 'pangloss/vim-javascript'
 
 " Visuals.
 Plug 'ap/vim-css-color'
 Plug 'plasticboy/vim-markdown'
-" Plug 'morhetz/gruvbox'
-" Plug 'jnurmine/Zenburn'
-" Plug 'easysid/mod8.vim'
 Plug 'w0ng/vim-hybrid'
 
 " Polyfills.
@@ -62,10 +57,6 @@ let b:ale_fixers = []  " ['isort']
 let g:ale_python_flake8_options = '
 \ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704,E701,E702,E722,E201,E241,E401'
 let g:ale_use_global_executables = 1  " Avoid slow search for virtual envs.
-" let g:ale_lint_on_text_changed = 1
-" let g:ale_pattern_options = {
-" \ '/google/src/.*': {'ale_enabled': 0},
-" \}
 
 " Shougo/deoplete.nvim
 " let g:python3_host_prog = '/usr/bin/python3'
@@ -78,13 +69,13 @@ call deoplete#custom#option('min_pattern_length', 1)
 " call deoplete#custom#option('sources', {'_': 'buffer']})
 
 " deoplete-plugins/deoplete-jedi
-" let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
+let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
 let g:deoplete#sources#jedi#enable_typeinfo = 0  " Faster
 
 " davidhalter/jedi-vim
-" let g:jedi#completions_enabled = 0
-" let g:jedi#force_py_version = 3
-" let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#completions_enabled = 0
+let g:jedi#force_py_version = 3
+let g:jedi#use_tabs_not_buffers = 1
 
 " ctrlp.vim
 let g:ctrlp_working_path_mode = 'a'
@@ -97,18 +88,6 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']
 let g:UltiSnipsExpandTrigger='<tab>'
 let g:UltiSnipsJumpForwardTrigger='<tab>'
 let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-
-" majutsushi/tagbar
-" let g:tagbar_sort = 0
-" let g:tagbar_width = 30
-" let g:tagbar_show_visibility = 0
-" let g:tagbar_autofocus = 1
-" let g:tagbar_autoclose = 1
-" let g:tagbar_compact = 1
-" let g:tagbar_iconchars = [' ', ' ']
-" let g:tagbar_map_close = '<leader>t'
-" autocmd FileType tagbar autocmd BufCreate <c-y>
-" autocmd FileType tagbar autocmd BufDelete <c-e>
 
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
@@ -126,29 +105,6 @@ let g:hybrid_custom_term_colors = 1
 
 " Yggdroot/indentLine
 let g:indentLine_setConceal = 0
-
-" " Netrw
-" let g:netrw_banner = 0
-" let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-" let g:netrw_altv = 1
-" let g:netrw_winsize = 25
-" augroup ProjectDrawer
-"   autocmd!
-"   autocmd VimEnter * :Vexplore
-" augroup END
-
-" preservim/nerdtree
-nnoremap <leader>t :NERDTreeToggle<CR>
-let g:NERDTreeWinSize = 40
-let g:NERDTreeQuitOnOpen = 1
-" nnoremap <leader>t :NERDTreeMirror<CR>:NERDTreeFocus<CR>
-" Exit Vim if NERDTree is the only window left.
-" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-" autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 | let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-" Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * silent NERDTreeMirror
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
@@ -185,11 +141,10 @@ set ruler
 set mouse=a
 set autoread
 set undofile
-set modeline  " Support in-file Vim settings.
+set modeline
 set shortmess=A
 set updatetime=200
 set laststatus=1
-" set noshowmode
 
 if has('mac')
   set clipboard=unnamed
@@ -282,13 +237,10 @@ autocmd BufReadPost * call ResumeCursorPosition()
 cmap w!! w !sudo tee % >/dev/null
 
 " Highlight trailing whitespace.
-" autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match Error /\s\+$/
 autocmd BufRead,BufNewFile * match Error /\s\+$/
 
 " Fix autoread in console Vim.
 autocmd FocusGained,BufEnter * checktime
-" autocmd FocusGained,BufEnter * mode
-" autocmd FocusLost * call feedkeys("\<C-\>\<C-n>")
 
 " Focus right split or otherwise next tab.
 function! RightWindowOrTab()
@@ -328,10 +280,6 @@ inoremap <c-v> <esc>
 vnoremap <c-c> <esc>
 vnoremap <c-v> <esc>
 
-" Handle focus events.
-" inoremap <esc>[O <esc>:stopinsert<cr>
-" inoremap <esc>[I :mode<cr>
-
 " No shift for command mode.
 nnoremap ; :
 
@@ -343,23 +291,20 @@ vnoremap <c-u> u
 nnoremap <silent> <c-c> :noh<cr>
 " nnoremap <esc>^[ <esc>^[
 
-" Line navigation.
-" noremap j gj
-" noremap k gk
-" noremap gj j
-" noremap gk k
-" noremap H ^
-" noremap L $
+" Open file in new tab.
+nnoremap <c-t> :call feedkeys(':tabe<space><tab>', 't')<cr>
 
 " Navigate windows and tabs.
-nnoremap <c-t> :call feedkeys(':tabe<space><tab>', 't')<cr>
 nnoremap <silent> <c-h> :call LeftWindowOrTab()<cr>
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-k> <c-w>k
 nnoremap <silent> <c-l> :call RightWindowOrTab()<cr>
 " Terminal needs to be configured to map Ctrl+Shift+h to Esc,h etc.
 nnoremap <esc>h :tabm -1<cr>
 nnoremap <esc>l :tabm +1<cr>
+
+" Tmux clipboard integration.
+vnoremap ty y:call system("tmux load-buffer -", @0)<cr>
+nnoremap tp :let @0 = system("tmux save-buffer -")<cr>"0p
+nnoremap tP :let @0 = system("tmux save-buffer -")<cr>"0P
 
 " Space as leader key.
 map <Space> <nop>
@@ -385,9 +330,7 @@ vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 nnoremap <leader>p "0p
-vnoremap <leader>p "0p
 nnoremap <leader>y mzvipy`z
-" nnoremap <leader>t :TagbarOpen j<cr>:TagbarFoldLevel 99<cr>
 nmap <leader>k mzgcip`z
 vmap <leader>k gc
 
@@ -410,9 +353,9 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
 autocmd BufNewFile,BufRead *.cls set filetype=tex
 autocmd BufNewFile,BufRead *.scss set tw=0
+autocmd FileType * set conceallevel=0
 
 autocmd FileType python setlocal ts=2 sw=2 sts=2
 autocmd FileType python setlocal tw=79
 autocmd FileType python call PythonSyntax()
 " autocmd FileType python,sh setlocal iskeyword-=_
-autocmd FileType tex set conceallevel=0
