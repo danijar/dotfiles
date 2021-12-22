@@ -359,3 +359,4 @@ autocmd FileType python setlocal ts=2 sw=2 sts=2
 autocmd FileType python setlocal tw=79
 autocmd FileType python call PythonSyntax()
 " autocmd FileType python,sh setlocal iskeyword-=_
+autocmd FileType markdown,tex set conceallevel=0
