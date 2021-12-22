@@ -9,11 +9,11 @@ startup () {
 
 # Try to start tray applications.
 startup cbatticon -n
-# startup insync start
 startup screencloud
 startup redshift-gtk
 startup unclutter
 startup volumeicon
+startup urxvtd -q -f -o
 
 # Set wallpaper or color.
 startup hsetroot -solid "#$COLOR_BG"

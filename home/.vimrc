@@ -305,6 +305,8 @@ nnoremap <esc>l :tabm +1<cr>
 vnoremap ty y:call system("tmux load-buffer -", @0)<cr>
 nnoremap tp :let @0 = system("tmux save-buffer -")<cr>"0p
 nnoremap tP :let @0 = system("tmux save-buffer -")<cr>"0P
+vnoremap tp :let @0 = system("tmux save-buffer -")<cr>"0p
+vnoremap tP :let @0 = system("tmux save-buffer -")<cr>"0P
 
 " Space as leader key.
 map <Space> <nop>

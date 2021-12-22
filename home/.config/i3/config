@@ -215,3 +215,4 @@ for_window [title="Mozilla Firefox"] border pixel 0
 for_window [title="Android Studio"] border pixel 0
 # for_window [title="Simulate"] floating enable
 for_window [title="mujoco_py"] floating enable
+for_window [title="Minecraft"] floating enable

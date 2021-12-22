@@ -29,3 +29,8 @@ def resize_image(image, width, height):
   image = Image.fromarray(image)
   image = image.resize((width, height), Image.NEAREST)
   return np.array(image)
+
+def render_video(inpath, outpath, size=256, fps=60):
+  video = np.load(inpath)['image']
+  video = [resize_image(x, size, size) for x in video]
+  imageio.mimsave(outpath, video, fps=fps)
