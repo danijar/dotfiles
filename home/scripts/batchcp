@@ -1,0 +1,73 @@
+#!/usr/bin/python3
+
+import argparse
+import concurrent.futures
+import os
+import re
+import subprocess
+
+
+def sh(command):
+  try:
+    return subprocess.run(
+        command, shell=True, check=True, capture_output=True,
+    ).stdout
+  except subprocess.CalledProcessError as e:
+    l, r = '\033[1;93m', '\033[0m'
+    message = f'{l}Exit code {e.returncode} of shell command.{r}\n'
+    message += f'\n{l}Command:{r}\n{e.cmd}\n'
+    if e.stdout:
+      message += f'\n{l}StdOut:{r}\n{e.stdout.decode("utf-8")}\n'
+    if e.stderr:
+      message += f'\n{l}StdErr:{r}\n{e.stderr.decode("utf-8")}\n'
+    raise RuntimeError(message)
+
+
+def main(args):
+  filenames = sh(args.ls_cmd.format(args.indir))
+  if isinstance(filenames, bytes):
+    filenames = filenames.decode('utf-8')
+  filenames = [x.strip() for x in filenames.split('\n')]
+  filenames = [x for x in filenames if x]
+  print('Found', len(filenames), 'filenames.')
+  if args.filter:
+    filenames = [x for x in filenames if args.filter.search(x)]
+    print('Remaining', len(filenames), 'after filter.')
+  commands = []
+  created = set()
+  for idx, src in enumerate(filenames):
+    assert src.startswith(args.indir), src
+    rel = src[len(args.indir):].strip('/')
+    dst = os.path.join(args.outdir, rel)
+    assert not dst.endswith('/')
+    par = os.path.dirname(dst)
+    if par not in created:
+      sh(args.mk_cmd.format(par))
+      created.add(par)
+    message = f'{idx+1}/{len(src)} {rel}'
+    command = args.cp_cmd.format(src, dst)
+    commands.append((command, message))
+  print(f'Executing {args.parallel} in parallel.')
+  def body(payload):
+    command, message = payload
+    print(message)
+    sh(command)
+  with concurrent.futures.ThreadPoolExecutor(args.parallel) as executor:
+    executor.map(body, commands)
+
+
+if __name__ == '__main__':
+  boolean = lambda x: bool(['False', 'True'].index(x))
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--indir', type=str, required=True)
+  parser.add_argument('--outdir', type=str, required=True)
+  parser.add_argument('--subdir', type=boolean, default=True)
+  parser.add_argument('--filter', type=re.compile, default=None)
+  parser.add_argument('--parallel', type=int, default=100)
+  parser.add_argument('--ls_cmd', type=str, default='gsutil ls {}**')
+  parser.add_argument('--cp_cmd', type=str, default='gsutil cp {} {}')
+  parser.add_argument('--mk_cmd', type=str, default='mkdir -p {}')
+  _args = parser.parse_args()
+  if _args.subdir:
+    _args.outdir = os.path.join(_args.outdir, os.path.basename(_args.indir))
+  main(_args)
