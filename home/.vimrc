@@ -16,7 +16,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/loremipsum'
 
 " Editing.
@@ -30,8 +30,8 @@ Plug 'bimlas/vim-numutils'
 " Codel intel.
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
+" Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'davidhalter/jedi-vim'
 Plug 'pangloss/vim-javascript'
 
 " Visuals.
@@ -57,6 +57,7 @@ let b:ale_fixers = []  " ['isort']
 let g:ale_python_flake8_options = '
 \ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704,E701,E702,E722,E201,E241,E401'
 let g:ale_use_global_executables = 1  " Avoid slow search for virtual envs.
+let g:ale_virtualenv_dir_names=[]
 
 " Shougo/deoplete.nvim
 " let g:python3_host_prog = '/usr/bin/python3'

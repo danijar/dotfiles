@@ -1,0 +1,103 @@
+#!/usr/bin/python3
+
+import argparse
+import concurrent.futures
+import pathlib
+import subprocess
+import threading
+
+
+def sh(command):
+  try:
+    return subprocess.run(
+        command, shell=True, check=True, capture_output=True,
+    ).stdout.decode('utf-8')
+  except subprocess.CalledProcessError as e:
+    l, r = '\033[1;93m', '\033[0m'
+    message = f'{l}Exit code {e.returncode} of shell command.{r}\n'
+    message += f'\n{l}Command:{r}\n{e.cmd}\n'
+    if e.stdout:
+      message += f'\n{l}StdOut:{r}\n{e.stdout.decode("utf-8")}\n'
+    if e.stderr:
+      message += f'\n{l}StdErr:{r}\n{e.stderr.decode("utf-8")}\n'
+    raise RuntimeError(message)
+
+
+def fetch(exid):
+  print(f'Fetching {exid}...')
+  cell = exid.split('_')[0][-2:]
+  if cell == 'xc':
+    logdir = f'gs://xcloud-shared/danijar/{exid}'
+    sh(
+        f'~/bin/batchcp --indir {logdir} --outdir ~/metrics/dreamer ' +
+        '--ls_cmd "gsutil ls {}**metrics.jsonl" ' +
+        '--cp_cmd "gsutil cp {} {}" ' +
+        '--subdir True --parallel 100')
+  else:
+    logdir = f'/cns/{cell}-d/home/danijar/logdir/agents/{exid}'
+    sh(
+        f'~/bin/batchcp --indir {logdir} --outdir ~/metrics/dreamer ' +
+        '--ls_cmd "fileutil ls -R {}" --filter "metrics.jsonl" ' +
+        '--cp_cmd "fileutil cp -f {} {}" ' +
+        '--subdir True --parallel 100')
+
+def plot(exid):
+  print(f'Plotting {exid}...')
+  logdir = f'~/metrics/dreamer/{exid}'
+  sh(
+      '/usr/bin/python3 ' +
+      '/google/src/cloud/danijar/dreamer/google3/experimental/users/' +
+      'danijar/agents/common/plot.py ' +
+      f'--indir {logdir} --outdir ~/plots/dreamer')
+
+def summarize(exids, filename):
+  lines = []
+  lines.append("""<style>
+  * { font-family: sans-serif; }
+  a { display: inline-block; padding: .5em; }
+  h2 { text-align: center; margin: 1em 0; }
+  img { width: 100%; }
+  hr { margin: 2em 0 3em; }
+  </style>""")
+  for exid in exids:
+    lines.append(f'<a href="#{exid}">{exid}</a><br>')
+  for exid in exids:
+    lines.append('<hr>')
+    lines.append(f'<h2 id="{exid}">{exid}</h2>')
+    lines.append(f'<img src="/dreamer/{exid}/curves.png">')
+  pathlib.Path(filename).expanduser().write_text('\n'.join(lines))
+
+def serve(directory, port):
+  def target():
+    sh(f'/usr/bin/python3 -m http.server -d {directory} {port}')
+  thread = threading.Thread(target=target)
+  thread.start()
+
+def main(args):
+  table = sh(
+      '/google/bin/releases/xmanager/cli/xmanager.par ' +
+      '--xm_deployment_env=alphabet list ' +
+      '--status RUNNING')
+  exids = [row.split('  ')[1] for row in table.split('\n')[2:] if row]
+  summarize(exids, '~/plots/recent.html')
+  serve('./plots', args.port)
+  if args.parallel > 1:
+    print(f'Executing {args.parallel} in parallel.')
+    def body(exid):
+      fetch(exid)
+      plot(exid)
+    with concurrent.futures.ThreadPoolExecutor(args.parallel) as executor:
+      executor.map(body, exids)
+  else:
+    for exid in exids:
+      fetch(exid)
+      plot(exid)
+  print(f'Server running at localhost:{args.port}...')
+
+
+if __name__ == '__main__':
+  boolean = lambda x: bool(['False', 'True'].index(x))
+  parser = argparse.ArgumentParser()
+  parser.add_argument('--parallel', type=int, default=6)
+  parser.add_argument('--port', type=int, default=6010)
+  main(parser.parse_args())

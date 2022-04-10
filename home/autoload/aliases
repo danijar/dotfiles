@@ -36,7 +36,8 @@ alias hc='hg commit -m '
 alias hl='hg xl'
 
 # Python.
-alias np='ipython -i -c " \
+alias py='python3'
+alias np='ipython --TerminalInteractiveShell.editing_mode=vi -i -c " \
   import sys; \
   import pathlib; \
   sys.path.append(str(pathlib.Path.home() / \"scripts\")); \
