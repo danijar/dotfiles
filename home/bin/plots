@@ -46,17 +46,17 @@ def plot(exid):
   logdir = f'~/metrics/dreamer/{exid}'
   sh(
       '/usr/bin/python3 ' +
-      '/google/src/cloud/danijar/dreamer/google3/experimental/users/' +
-      'danijar/agents/common/plot.py ' +
-      f'--indir {logdir} --outdir ~/plots/dreamer')
+      '/google/src/cloud/danijar/embodied/google3/experimental/users/' +
+      'danijar/embodied/plot.py ' +
+      f'--indirs {logdir} --outdir ~/plots/dreamer')
 
 def summarize(exids, filename):
   lines = []
   lines.append("""<style>
   * { font-family: sans-serif; }
   a { display: inline-block; padding: .5em; }
-  h2 { text-align: center; margin: 1em 0; }
-  img { width: 100%; }
+  h2 { text-align: center; margin: 1.5em 0 .5em; }
+  img { height: 80vh; width: 100vw; object-fit: contain; position: relative; }
   hr { margin: 2em 0 3em; }
   </style>""")
   for exid in exids:
@@ -79,19 +79,21 @@ def main(args):
       '--xm_deployment_env=alphabet list ' +
       '--status RUNNING')
   exids = [row.split('  ')[1] for row in table.split('\n')[2:] if row]
+  exids = [exid for exid in exids if '_' in exid]
   summarize(exids, '~/plots/recent.html')
   serve('./plots', args.port)
-  if args.parallel > 1:
-    print(f'Executing {args.parallel} in parallel.')
-    def body(exid):
-      fetch(exid)
-      plot(exid)
-    with concurrent.futures.ThreadPoolExecutor(args.parallel) as executor:
-      executor.map(body, exids)
-  else:
-    for exid in exids:
-      fetch(exid)
-      plot(exid)
+  if args.fetch:
+    if args.parallel > 1:
+      print(f'Executing {args.parallel} in parallel.')
+      def body(exid):
+        fetch(exid)
+        plot(exid)
+      with concurrent.futures.ThreadPoolExecutor(args.parallel) as executor:
+        executor.map(body, exids)
+    else:
+      for exid in exids:
+        fetch(exid)
+        plot(exid)
   print(f'Server running at localhost:{args.port}...')
 
 
@@ -99,5 +101,6 @@ if __name__ == '__main__':
   boolean = lambda x: bool(['False', 'True'].index(x))
   parser = argparse.ArgumentParser()
   parser.add_argument('--parallel', type=int, default=6)
+  parser.add_argument('--fetch', type=boolean, default=True)
   parser.add_argument('--port', type=int, default=6010)
   main(parser.parse_args())
