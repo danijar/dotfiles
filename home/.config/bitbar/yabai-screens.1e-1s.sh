@@ -16,7 +16,7 @@ for display in displays:
     if space['display'] != display:
       continue
     index = space['index']
-    if space['focused']:
+    if space['has-focus']:
       output.append(f'>{index} ')
     elif space['windows']:
       output.append(f':{index} ')

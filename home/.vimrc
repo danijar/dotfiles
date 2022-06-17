@@ -38,6 +38,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'ap/vim-css-color'
 Plug 'plasticboy/vim-markdown'
 Plug 'w0ng/vim-hybrid'
+Plug 'itchyny/vim-cursorword'
 
 " Polyfills.
 " Plug 'amerlyq/vim-focus-autocmd'
@@ -106,6 +107,9 @@ let g:hybrid_custom_term_colors = 1
 
 " Yggdroot/indentLine
 let g:indentLine_setConceal = 0
+
+" itchyny/vim-cursorword
+let g:cursorword_highlight=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
@@ -205,7 +209,7 @@ colorscheme hybrid
 
 " w0ng/vim-hybrid
 if exists('g:colors_name') && g:colors_name == 'hybrid'
-  hi CursorLineNr ctermbg=black
+  hi CursorLineNr                                ctermbg=black
   hi ErrorMsg           cterm=none ctermfg=red   ctermbg=none
   hi SpellBad           cterm=none ctermfg=black ctermbg=red
   hi TabLine            cterm=none ctermfg=gray  ctermbg=black
@@ -216,6 +220,8 @@ if exists('g:colors_name') && g:colors_name == 'hybrid'
   hi DiffChange         cterm=none ctermfg=none  ctermbg=blue
   hi DiffDelete         cterm=none ctermfg=none  ctermbg=red
   hi SyntasticErrorSign cterm=none ctermfg=red   ctermbg=none
+  hi CursorWord0        cterm=bold               ctermbg=black
+  hi CursorWord1                                 ctermbg=black
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

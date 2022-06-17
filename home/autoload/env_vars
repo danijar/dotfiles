@@ -5,6 +5,7 @@ export EDITOR=vim
 
 # User directories.
 # export PATH=$PATH:~/bin
+export PATH=$PATH:/Users/danijar/.gem/ruby/2.6.0/bin
 
 # Pip.
 export PATH=$PATH:~/.local/bin
