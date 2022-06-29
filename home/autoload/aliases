@@ -18,6 +18,7 @@ alias sudo='sudo '
 # Other.
 alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
 alias diff='git diff --no-index'
+alias v='vim'
 
 # Git.
 alias gs='git status'

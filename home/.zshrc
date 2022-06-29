@@ -92,12 +92,6 @@ setopt promptsubst
     PS1="$line "
 }
 
-# Run interactive scripts in interactive mode.
-[[ $- != *i* ]] && return
-for script in ~/autoload/*; do
-    . $script;
-done
-
 # Start tmux automatically with SSH.
 if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
   # We run tmux in this complicated way so that systemd does not kill the
@@ -106,13 +100,17 @@ if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
   systemd-run --user --scope tmux
 fi
 
+# Run interactive scripts in interactive mode.
+[[ $- != *i* ]] && return
+for script in ~/autoload/*; do
+    . $script;
+done
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/danijar/download/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/danijar/download/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/danijar/download/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/danijar/download/google-cloud-sdk/completion.zsh.inc'; fi
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 PATH="/Users/danijar/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/Users/danijar/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
