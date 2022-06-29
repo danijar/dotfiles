@@ -249,28 +249,59 @@ autocmd BufRead,BufNewFile * match Error /\s\+$/
 " Fix autoread in console Vim.
 autocmd FocusGained,BufEnter * checktime
 
-" Focus right split or otherwise next tab.
-function! RightWindowOrTab()
-  let win_no = winnr()
-  wincmd l
-  if win_no == winnr()
-    normal gt
-  endif
-endfunction
-
-" Focus left split or otherwise previous tab.
-function! LeftWindowOrTab()
-  let win_no = winnr()
-  wincmd h
-  if win_no == winnr()
-    normal gT
-  endif
-endfunction
-
 " Show filenames in tmux window.
 autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter *
   \ call system("tmux rename-window '" . expand("%:t") . "'")
 autocmd VimLeave * call system("tmux setw automatic-rename")
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Focus Movements
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! SplitTabPaneRight()
+  let win = winnr()
+  wincmd l
+  if win != winnr()
+    return
+  elseif tabpagenr() != tabpagenr('$')
+    normal gt
+  else
+    :call system('tmux select-pane -R')
+  endif
+endfunction
+
+function! SplitTabPaneLeft()
+  let win = winnr()
+  wincmd h
+  if win != winnr()
+    return
+  elseif tabpagenr() != 1
+    normal gT
+  else
+    :call system('tmux select-pane -L')
+  endif
+endfunction
+
+function! SplitTabDown()
+  let win = winnr()
+  wincmd j
+  if win == winnr()
+    :call system('tmux select-pane -D')
+  endif
+endfunction
+
+function! SplitPaneUp()
+  let win = winnr()
+  wincmd k
+  if win == winnr()
+    :call system('tmux select-pane -U')
+  endif
+endfunction
+
+nnoremap <silent> <c-h> :call SplitTabPaneLeft()<cr>
+nnoremap <silent> <c-l> :call SplitTabPaneRight()<cr>
+nnoremap <silent> <c-j> :call SplitTabDown()<cr>
+nnoremap <silent> <c-k> :call SplitPaneUp()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Key bindings
@@ -301,9 +332,7 @@ nnoremap <silent> <c-c> :noh<cr>
 " Open file in new tab.
 nnoremap <c-t> :call feedkeys(':tabe<space><tab>', 't')<cr>
 
-" Navigate windows and tabs.
-nnoremap <silent> <c-h> :call LeftWindowOrTab()<cr>
-nnoremap <silent> <c-l> :call RightWindowOrTab()<cr>
+" Move tabs.
 " Terminal needs to be configured to map Ctrl+Shift+h to Esc,h etc.
 nnoremap <esc>h :tabm -1<cr>
 nnoremap <esc>l :tabm +1<cr>
