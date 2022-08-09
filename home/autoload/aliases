@@ -38,12 +38,12 @@ alias hl='hg xl'
 
 # Python.
 alias py='python3'
-alias np='ipython --TerminalInteractiveShell.editing_mode=vi -i -c " \
+alias np='ipython3 --TerminalInteractiveShell.editing_mode=vi -i -c " \
   import sys; \
   import pathlib; \
   sys.path.append(str(pathlib.Path.home() / \"scripts\")); \
   from py_imports import *;"'
-# alias tf='nogpu ipython -i -c " \
+# alias tf='nogpu ipython3 -i -c " \
 #   import functools, itertools, pathlib, re, json; \
 #   import numpy as np; \
 #   import matplotlib.pyplot as plt; \

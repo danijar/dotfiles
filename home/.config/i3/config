@@ -41,7 +41,8 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec urxvtcd -name "" -e tmux
-bindsym $mod+Return exec urxvtcd
+# bindsym $mod+Return exec urxvtcd
+bindsym $mod+Return exec ~/.cargo/bin/alacritty
 
 # kill focused window
 mode "kill" {
@@ -56,12 +57,12 @@ bindsym $mod+Shift+q mode "kill"
 
 # program launcher
 
-# bindsym $mod+d exec --no-startup-id dmenu_run \
-#   -fn 'DejaVu Sans Mono:pixelsize=19' \
-#   -nb '$COLOR_BG' -nf '$COLOR_FG' -sb '$COLOR_PR' -sf '$COLOR_BG'
+bindsym $mod+d exec --no-startup-id dmenu_run \
+  -fn 'DejaVu Sans Mono:pixelsize=19' \
+  -nb '$COLOR_BG' -nf '$COLOR_FG' -sb '$COLOR_PR' -sf '$COLOR_BG'
 
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --display-binary --no-generic --dmenu \
-  'dmenu -fn "DejaVu Sans Mono:pixelsize=19" -nb "$COLOR_BG" -nf "$COLOR_FG" -sb "$COLOR_PR" -sf "$COLOR_BG"'
+# bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --display-binary --no-generic --dmenu \
+#   'dmenu -fn "DejaVu Sans Mono:pixelsize=19" -nb "$COLOR_BG" -nf "$COLOR_FG" -sb "$COLOR_PR" -sf "$COLOR_BG"'
 
 # take screenshot
 bindsym $mod+p exec xfce4-screenshooter -r -s ~/screenshot.png && cat ~/screenshot.png | xclip -i -selection clipboard -target image/png

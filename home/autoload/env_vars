@@ -4,16 +4,15 @@
 export EDITOR=vim
 
 # User directories.
-# export PATH=$PATH:~/bin
-export PATH=$PATH:/Users/danijar/.gem/ruby/2.6.0/bin
-
-# Pip.
+export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.cargo/bin
+# export PATH=$PATH:/Users/danijar/.gem/ruby/2.6.0/bin
 
 # MuJoCo.
-export MUJOCO_HOME=~/.mujoco/mjpro200
+# export MUJOCO_HOME=~/.mujoco/mjpro200
 # export PATH=$PATH:$MUJOCO_HOME/bin
-export LD_LIBRARY_PATH=$MUJOCO_HOME/bin:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=$MUJOCO_HOME/bin:$LD_LIBRARY_PATH
 
 # # Mac specific.
 # if [ -d "~/homebrew" ]; then
@@ -25,7 +24,7 @@ export LD_LIBRARY_PATH=$MUJOCO_HOME/bin:$LD_LIBRARY_PATH
 #   export PATH=~/homebrew/bin:~/homebrew/sbin:$PATH
 # fi
 
-export HOMEBREW_NO_AUTO_UPDATE=1
-export HOMEBREW_NO_ANALYTICS=1
-export PATH=~/homebrew/bin:~/homebrew/sbin:$PATH
-export PATH=~/homebrew/opt/coreutils/libexec/gnubin:$PATH
+# export HOMEBREW_NO_AUTO_UPDATE=1
+# export HOMEBREW_NO_ANALYTICS=1
+# export PATH=~/homebrew/bin:~/homebrew/sbin:$PATH
+# export PATH=~/homebrew/opt/coreutils/libexec/gnubin:$PATH

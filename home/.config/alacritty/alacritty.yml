@@ -1,0 +1,34 @@
+live_config_reload: true
+scrolling:
+  multiplier: 5
+font:
+  size: 13.0
+  family: monospace
+colors:
+  primary:
+    background: '#3a3a3a'
+    foreground: '#adada2'
+  cursor:
+    text:       '#3a3a3a'
+    cursor:     '#adada2'
+  vi_mode_cursor:
+    text:       '#3a3a3a'
+    cursor:     '#adada2'
+  normal:
+    black:      '#1f1f1f'
+    red:        '#cc9393'
+    green:      '#7f9f7f'
+    yellow:     '#e3ceab'
+    blue:       '#799bd2'
+    magenta:    '#8c8cbc'
+    cyan:       '#8cd0d3'
+    white:      '#adada2'
+  bright:
+    black:      '#7e7f78'
+    red:        '#d09a9a'
+    green:      '#85a385'
+    yellow:     '#e6d3b3'
+    blue:       '#81a1d5'
+    magenta:    '#9292bf'
+    cyan:       '#94d3d6'
+    white:      '#dcdccc'
