@@ -54,7 +54,9 @@ alt + shift - 9 : yabai -m window --space 9
 # ctrl - l : skhd --key "cmd - l"
 
 # Disable Mac shortcuts.
-cmd - h : echo
-cmd - m : echo
+# cmd - h : echo
+cmd - h [
+    "Google Chrome" : echo
+]
 
 ctrl - space : osascript -e 'tell application "System Events" to keystroke space using {command down}'
