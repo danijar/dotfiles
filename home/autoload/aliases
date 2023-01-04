@@ -1,16 +1,12 @@
 #!/bin/sh
 
-# Filesystem interaction.
-alias l='command ls --color=auto --group-directories-first'
-alias ls='command ls --color=auto --group-directories-first -lhA --time-style long-iso'
-alias ll='tree -aL 2'
-ed() {
-  if [ -z "$1" ]; then; 1=$PWD; fi
-  ~/bin/edit_list \
-      --content-cmd "find $1" \
-      --rename-cmd 'mv {} {}' \
-      --delete-cmd 'rm -rf {}'
-}
+# Default programs.
+# alias chrome='google-chrome-stable'
+alias chrome='google-chrome-stable --high-dpi-support=1 --force-device-scale-factor=1.5'
+alias tmux='tmux -f ~/.config/tmux/tmux.conf'
+# alias vim='nvim'
+alias vi='vim'
+alias v='vim'
 
 # Resolve aliases for sudo.
 alias sudo='sudo '
@@ -18,7 +14,6 @@ alias sudo='sudo '
 # Other.
 alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
 alias diff='git diff --no-index'
-alias v='vim'
 
 # Git.
 alias gs='git status'
@@ -61,25 +56,24 @@ alias drl='docker run --privileged -it --rm --gpus all -v ~/logdir:/logdir image
 alias dbr='db && dr'
 alias dbrl='db && drl'
 
-# Default programs.
-alias chrome='google-chrome-stable'
-alias tmux='tmux -f ~/.config/tmux/tmux.conf'
-
 # Mac specific.
 if [ "$(uname -s)" = "Darwin" ]; then
   alias chrome='open -a "Google Chrome"'
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
   export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:${MANPATH}"
-  # alias python3="/usr/bin/python3"
-  # alias pip3="/usr/bin/pip3 --disable-pip-version-check"
-  # alias vim="~/homebrew/Cellar/macvim/8.2-162/bin/vim"
-  # alias vim="/usr/local/bin/vim"
-  # alias l="~/homebrew/opt/coreutils/libexec/gnubin/ls --color=auto --group-directories-first"
-  # alias ls="~/homebrew/opt/coreutils/libexec/gnubin/ls --color=auto --group-directories-first -lhA --time-style long-iso"
-  # alias cp="~/homebrew/opt/coreutils/libexec/gnubin/cp"
-  # alias mv="~/homebrew/opt/coreutils/libexec/gnubin/mv"
-  # alias rm="~/homebrew/opt/coreutils/libexec/gnubin/rm"
 fi
+
+# Filesystem interaction.
+alias l='command ls --color=auto --group-directories-first'
+alias ls='command ls --color=auto --group-directories-first -lhA --time-style long-iso'
+alias ll='tree -aL 2'
+ed() {
+  if [ -z "$1" ]; then; 1=$PWD; fi
+  ~/bin/edit_list \
+      --content-cmd "find $1" \
+      --rename-cmd 'mv {} {}' \
+      --delete-cmd 'rm -rf {}'
+}
 
 # SSH shortcuts.
 alias gssh='gcert ; ssh -t danijar@danijar.tor.corp.google.com -L 6007:127.0.0.1:6007 -o ControlPath=none "gcert ; /bin/zsh"'
@@ -91,4 +85,3 @@ cd () {
     l
     defer ~/bin/git_fetch_status
 }
-

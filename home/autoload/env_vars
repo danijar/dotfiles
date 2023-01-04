@@ -7,6 +7,7 @@ export EDITOR=vim
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:/usr/local/bin
 # export PATH=$PATH:/Users/danijar/.gem/ruby/2.6.0/bin
 
 # Mac specific.
@@ -17,3 +18,32 @@ if [ -d "$HOME/homebrew" ]; then
   export PATH=~/homebrew/bin:$PATH
   export PATH=~//homebrew/opt/coreutils/libexec/gnubin:$PATH
 fi
+
+# only for meta world
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/google/home/danijar/.mujoco/mujoco210/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia
+
+# export PATH=$PATH:/usr/local/cuda-11.8/bin
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-11.8/lib64
+# export PATH=$PATH:/usr/local/cuda/bin
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+
+# MuJoCo.
+# export MUJOCO_HOME=~/.mujoco/mjpro200
+# export PATH=$PATH:$MUJOCO_HOME/bin
+# export LD_LIBRARY_PATH=$MUJOCO_HOME/bin:$LD_LIBRARY_PATH
+
+# # Mac specific.
+# if [ -d "~/homebrew" ]; then
+#   export EDITOR=vi
+#   export HOMEBREW_NO_AUTO_UPDATE=1
+#   export HOMEBREW_NO_ANALYTICS=1
+#   # export PATH=$PATH:/Users/danijar/Library/Python/3.9/bin
+#   # export PATH=$PATH:/Users/danijar/.gem/ruby/2.6.0/bin
+#   export PATH=~/homebrew/bin:~/homebrew/sbin:$PATH
+# fi
+
+# export HOMEBREW_NO_AUTO_UPDATE=1
+# export HOMEBREW_NO_ANALYTICS=1
+# export PATH=~/homebrew/bin:~/homebrew/sbin:$PATH
+# export PATH=~/homebrew/opt/coreutils/libexec/gnubin:$PATH

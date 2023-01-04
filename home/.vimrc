@@ -14,10 +14,12 @@ call plug#begin('~/.vim/plugged')
 
 " Tools.
 Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'junegunn/fzf'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 " Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/loremipsum'
+" Plug 'folke/which-key.nvim'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -33,12 +35,14 @@ Plug 'Shougo/deoplete.nvim'
 " Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'davidhalter/jedi-vim'
 Plug 'pangloss/vim-javascript'
+" Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
 " Visuals.
 Plug 'ap/vim-css-color'
 Plug 'plasticboy/vim-markdown'
 Plug 'w0ng/vim-hybrid'
 Plug 'itchyny/vim-cursorword'
+" Plug 'dstein64/nvim-scrollview'
 
 " Polyfills.
 " Plug 'amerlyq/vim-focus-autocmd'
@@ -52,13 +56,30 @@ call plug#end()
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" ctrlp.vim
+let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_user_command = {'types': {
+\ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
+\ }, 'fallback': 'find -L %s -type f'}
+
+" junegunn/fzf
+" nnoremap <C-P> :FZF<CR>
+" let g:fzf_layout = {'down': '40%'}
+" let $FZF_DEFAULT_COMMAND='fdfind -t f -E __pycache__ | sort | cut -c 3-'
+
 " dense-analysis/ale
 let g:ale_linters = {'python': ['flake8']}
 let b:ale_fixers = []  " ['isort']
 let g:ale_python_flake8_options = '
 \ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704,E701,E702,E722,E201,E241,E401,E741'
-let g:ale_use_global_executables = 1  " Avoid slow search for virtual envs.
+" Avoid slow search for virtual envs.
+let g:ale_use_global_executables = 1
 let g:ale_virtualenv_dir_names=[]
+" Disable automatic linting.
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 0
 
 " Shougo/deoplete.nvim
 " let g:python3_host_prog = '/usr/bin/python3'
@@ -69,6 +90,7 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 call deoplete#custom#option('min_pattern_length', 1)
 " call deoplete#custom#option('sources', {'_': 'buffer']})
+call deoplete#custom#option('auto_complete_delay', 100)
 
 " deoplete-plugins/deoplete-jedi
 let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
@@ -78,12 +100,6 @@ let g:deoplete#sources#jedi#enable_typeinfo = 0  " Faster
 let g:jedi#completions_enabled = 0
 let g:jedi#force_py_version = 3
 let g:jedi#use_tabs_not_buffers = 1
-
-" ctrlp.vim
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_user_command = {'types': {
-\ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
-\ }, 'fallback': 'find -L %s -type f'}
 
 " SirVer/ultisnips
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']
@@ -155,6 +171,12 @@ if has('mac')
   set clipboard=unnamed
 else
   set clipboard=unnamedplus
+endif
+
+if has('nvim')
+  let &inccommand = ""
+  " set display-=msgsep
+  set display=lastline
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -359,6 +381,7 @@ nnoremap <leader>S :tabedit ~/.vim/snippet/python.snippets<cr>
 nnoremap <leader>l :mode<cr>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
+nnoremap <leader>l :ALELint<cr>
 nnoremap <leader>e :ALENext<cr>
 nnoremap <leader>E :ALEPrevious<cr>
 nnoremap <leader>m :make<cr>
