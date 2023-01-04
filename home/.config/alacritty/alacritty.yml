@@ -4,7 +4,7 @@ env:
 scrolling:
   multiplier: 5
 font:
-  size: 13.0
+  size: 15.0
   family: DejaVu Sans Mono
   offset:
     x: 1
