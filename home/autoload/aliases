@@ -4,9 +4,9 @@
 # alias chrome='google-chrome-stable'
 alias chrome='google-chrome-stable --high-dpi-support=1 --force-device-scale-factor=1.5'
 alias tmux='tmux -f ~/.config/tmux/tmux.conf'
-# alias vim='nvim'
-alias vi='vim'
-alias v='vim'
+alias vim='nvim'
+alias vi='nvim'
+alias v='nvim'
 
 # Resolve aliases for sudo.
 alias sudo='sudo '

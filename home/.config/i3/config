@@ -217,3 +217,11 @@ for_window [title="Android Studio"] border pixel 0
 # for_window [title="Simulate"] floating enable
 for_window [title="mujoco_py"] floating enable
 for_window [title="Minecraft"] floating enable
+
+# Multi-monitor default assignment
+workspace 1 output DP-2
+workspace 2 output DP-2
+workspace 3 output DP-2
+workspace 4 output DP-0
+workspace 5 output DP-0
+workspace 6 output DP-0

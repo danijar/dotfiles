@@ -13,13 +13,15 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Tools.
-Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'junegunn/fzf'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
-" Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/loremipsum'
+" Plug 'tpope/vim-fugitive'
 " Plug 'folke/which-key.nvim'
+" Plug 'scrooloose/nerdtree'
 
 " Editing.
 Plug 'Raimondi/delimitMate'
@@ -57,15 +59,21 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " ctrlp.vim
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_user_command = {'types': {
-\ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
-\ }, 'fallback': 'find -L %s -type f'}
+" let g:ctrlp_working_path_mode = 'a'
+" let g:ctrlp_user_command = {'types': {
+" \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
+" \ }, 'fallback': 'find -L %s -type f'}
 
 " junegunn/fzf
+" junegunn/fzf.vim
 " nnoremap <C-P> :FZF<CR>
 " let g:fzf_layout = {'down': '40%'}
+let g:fzf_layout = {'window': 'new', 'down': '40%'}
+let g:fzf_preview_window = ['right:hidden', 'ctrl-/']
+let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!{.git,node_modules,__pycache__}'"
 " let $FZF_DEFAULT_COMMAND='fdfind -t f -E __pycache__ | sort | cut -c 3-'
+nnoremap <C-P> :Files<cr>
+nnoremap <C-F> :Lines<cr>
 
 " dense-analysis/ale
 let g:ale_linters = {'python': ['flake8']}
@@ -79,7 +87,7 @@ let g:ale_virtualenv_dir_names=[]
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
+let g:ale_lint_on_save = 1
 
 " Shougo/deoplete.nvim
 " let g:python3_host_prog = '/usr/bin/python3'
@@ -155,7 +163,7 @@ set formatoptions+=t
 set formatoptions-=o
 set nojoinspaces
 set ts=2 sw=2 sts=2
-set tw=79
+# set tw=79
 set cursorline
 set number
 set ruler
@@ -385,7 +393,7 @@ nnoremap <leader>l :ALELint<cr>
 nnoremap <leader>e :ALENext<cr>
 nnoremap <leader>E :ALEPrevious<cr>
 nnoremap <leader>m :make<cr>
-nnoremap <leader>h :cd %:h<cr>
+nnoremap <leader>h :cd %:h<cr>:pwd<cr>
 nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
@@ -422,3 +430,4 @@ autocmd FileType python setlocal tw=79
 autocmd FileType python call PythonSyntax()
 " autocmd FileType python,sh setlocal iskeyword-=_
 autocmd FileType markdown,tex set conceallevel=0
+
