@@ -27,9 +27,10 @@ Plug 'vim-scripts/loremipsum'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'bimlas/vim-numutils'
+Plug 'hrsh7th/vim-vsnip'
 
 " Codel intel.
 Plug 'dense-analysis/ale'
@@ -109,11 +110,14 @@ let g:jedi#completions_enabled = 0
 let g:jedi#force_py_version = 3
 let g:jedi#use_tabs_not_buffers = 1
 
+" hrsh7th/vim-vsnip
+imap <expr> <Tab> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<Tab>'
+
 " SirVer/ultisnips
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+" let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']
+" let g:UltiSnipsExpandTrigger='<tab>'
+" let g:UltiSnipsJumpForwardTrigger='<tab>'
+" let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
 
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
@@ -163,7 +167,7 @@ set formatoptions+=t
 set formatoptions-=o
 set nojoinspaces
 set ts=2 sw=2 sts=2
-# set tw=79
+" set tw=79
 set cursorline
 set number
 set ruler

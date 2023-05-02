@@ -1,0 +1,26 @@
+{
+  "import": {
+    "prefix": ["i"],
+    "body": "import "
+  },
+  "print": {
+    "prefix": ["p"],
+    "body": "print($1)"
+  },
+  "line": {
+    "prefix": ["--"],
+    "body": "print('-' * 79)"
+  },
+  "exit": {
+    "prefix": ["x"],
+    "body": "import sys; sys.exit()"
+  },
+  "import matplotlib": {
+    "prefix": ["import m"],
+    "body": "import matplotlib.pyplot as plt"
+  },
+  "import numpy": {
+    "prefix": ["import n"],
+    "body": "import numpy as np"
+  }
+}
