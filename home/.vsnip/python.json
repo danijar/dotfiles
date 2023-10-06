@@ -3,6 +3,10 @@
     "prefix": ["i"],
     "body": "import "
   },
+  "return": {
+    "prefix": ["r"],
+    "body": "return "
+  },
   "print": {
     "prefix": ["p"],
     "body": "print($1)"

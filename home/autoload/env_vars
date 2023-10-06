@@ -1,21 +1,19 @@
 #!/bin/sh
 
-# Defaults.
 export EDITOR=vim
 
-# User directories.
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:/usr/local/bin
 
-# Mac specific.
-if [ -d "$HOME/homebrew" ]; then
+if [ -d "/opt/homebrew" ]; then
   export EDITOR=vi
   export HOMEBREW_NO_AUTO_UPDATE=1
   export HOMEBREW_NO_ANALYTICS=1
-  export PATH=~/homebrew/bin:$PATH
-  export PATH=~//homebrew/opt/coreutils/libexec/gnubin:$PATH
+  export PATH=/opt/homebrew/bin:$PATH
+  export PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH
+  export PATH=/opt/homebrew/opt/python/libexec/bin:$PATH
 fi
 
 # export PATH=/usr/local/cuda-11.8/bin:$PATH

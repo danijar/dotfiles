@@ -2,7 +2,10 @@
 # stop skhd service and run `skhd -V` in the terminal.
 
 alt + shift - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
-alt - return : osascript -e 'tell application "iTerm2" to create window with default profile'
+# alt - return : osascript -e 'tell application "iTerm2" to create window with default profile'
+# alt - return : alacritty
+alt - return : open -n -a 'Alacritty.app'
+ctrl - space : osascript -e 'tell application "System Events" to keystroke space using {command down}'
 
 alt - h : yabai -m window --focus west || yabai -m display --focus west
 alt - j : yabai -m window --focus south || yabai -m display --focus south
@@ -51,12 +54,21 @@ alt + shift - 7 : yabai -m window --space 7
 alt + shift - 8 : yabai -m window --space 8
 alt + shift - 9 : yabai -m window --space 9
 
+# alt + u : skhd -k "ü"
+
 # ctrl - l : skhd --key "cmd - l"
 
-# Disable Mac shortcuts.
-# cmd - h : echo
-cmd - h [
-    "Google Chrome" : echo
+# cmd [
+#     "Alacritty" : ctrl
+# ]
+# ctrl [
+#     "Alacritty" : cmd
+# ]
+
+cmd - q [
+    "Alacritty" : echo
 ]
 
-ctrl - space : osascript -e 'tell application "System Events" to keystroke space using {command down}'
+# Disable Mac shortcuts.
+cmd - h : echo
+cmd + ctrl - q : echo

@@ -9,7 +9,7 @@ alias vi='nvim'
 alias v='nvim'
 
 # Resolve aliases for sudo.
-alias sudo='sudo '
+alias sudo='sudo env "PATH=$PATH" '
 
 # Other.
 alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'

@@ -35,7 +35,7 @@ Plug 'hrsh7th/vim-vsnip'
 " Codel intel.
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim'
-" Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 " Plug 'davidhalter/jedi-vim'
 Plug 'pangloss/vim-javascript'
 " Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
@@ -48,10 +48,12 @@ Plug 'itchyny/vim-cursorword'
 " Plug 'dstein64/nvim-scrollview'
 
 " Polyfills.
-" Plug 'amerlyq/vim-focus-autocmd'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'dbakker/vim-paragraph-motion'
+if !has('nvim')
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+" Plug 'amerlyq/vim-focus-autocmd'
 
 call plug#end()
 
@@ -77,10 +79,12 @@ nnoremap <C-P> :Files<cr>
 nnoremap <C-F> :Lines<cr>
 
 " dense-analysis/ale
-let g:ale_linters = {'python': ['flake8']}
+" let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {'python': ['ruff']}
 let b:ale_fixers = []  " ['isort']
-let g:ale_python_flake8_options = '
-\ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704,E701,E702,E722,E201,E241,E401,E741'
+" let g:ale_python_flake8_options = '
+" \ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704,E701,E702,E722,E201,E241,E401,E741'
+let g:ale_python_ruff_options = '--preview --ignore E111,E114,E731,E402'
 " Avoid slow search for virtual envs.
 let g:ale_use_global_executables = 1
 let g:ale_virtualenv_dir_names=[]
@@ -89,6 +93,7 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
+let g:ale_virtualtext_cursor=0
 
 " Shougo/deoplete.nvim
 " let g:python3_host_prog = '/usr/bin/python3'
@@ -102,11 +107,12 @@ call deoplete#custom#option('min_pattern_length', 1)
 call deoplete#custom#option('auto_complete_delay', 100)
 
 " deoplete-plugins/deoplete-jedi
-let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
+" let g:deoplete#sources#jedi#python_path = '/usr/bin/python3'
 let g:deoplete#sources#jedi#enable_typeinfo = 0  " Faster
 
 " davidhalter/jedi-vim
-let g:jedi#completions_enabled = 0
+" let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
 let g:jedi#force_py_version = 3
 let g:jedi#use_tabs_not_buffers = 1
 

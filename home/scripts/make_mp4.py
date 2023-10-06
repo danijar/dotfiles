@@ -22,6 +22,7 @@ def main(args):
   outpath = args.inpath.with_suffix('.mp4')
   writer = imageio.get_writer(outpath, fps=args.fps)
   for index, frame in enumerate(frames):
+    frame = frame[..., :3]
     if index % 100 == 0:
       print('.', end='', flush=True)
     height = int(args.zoom * frame.shape[0])

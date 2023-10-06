@@ -1,6 +1,8 @@
 live_config_reload: true
 env:
   TERM: xterm-256color
+window:
+  decorations: Buttonless
 scrolling:
   multiplier: 5
 font:
