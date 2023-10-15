@@ -9,6 +9,7 @@ import subprocess
 
 def sh(command):
   try:
+    print(f'RUN {command}')
     return subprocess.run(
         command, shell=True, check=True, capture_output=True,
     ).stdout
@@ -44,7 +45,7 @@ def main(args):
     if par not in created:
       sh(args.mk_cmd.format(par))
       created.add(par)
-    message = f'{idx+1}/{len(src)} {rel}'
+    message = f'{idx + 1}/{len(filenames)} {rel}'
     command = args.cp_cmd.format(src, dst)
     commands.append((command, message))
   print(f'Executing {args.parallel} in parallel.')

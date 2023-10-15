@@ -240,8 +240,8 @@ if exists('g:colors_name') && g:colors_name == 'hybrid'
   hi DiffChange         cterm=none ctermfg=none  ctermbg=blue
   hi DiffDelete         cterm=none ctermfg=none  ctermbg=red
   hi SyntasticErrorSign cterm=none ctermfg=red   ctermbg=none
-  hi CursorWord0        cterm=bold               ctermbg=black
-  hi CursorWord1                                 ctermbg=black
+  " hi CursorWord0        cterm=bold               ctermbg=black
+  " hi CursorWord1                                 ctermbg=black
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
