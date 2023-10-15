@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!python3
 import argparse
 import multiprocessing.dummy as mp
 import os

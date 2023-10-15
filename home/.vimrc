@@ -12,48 +12,46 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" Tools.
-" Plug 'ctrlpvim/ctrlp.vim'
+" Tools
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'vim-scripts/loremipsum'
-" Plug 'tpope/vim-fugitive'
-" Plug 'folke/which-key.nvim'
-" Plug 'scrooloose/nerdtree'
 
-" Editing.
+" Editing
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'nelstrom/vim-visual-star-search'
-" Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'bimlas/vim-numutils'
 Plug 'hrsh7th/vim-vsnip'
 
-" Codel intel.
+" Codel intel
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim'
 Plug 'deoplete-plugins/deoplete-jedi'
-" Plug 'davidhalter/jedi-vim'
-Plug 'pangloss/vim-javascript'
-" Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 
-" Visuals.
+" Syntax highlighting
+Plug 'pangloss/vim-javascript'
+Plug 'DingDean/wgsl.vim'
+if has('nvim')
+  Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+endif
+
+" Visuals
 Plug 'ap/vim-css-color'
 Plug 'plasticboy/vim-markdown'
 Plug 'w0ng/vim-hybrid'
 Plug 'itchyny/vim-cursorword'
 " Plug 'dstein64/nvim-scrollview'
 
-" Polyfills.
+" Polyfills
 Plug 'dbakker/vim-paragraph-motion'
 if !has('nvim')
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-" Plug 'amerlyq/vim-focus-autocmd'
 
 call plug#end()
 
@@ -69,22 +67,17 @@ call plug#end()
 
 " junegunn/fzf
 " junegunn/fzf.vim
-" nnoremap <C-P> :FZF<CR>
-" let g:fzf_layout = {'down': '40%'}
 let g:fzf_layout = {'window': 'new', 'down': '40%'}
 let g:fzf_preview_window = ['right:hidden', 'ctrl-/']
 let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!{.git,node_modules,__pycache__}'"
-" let $FZF_DEFAULT_COMMAND='fdfind -t f -E __pycache__ | sort | cut -c 3-'
 nnoremap <C-P> :Files<cr>
 nnoremap <C-F> :Lines<cr>
 
 " dense-analysis/ale
-" let g:ale_linters = {'python': ['flake8']}
 let g:ale_linters = {'python': ['ruff']}
-let b:ale_fixers = []  " ['isort']
-" let g:ale_python_flake8_options = '
-" \ --ignore=F403,E402,E111,E114,E302,E306,E125,E731,W504,E305,E221,E129,C741,E704,E701,E702,E722,E201,E241,E401,E741'
+let b:ale_fixers = []
 let g:ale_python_ruff_options = '--preview --ignore E111,E114,E731,E402'
+let g:ale_virtualtext_cursor=0
 " Avoid slow search for virtual envs.
 let g:ale_use_global_executables = 1
 let g:ale_virtualenv_dir_names=[]
@@ -93,7 +86,6 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
-let g:ale_virtualtext_cursor=0
 
 " Shougo/deoplete.nvim
 " let g:python3_host_prog = '/usr/bin/python3'
@@ -119,22 +111,10 @@ let g:jedi#use_tabs_not_buffers = 1
 " hrsh7th/vim-vsnip
 imap <expr> <Tab> vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<Tab>'
 
-" SirVer/ultisnips
-" let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snippet']
-" let g:UltiSnipsExpandTrigger='<tab>'
-" let g:UltiSnipsJumpForwardTrigger='<tab>'
-" let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-
 " plasticboy/vim-markdown
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_conceal = 0
-
-" morhetz/gruvbox
-let g:gruvbox_termcolors = 16
-let g:gruvbox_underline = 0
-let g:gruvbox_undercurl = 0
-let g:gruvbox_italic = 1
 
 " w0ng/vim-hybrid
 let g:hybrid_custom_term_colors = 1
@@ -391,6 +371,7 @@ let mapleader = " "
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
 vnoremap <leader>s :s//g<left><left>
+
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
 nnoremap <leader>c :source ~/.vimrc<cr>:doautoall FileType<cr>
@@ -433,7 +414,7 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
 autocmd BufNewFile,BufRead *.cls set filetype=tex
 autocmd BufNewFile,BufRead *.scss set tw=0
-autocmd FileType * set conceallevel=0
+autocmd BufNewFile,BufRead * set conceallevel=0
 
 autocmd FileType python setlocal ts=2 sw=2 sts=2
 autocmd FileType python setlocal tw=79
