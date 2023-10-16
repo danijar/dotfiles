@@ -392,6 +392,7 @@ nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 nnoremap <leader>p "0p
 vnoremap <leader>p "0p
 nnoremap <leader>y mzvipy`z
+nnoremap <leader>b :0,$!yapf<cr>
 nmap <leader>k mzgcip`z
 vmap <leader>k gc
 
