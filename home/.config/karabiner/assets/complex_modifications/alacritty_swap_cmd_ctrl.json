@@ -1,0 +1,32 @@
+{
+  "title": "Swap ctrl and command in Terminal",
+  "rules": [
+    {
+      "description": "Swap ctrl and command in Terminal",
+      "manipulators": [
+        {
+          "from": {"key_code": "left_command"},
+          "to": [{"key_code": "left_control"}],
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "file_paths": ["alacritty"]
+            }
+          ]
+        },
+        {
+          "from": {"key_code": "left_control"},
+          "to": [{"key_code": "left_command"}],
+          "type": "basic",
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "file_paths": ["alacritty"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
