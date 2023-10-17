@@ -97,7 +97,7 @@ if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
   # We run tmux in this complicated way so that systemd does not kill the
   # process on logout when the SSH session ends. For more information:
   # https://www.freedesktop.org/software/systemd/man/systemd-run.html
-  systemd-run --user --scope tmux
+  tmux attach || systemd-run --user --scope tmux -f ~/.config/tmux/tmux.conf
 fi
 
 # Run interactive scripts in interactive mode.
