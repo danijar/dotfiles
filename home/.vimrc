@@ -20,31 +20,27 @@ Plug 'tpope/vim-eunuch'
 Plug 'vim-scripts/loremipsum'
 
 " Editing
+Plug 'nelstrom/vim-visual-star-search'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
-Plug 'nelstrom/vim-visual-star-search'
 Plug 'tpope/vim-commentary'
-Plug 'bimlas/vim-numutils'
 Plug 'hrsh7th/vim-vsnip'
+" Plug 'bimlas/vim-numutils'
 
 " Codel intel
-Plug 'dense-analysis/ale'
-Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'dense-analysis/ale', { 'do': 'pip3 install ruff' }
+Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install pynvim' }
+Plug 'deoplete-plugins/deoplete-jedi', { 'do': 'pip3 install jedi' }
 
 " Syntax highlighting
 Plug 'pangloss/vim-javascript'
 Plug 'DingDean/wgsl.vim'
-if has('nvim')
-  Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
-endif
+Plug 'plasticboy/vim-markdown'
 
 " Visuals
-Plug 'ap/vim-css-color'
-Plug 'plasticboy/vim-markdown'
-Plug 'w0ng/vim-hybrid'
 Plug 'itchyny/vim-cursorword'
-" Plug 'dstein64/nvim-scrollview'
+Plug 'ap/vim-css-color'
+Plug 'w0ng/vim-hybrid'
 
 " Polyfills
 Plug 'dbakker/vim-paragraph-motion'
@@ -54,6 +50,10 @@ if !has('nvim')
 endif
 
 call plug#end()
+
+" autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+"   \| PlugInstall --sync | source $MYVIMRC
+" \| endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin settings
@@ -86,6 +86,7 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
+let g:ale_virtualtext_cursor = 'disabled'
 
 " Shougo/deoplete.nvim
 " let g:python3_host_prog = '/usr/bin/python3'
@@ -153,7 +154,6 @@ set formatoptions+=t
 set formatoptions-=o
 set nojoinspaces
 set ts=2 sw=2 sts=2
-" set tw=79
 set cursorline
 set number
 set ruler
@@ -161,7 +161,7 @@ set mouse=a
 set autoread
 set undofile
 set modeline
-set shortmess=A
+set shortmess=lxWAIF
 set updatetime=200
 set laststatus=1
 

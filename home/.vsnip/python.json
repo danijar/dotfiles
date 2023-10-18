@@ -15,6 +15,10 @@
     "prefix": ["--"],
     "body": "print('-' * 79)"
   },
+  "line_double": {
+    "prefix": ["=="],
+    "body": "print('=' * 79)"
+  },
   "exit": {
     "prefix": ["x"],
     "body": "import sys; sys.exit()"

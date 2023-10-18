@@ -49,12 +49,18 @@ alias np='ipython3 --TerminalInteractiveShell.editing_mode=vi -i -c " \
 #   random = np.random.RandomState(seed=0);"'
 # alias pyprof='python3 -m cProfile -s cumulative'  # Use as pyprof script.py > profile.txt
 
+# Apt
+alias apt-installed='apt list --installed'
+alias apt-find='apt-cache query'
+alias apt-install='apt-get install'
+alias apt-remove='apt-get remove'
+alias apt-uninstall='apt-get remove'
+alias apt-version='apt show'
+
 # Docker
-alias db='docker build -t image .'
+alias db='docker build -t image . -f'
 alias dr='docker run --privileged -it --rm --gpus all image'
 alias drl='docker run --privileged -it --rm --gpus all -v ~/logdir:/logdir image'
-alias dbr='db && dr'
-alias dbrl='db && drl'
 
 # Mac specific.
 if [ "$(uname -s)" = "Darwin" ]; then
