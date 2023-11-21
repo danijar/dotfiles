@@ -14,7 +14,7 @@ call plug#begin('~/.vim/plugged')
 
 " Tools
 Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'vim-scripts/loremipsum'
@@ -59,25 +59,22 @@ call plug#end()
 " Plugin settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ctrlp.vim
-" let g:ctrlp_working_path_mode = 'a'
-" let g:ctrlp_user_command = {'types': {
-" \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
-" \ }, 'fallback': 'find -L %s -type f'}
-
 " junegunn/fzf
-" junegunn/fzf.vim
-let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!{.git,node_modules,__pycache__}'"
+let fzfcmd = "rg --files --hidden -g '!{.git,node_modules,__pycache__}'"
+nnoremap <silent> <C-P> :call fzf#run(fzf#wrap({ 'source': fzfcmd }))<cr>
+let g:fzf_history_dir = '/tmp/fzf_history'
 let g:fzf_layout = {'window': 'new', 'down': '40%'}
-let g:fzf_preview_window = ['right:hidden', 'ctrl-/']
-let g:fzf_buffers_jump = 1
 let g:fzf_action = {
   \ 'return': 'drop',
   \ 'ctrl-t': 'tab drop',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
-let g:fzf_history_dir = '/tmp/fzf_history'
-nnoremap <C-P> :Files<cr>
+
+" ctrlp.vim
+" let g:ctrlp_working_path_mode = 'a'
+" let g:ctrlp_user_command = {'types': {
+" \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
+" \ }, 'fallback': 'find -L %s -type f'}
 
 " dense-analysis/ale
 let g:ale_linters = {'python': ['ruff']}
