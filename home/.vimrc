@@ -38,7 +38,7 @@ Plug 'DingDean/wgsl.vim'
 Plug 'plasticboy/vim-markdown'
 
 " Visuals
-Plug 'itchyny/vim-cursorword'
+" Plug 'itchyny/vim-cursorword'
 Plug 'ap/vim-css-color'
 Plug 'w0ng/vim-hybrid'
 
@@ -67,16 +67,22 @@ call plug#end()
 
 " junegunn/fzf
 " junegunn/fzf.vim
+let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!{.git,node_modules,__pycache__}'"
 let g:fzf_layout = {'window': 'new', 'down': '40%'}
 let g:fzf_preview_window = ['right:hidden', 'ctrl-/']
-let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!{.git,node_modules,__pycache__}'"
+let g:fzf_buffers_jump = 1
+let g:fzf_action = {
+  \ 'return': 'drop',
+  \ 'ctrl-t': 'tab drop',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_history_dir = '/tmp/fzf_history'
 nnoremap <C-P> :Files<cr>
-nnoremap <C-F> :Lines<cr>
 
 " dense-analysis/ale
 let g:ale_linters = {'python': ['ruff']}
 let b:ale_fixers = []
-let g:ale_python_ruff_options = '--preview --ignore E111,E114,E731,E402'
+let g:ale_python_ruff_options = '--preview --ignore E111,E114,E731,E402 --line-length 79'
 let g:ale_virtualtext_cursor=0
 " Avoid slow search for virtual envs.
 let g:ale_use_global_executables = 1
