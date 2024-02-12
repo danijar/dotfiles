@@ -384,7 +384,7 @@ let mapleader = " "
 
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
-vnoremap <leader>s :s//g<left><left>
+vnoremap <leader>s :s/\%V/g<left><left>
 
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
