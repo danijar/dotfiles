@@ -14,7 +14,6 @@ call plug#begin('~/.vim/plugged')
 
 " Tools
 Plug 'junegunn/fzf'
-" Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'vim-scripts/loremipsum'
@@ -41,6 +40,7 @@ Plug 'plasticboy/vim-markdown'
 " Plug 'itchyny/vim-cursorword'
 Plug 'ap/vim-css-color'
 Plug 'w0ng/vim-hybrid'
+" Plug 'wellle/context.vim'
 
 " Polyfills
 Plug 'dbakker/vim-paragraph-motion'
@@ -60,7 +60,7 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " junegunn/fzf
-let fzfcmd = "rg --files --hidden -g '!{.git,node_modules,__pycache__}'"
+let fzfcmd = "rg --files --hidden --no-ignore -g '!{.git,node_modules,__pycache__}'"
 nnoremap <silent> <C-P> :call fzf#run(fzf#wrap({ 'source': fzfcmd }))<cr>
 let g:fzf_history_dir = '/tmp/fzf_history'
 let g:fzf_layout = {'window': 'new', 'down': '40%'}
@@ -129,6 +129,10 @@ let g:indentLine_setConceal = 0
 " itchyny/vim-cursorword
 let g:cursorword_highlight=0
 
+" wellle/context.vim
+let g:context_enabled = 1
+let g:context_max_height = 1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -167,6 +171,7 @@ set modeline
 set shortmess=lxWAIF
 set updatetime=200
 set laststatus=1
+set breakindent
 
 if has('mac')
   set clipboard=unnamed
@@ -378,8 +383,8 @@ vnoremap <leader>s :s//g<left><left>
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
 nnoremap <leader>c :source ~/.vimrc<cr>:doautoall FileType<cr>
-nnoremap <leader>C :tabedit ~/.vimrc<cr>
-nnoremap <leader>S :tabedit ~/.vim/snippet/python.snippets<cr>
+nnoremap <leader>C :tab drop ~/.vimrc<cr>
+nnoremap <leader>S :tab drop ~/.vim/snippet/python.snippets<cr>
 nnoremap <leader>l :mode<cr>
 nnoremap <leader>a mzggVGy`z
 nnoremap <leader>q @q
@@ -392,6 +397,7 @@ nnoremap <leader>o vipo:sort<cr>
 vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
+nnoremap <leader>i mzoimport ipdb; ipdb.set_trace()<esc>`z
 nnoremap <leader>p "0p
 vnoremap <leader>p "0p
 nnoremap <leader>y mzvipy`z
