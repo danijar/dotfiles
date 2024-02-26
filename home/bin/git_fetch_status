@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-[[ -d '.git' ]] || exit
-[[ -x "$(command -v git)" ]] || exit
+[ ! -d '.git' ] || exit
+[ ! -x "$(command -v git)" ] || exit
 git fetch --all > /dev/null || exit
 
 LOCAL=$(git rev-parse @)
