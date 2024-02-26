@@ -10,6 +10,11 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+function! SetupDeoplete()
+  call system('pip3 install -U neovim pynvim')
+  UpdateRemotePlugins
+endfunction
+
 call plug#begin('~/.vim/plugged')
 
 " Tools
@@ -28,7 +33,8 @@ Plug 'hrsh7th/vim-vsnip'
 
 " Codel intel
 Plug 'dense-analysis/ale', { 'do': 'pip3 install ruff' }
-Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install pynvim' }
+" Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install pynvim' }
+Plug 'Shougo/deoplete.nvim', { 'do': { -> SetupDeoplete() } }
 Plug 'deoplete-plugins/deoplete-jedi', { 'do': 'pip3 install jedi' }
 
 " Syntax highlighting
@@ -92,7 +98,6 @@ let g:ale_lint_on_save = 1
 let g:ale_virtualtext_cursor = 'disabled'
 
 " Shougo/deoplete.nvim
-" let g:python3_host_prog = '/usr/bin/python3'
 let g:deoplete#enable_at_startup = 1
 inoremap <expr> <c-j> pumvisible() ? "\<C-n>" : "\<c-j>"
 inoremap <expr> <c-k> pumvisible() ? "\<C-p>" : "\<c-k>"
@@ -172,6 +177,7 @@ set shortmess=lxWAIF
 set updatetime=200
 set laststatus=1
 set breakindent
+let g:python3_host_prog = 'python3'
 
 if has('mac')
   set clipboard=unnamed
