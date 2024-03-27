@@ -33,7 +33,7 @@ alias hl='hg xl'
 
 # Python.
 alias py='python3'
-alias np='ipython3 --TerminalInteractiveShell.editing_mode=vi -i -c " \
+alias np='ipython3 -i -c " \
   import sys; \
   import pathlib; \
   sys.path.append(str(pathlib.Path.home() / \"scripts\")); \
