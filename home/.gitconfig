@@ -14,3 +14,5 @@
   wip = !git add -A && git commit -m 'WIP' && git show
 [core]
 	excludesfile = ~/.gitignore_global
+[init]
+	defaultBranch = main
