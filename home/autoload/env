@@ -6,6 +6,7 @@ export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:/opt/homebrew/bin
 
 if [ -x "$(command -v brew)" ]; then
   export EDITOR=vi

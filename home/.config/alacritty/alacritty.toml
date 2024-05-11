@@ -1,0 +1,50 @@
+live_config_reload = true
+
+[colors.bright]
+black = "#7e7f78"
+blue = "#81a1d5"
+cyan = "#94d3d6"
+green = "#85a385"
+magenta = "#9292bf"
+red = "#d09a9a"
+white = "#dcdccc"
+yellow = "#e6d3b3"
+
+[colors.cursor]
+cursor = "#adada2"
+text = "#3a3a3a"
+
+[colors.normal]
+black = "#1f1f1f"
+blue = "#799bd2"
+cyan = "#8cd0d3"
+green = "#7f9f7f"
+magenta = "#8c8cbc"
+red = "#cc9393"
+white = "#adada2"
+yellow = "#e3ceab"
+
+[colors.primary]
+background = "#3a3a3a"
+foreground = "#adada2"
+
+[colors.vi_mode_cursor]
+cursor = "#adada2"
+text = "#3a3a3a"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+# family = "DejaVu Sans Mono"
+size = 15.0
+
+[font.offset]
+x = 1
+y = 0
+
+[scrolling]
+multiplier = 5
+
+[window]
+decorations = "Buttonless"
