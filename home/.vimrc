@@ -85,7 +85,7 @@ let g:fzf_action = {
 " dense-analysis/ale
 let g:ale_linters = {'python': ['ruff']}
 let b:ale_fixers = []
-let g:ale_python_ruff_options = '--preview --ignore E111,E114,E731,E402 --line-length 79'
+let g:ale_python_ruff_options = '--preview --line-length 79 --select E4,E5,E7,E9,F,C,PERF,PIE --ignore E111,E114,E731,E402,E701,E702,F722,FBT,C408,C409,C420,PERF203'
 let g:ale_virtualtext_cursor=0
 " Avoid slow search for virtual envs.
 let g:ale_use_global_executables = 1
@@ -162,7 +162,7 @@ set wildmode=longest,list
 set autoindent
 set backspace=indent,eol,start
 set expandtab
-set formatoptions+=t
+set formatoptions-=t
 set formatoptions-=o
 set nojoinspaces
 set ts=2 sw=2 sts=2
@@ -404,6 +404,7 @@ vnoremap <leader>o :sort<cr>
 nnoremap <leader>j vipJ^
 nnoremap <leader>x mzoimport sys; sys.exit()<esc>`z
 nnoremap <leader>i mzoimport ipdb; ipdb.set_trace()<esc>`z
+nnoremap <leader>t mzA  # TODO<esc>`z
 nnoremap <leader>p "0p
 vnoremap <leader>p "0p
 nnoremap <leader>y mzvipy`z
@@ -430,11 +431,9 @@ autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.ad set filetype=asciidoc
 autocmd BufNewFile,BufRead *.cls set filetype=tex
 autocmd BufNewFile,BufRead *.scss set tw=0
+autocmd BufNewFile,BufRead *Dockerfile* set filetype=dockerfile
 autocmd BufNewFile,BufRead * set conceallevel=0
 
-autocmd FileType python setlocal ts=2 sw=2 sts=2
-autocmd FileType python setlocal tw=79
+autocmd FileType python setlocal ts=2 sw=2 sts=2 tw=79
 autocmd FileType python call PythonSyntax()
-" autocmd FileType python,sh setlocal iskeyword-=_
 autocmd FileType markdown,tex set conceallevel=0
-

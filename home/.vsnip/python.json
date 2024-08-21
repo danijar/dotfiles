@@ -3,6 +3,22 @@
     "prefix": ["i"],
     "body": "import "
   },
+  "import numpy": {
+    "prefix": ["import n"],
+    "body": "import numpy as np"
+  },
+  "import pandas": {
+    "prefix": ["import pd"],
+    "body": "import pandas as pd"
+  },
+  "import matplotlib": {
+    "prefix": ["import m"],
+    "body": "import matplotlib as mpl"
+  },
+  "import pyplot": {
+    "prefix": ["import pl"],
+    "body": "import matplotlib.pyplot as plt"
+  },
   "return": {
     "prefix": ["r"],
     "body": "return "
@@ -22,13 +38,5 @@
   "exit": {
     "prefix": ["x"],
     "body": "import sys; sys.exit()"
-  },
-  "import matplotlib": {
-    "prefix": ["import m"],
-    "body": "import matplotlib.pyplot as plt"
-  },
-  "import numpy": {
-    "prefix": ["import n"],
-    "body": "import numpy as np"
   }
 }

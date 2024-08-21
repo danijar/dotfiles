@@ -2,18 +2,11 @@
 # See :help UltiSnips, especially section Snippet Options.
 
 ###############################################################################
-# Generic text editing
+# Text editing
 ###############################################################################
 
 snippet "(\w+)\)" "parenthesis" r
 (`!p snip.rv = match.group(1)`$1)$0
-endsnippet
-
-snippet ## "comment headline" b
-###############################################################################
-# ${1:Title}
-###############################################################################
-
 endsnippet
 
 ###############################################################################
@@ -21,7 +14,7 @@ endsnippet
 ###############################################################################
 
 # This snippet has an intentional trailing space.
-snippet i "import" b
+snippet "i" "import" b
 import 
 endsnippet
 
@@ -33,31 +26,27 @@ snippet "import n" "import numpy" br
 import numpy as np
 endsnippet
 
-snippet "import p" "import pyplot" br
+snippet "import p" "import pandas" br
+import pandas as pd
+endsnippet
+
+snippet "import j" "import jax.numpy" br
+import jax.numpy as jnp
+endsnippet
+
+snippet "import m" "import matplotlib" br
+import matplotlib as mpl
+endsnippet
+
+snippet "import pl" "import pyplot" br
 import matplotlib.pyplot as plt
-endsnippet
-
-snippet "import t" "import tensorflow" br
-import tensorflow as tf
-endsnippet
-
-snippet "import tfp" "import tensorflow probability" br
-import tensorflow_probability as tfp
-endsnippet
-
-snippet "import tfd" "import tensorflow probability distributions" br
-from tensorflow_probability import distributions as tfd
-endsnippet
-
-snippet "import tfl" "import tensorflow keras layers" br
-import tensorflow.keras.layers as tfl
 endsnippet
 
 ###############################################################################
 # Lines
 ###############################################################################
 
-snippet p "print" b
+snippet "p" "print" b
 print(${1:${VISUAL}})
 endsnippet
 
