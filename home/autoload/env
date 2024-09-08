@@ -15,8 +15,12 @@ if [ -x "$(command -v brew)" ]; then
   export PATH=$(brew --prefix)/bin:$PATH
   export PATH=$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH
   # export PATH=$(brew --prefix)/opt/python/libexec/bin:$PATH
+
+  # Disable Alacritty icon bouncing
+  printf "\e[?1042l"
 fi
 
 # Python default venv
 FILE="$HOME/venv/bin/activate"
 test -f $FILE && source $FILE
+
