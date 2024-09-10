@@ -14,6 +14,7 @@ alias sudo='sudo env "PATH=$PATH" '
 # Other.
 alias nogpu='export CUDA_VISIBLE_DEVICES=-1;'
 alias diff='git diff --no-index'
+alias scrollback='tmux capture-pane -pS -1000000'
 
 # Git.
 alias gs='git status'

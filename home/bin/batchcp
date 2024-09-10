@@ -30,6 +30,8 @@ def main(args):
     filenames = filenames.decode('utf-8')
   filenames = [x.strip() for x in filenames.split('\n')]
   filenames = [x for x in filenames if x]
+  if args.append:
+    filenames = [x + args.append for x in filenames]
   print('Found', len(filenames), 'filenames.')
   if args.filter:
     filenames = [x for x in filenames if args.filter.search(x)]
@@ -65,6 +67,7 @@ if __name__ == '__main__':
   parser.add_argument('--subdir', type=boolean, default=True)
   parser.add_argument('--filter', type=re.compile, default=None)
   parser.add_argument('--parallel', type=int, default=100)
+  parser.add_argument('--append', type=str, default=None)
   parser.add_argument('--ls_cmd', type=str, default='gsutil ls {}**')
   parser.add_argument('--cp_cmd', type=str, default='gsutil cp {} {}')
   parser.add_argument('--mk_cmd', type=str, default='mkdir -p {}')

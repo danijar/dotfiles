@@ -85,7 +85,7 @@ let g:fzf_action = {
 " dense-analysis/ale
 let g:ale_linters = {'python': ['ruff']}
 let b:ale_fixers = []
-let g:ale_python_ruff_options = '--preview --line-length 79 --select E4,E5,E7,E9,F,C,PERF,PIE --ignore E111,E114,E731,E402,E701,E702,F722,FBT,C408,C409,C420,PERF203'
+let g:ale_python_ruff_options = '--preview --line-length 79 --select E4,E5,E7,E9,F,PERF,PIE --ignore E111,E114,E731,E402,E701,E702,F722,FBT,PERF102,PERF203,PERF401,E721'
 let g:ale_virtualtext_cursor=0
 " Avoid slow search for virtual envs.
 let g:ale_use_global_executables = 1
@@ -384,7 +384,8 @@ let mapleader = " "
 
 " Leader key shortcuts.
 nnoremap <leader>s :%s//g<left><left>
-vnoremap <leader>s :s/\%V/g<left><left>
+" vnoremap <leader>s :s/\%V/g<left><left>
+vnoremap <leader>s :s//g<left><left>
 
 nnoremap <leader>f gqap
 vnoremap <leader>f gq
