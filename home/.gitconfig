@@ -16,3 +16,4 @@
 	excludesfile = ~/.gitignore_global
 [init]
 	defaultBranch = main
+	editor = nvim
