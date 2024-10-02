@@ -56,19 +56,10 @@ alt + shift - 9 : yabai -m window --space 9
 
 # alt + u : skhd -k "ü"
 
-# ctrl - l : skhd --key "cmd - l"
-
-# cmd [
-#     "Alacritty" : ctrl
-# ]
-# ctrl [
-#     "Alacritty" : cmd
-# ]
-
 cmd - q [
     "Alacritty" : echo
 ]
 
 # Disable Mac shortcuts.
-cmd - h : echo
+cmd - h : skhd --key "ctrl - h"
 cmd + ctrl - q : echo
