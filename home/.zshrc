@@ -27,6 +27,12 @@ setopt hist_reduce_blanks
 bindkey -v
 export KEYTIMEOUT=1
 
+# Remove trailing newlines after paste.
+bracketed-paste() {
+  zle .$WIDGET && LBUFFER=${LBUFFER%$'\n'}
+}
+zle -N bracketed-paste
+
 x-yank() {
     zle copy-region-as-kill
     print -rn -- $CUTBUFFER | xclip -sel clipboard

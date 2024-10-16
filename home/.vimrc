@@ -27,13 +27,11 @@ Plug 'vim-scripts/loremipsum'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
-Plug 'tpope/vim-commentary'
 Plug 'hrsh7th/vim-vsnip'
-" Plug 'bimlas/vim-numutils'
+Plug 'tomtom/tcomment_vim'
 
 " Codel intel
 Plug 'dense-analysis/ale', { 'do': 'pip3 install ruff' }
-" Plug 'Shougo/deoplete.nvim', { 'do': 'pip3 install pynvim' }
 Plug 'Shougo/deoplete.nvim', { 'do': { -> SetupDeoplete() } }
 Plug 'deoplete-plugins/deoplete-jedi', { 'do': 'pip3 install jedi' }
 
@@ -41,6 +39,7 @@ Plug 'deoplete-plugins/deoplete-jedi', { 'do': 'pip3 install jedi' }
 Plug 'pangloss/vim-javascript'
 Plug 'DingDean/wgsl.vim'
 Plug 'plasticboy/vim-markdown'
+Plug 'posva/vim-vue'
 
 " Visuals
 " Plug 'itchyny/vim-cursorword'
@@ -83,9 +82,9 @@ let g:fzf_action = {
 " \ }, 'fallback': 'find -L %s -type f'}
 
 " dense-analysis/ale
-let g:ale_linters = {'python': ['ruff']}
+let g:ale_linters = {'python': ['ruff'], 'javascript': [], 'vue': []}
 let b:ale_fixers = []
-let g:ale_python_ruff_options = '--preview --line-length 79 --select E4,E5,E7,E9,F,PERF,PIE --ignore E111,E114,E731,E402,E701,E702,F722,FBT,PERF102,PERF203,PERF401,E721'
+let g:ale_python_ruff_options = '--preview --line-length 79 --select E4,E5,E7,E9,F,PERF,PIE --ignore E111,E114,E731,E402,E701,E702,F722,FBT,PERF102,PERF203,PERF401,E721,PERF403'
 let g:ale_virtualtext_cursor=0
 " Avoid slow search for virtual envs.
 let g:ale_use_global_executables = 1
