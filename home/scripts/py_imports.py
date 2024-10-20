@@ -15,4 +15,3 @@ def resize(image, width, height):
   image = Image.fromarray(image)
   image = image.resize((width, height), Image.NEAREST)
   return np.asarray(image)
-
