@@ -12,8 +12,15 @@
   reword = commit --amend
   list = log --name-only
   wip = !git add -A && git commit -m 'WIP' && git show
-[core]
-	excludesfile = ~/.gitignore_global
 [init]
 	defaultBranch = main
 	editor = nvim
+[core]
+	excludesfile = ~/.gitignore_global
+  pager = delta
+[delta]
+  syntax-theme = none
+  hunk-header-style = raw
+  hunk-header-decoration-style = none
+  file-style = bold
+  file-decoration-style = box
