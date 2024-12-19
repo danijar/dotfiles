@@ -20,7 +20,24 @@
   pager = delta
 [delta]
   syntax-theme = none
-  hunk-header-style = raw
-  hunk-header-decoration-style = none
   file-style = bold
-  file-decoration-style = box
+  file-decoration-style = none
+  hunk-header-style = raw  #bold
+  hunk-header-decoration-style = none
+  # hunk-header-style = bold blue
+  # hunk-header-decoration-style = none
+  # hunk-header-line-number-style = bold "#003300"
+  # hunk-header-style = file line-number syntax
+  line-numbers = true
+  line-numbers-left-format = " {nm:>1} "
+  line-numbers-right-format = ""
+  line-numbers-left-style = gray
+  line-numbers-minus-style = gray
+  line-numbers-plus-style = gray
+  line-numbers-right-style = gray
+  line-numbers-zero-style = gray
+  # line-numbers-left-style = gray black
+  # line-numbers-minus-style = gray black
+  # line-numbers-plus-style = gray black
+  # line-numbers-right-style = gray black
+  # line-numbers-zero-style = gray black
