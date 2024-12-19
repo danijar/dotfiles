@@ -1,7 +1,7 @@
 live_config_reload = true
 
 [colors.bright]
-black = "#7e7f78"
+black = "#1f1f1f"
 blue = "#81a1d5"
 cyan = "#94d3d6"
 green = "#85a385"
@@ -15,7 +15,8 @@ cursor = "#adada2"
 text = "#3a3a3a"
 
 [colors.normal]
-black = "#1f1f1f"
+# black = "#1f1f1f"
+black = "#222222"
 blue = "#799bd2"
 cyan = "#8cd0d3"
 green = "#7f9f7f"

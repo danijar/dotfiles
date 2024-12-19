@@ -58,7 +58,7 @@ if __name__ == '__main__':
   parser.add_argument('--fps', type=int, default=10)
   parser.add_argument('--zoom', type=float, default=1.0)
   parser.add_argument('--trim', type=int, nargs=2, default=None)
-  parser.add_argument('--grid', type=int, nargs=2, default=(1, 1))
+  parser.add_argument('--grid', type=int, nargs=2, default=(1, 1))  # (H, W)
   parser.add_argument('--cols', type=int, nargs='+', default=(0,))
   parser.add_argument('--rows', type=int, nargs='+', default=(0,))
   main(parser.parse_args())

@@ -45,6 +45,7 @@ Plug 'posva/vim-vue'
 " Plug 'itchyny/vim-cursorword'
 Plug 'ap/vim-css-color'
 Plug 'w0ng/vim-hybrid'
+Plug 'morhetz/gruvbox'
 " Plug 'wellle/context.vim'
 
 " Polyfills
@@ -75,6 +76,9 @@ let g:fzf_action = {
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+" airblade/vim-gitgutter
+let g:gitgutter_set_sign_backgrounds = 1
+
 " ctrlp.vim
 " let g:ctrlp_working_path_mode = 'a'
 " let g:ctrlp_user_command = {'types': {
@@ -85,7 +89,7 @@ let g:fzf_action = {
 let g:ale_linters = {'python': ['ruff'], 'javascript': [], 'vue': []}
 let b:ale_fixers = []
 let g:ale_python_ruff_options = '--preview --line-length 79 --select E4,E5,E7,E9,F,PERF,PIE --ignore E111,E114,E731,E402,E701,E702,F722,FBT,PERF102,PERF203,PERF401,E721,PERF403'
-let g:ale_virtualtext_cursor=0
+let g:ale_virtualtext_cursor = 0
 " Avoid slow search for virtual envs.
 let g:ale_use_global_executables = 1
 let g:ale_virtualenv_dir_names=[]
@@ -126,6 +130,9 @@ let g:vim_markdown_conceal = 0
 
 " w0ng/vim-hybrid
 let g:hybrid_custom_term_colors = 1
+
+" morhetz/gruvbox
+let g:gruvbox_termcolors=16
 
 " Yggdroot/indentLine
 let g:indentLine_setConceal = 0
@@ -236,26 +243,34 @@ set backupdir=$HOME/.vim/backup//
 " Color scheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set notermguicolors
 set background=dark
 " set background=light
 colorscheme hybrid
+" colorscheme gruvbox
 
-" w0ng/vim-hybrid
-if exists('g:colors_name') && g:colors_name == 'hybrid'
-  hi CursorLineNr                                ctermbg=black
-  hi ErrorMsg           cterm=none ctermfg=red   ctermbg=none
-  hi SpellBad           cterm=none ctermfg=black ctermbg=red
-  hi TabLine            cterm=none ctermfg=gray  ctermbg=black
-  hi MatchParen         cterm=none ctermfg=lightgray  ctermbg=lightblue
-  hi TabLineFill        cterm=none ctermfg=none  ctermbg=black
-  hi TabLineSel         cterm=bold ctermfg=gray  ctermbg=none
-  hi DiffAdd            cterm=none ctermfg=none  ctermbg=green
-  hi DiffChange         cterm=none ctermfg=none  ctermbg=blue
-  hi DiffDelete         cterm=none ctermfg=none  ctermbg=red
-  hi SyntasticErrorSign cterm=none ctermfg=red   ctermbg=none
-  " hi CursorWord0        cterm=bold               ctermbg=black
-  " hi CursorWord1                                 ctermbg=black
-endif
+hi Normal              ctermfg=white      ctermbg=none
+hi LineNr              ctermfg=darkgray   ctermbg=none
+hi Visual                                 ctermbg=darkgray
+hi CursorLineNr        ctermfg=gray       ctermbg=black
+hi SignColumn                             ctermbg=none
+hi MatchParen          ctermfg=black      ctermbg=lightblue
+hi TabLine             ctermfg=gray       ctermbg=black    cterm=none
+hi TabLineFill                            ctermbg=black     cterm=none
+hi TabLineSel          ctermfg=black      ctermbg=gray
+
+hi ErrorMsg            ctermfg=red        ctermbg=none
+hi SpellBad            ctermfg=black      ctermbg=red
+hi DiffAdd             ctermfg=none       ctermbg=green
+hi DiffChange          ctermfg=none       ctermbg=blue
+hi DiffDelete          ctermfg=none       ctermbg=red
+hi SyntasticErrorSign  ctermfg=red        ctermbg=none
+hi GitGutterAdd        ctermbg=none
+hi GitGutterChange     ctermbg=none
+hi GitGutterDelete     ctermbg=none
+
+" hi CursorWord0        cterm=bold               ctermbg=black
+" hi CursorWord1                                 ctermbg=black
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Scripts

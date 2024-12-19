@@ -33,7 +33,7 @@ alias hc='hg commit -m '
 alias hl='hg xl'
 
 # Python.
-alias py='python3'
+alias py='ipython3'
 alias np='python3 -i -c "\
 import sys; \
 import pathlib; \
