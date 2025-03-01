@@ -127,4 +127,3 @@ PERL_MM_OPT="INSTALL_BASE=/Users/danijar/perl5"; export PERL_MM_OPT;
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
