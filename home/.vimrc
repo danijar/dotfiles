@@ -47,6 +47,7 @@ Plug 'ap/vim-css-color'
 Plug 'w0ng/vim-hybrid'
 Plug 'morhetz/gruvbox'
 " Plug 'wellle/context.vim'
+Plug 'luochen1990/rainbow'
 
 " Polyfills
 Plug 'dbakker/vim-paragraph-motion'
@@ -143,6 +144,15 @@ let g:cursorword_highlight=0
 " wellle/context.vim
 let g:context_enabled = 1
 let g:context_max_height = 1
+
+" luochen1990/rainbow
+let g:rainbow_active = 0
+let g:rainbow_conf = {
+\	'ctermfgs': ['white', 'lightgray', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\	'operators': '',
+\	'parentheses': ['start=/(/ end=/)/ fold'],
+\ }
+" \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Settings
@@ -436,10 +446,18 @@ function! PythonSyntax()
   syntax match MyPythonLibrary "\<np\.\|\<tf\.\|\<scipy\.\<os\."
   syntax match MyPythonKwarg "\((\| \)\@<=\<[A-Za-z0-9_]\+\>="
   syntax match MyPythonNumber "\<[0-9.]\+\>\.\?"
+  " syntax match MyPythonFunction /\v[[:alpha:]_.]+\ze(\s?\()/
+  syntax match MyPythonFunction /\v[[:alpha:]_.]+\ze\s?\(/
+  syntax keyword MyPythonConstants True False None Ellipsis
+  " syntax match MyPythonFunction /\v[[:alpha:]_.]+\s?\(\ze/
+  " syntax match MyPythonParens /[()]/
   hi MyPythonSelf    cterm=none ctermfg=gray ctermbg=none
   hi MyPythonLibrary cterm=none ctermfg=gray ctermbg=none
   hi MyPythonKwarg   cterm=none ctermfg=magenta ctermbg=none
   hi MyPythonNumber  cterm=none ctermfg=red ctermbg=none
+  " hi MyPythonParens  cterm=none ctermfg=gray
+  hi def link MyPythonFunction Function
+  hi def link MyPythonConstants Constant
 endfunction
 
 autocmd BufNewFile,BufRead *.md set filetype=markdown

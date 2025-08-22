@@ -36,6 +36,7 @@
   line-numbers-plus-style = gray
   line-numbers-right-style = gray
   line-numbers-zero-style = gray
+  max-line-length = 1000
   # line-numbers-left-style = gray black
   # line-numbers-minus-style = gray black
   # line-numbers-plus-style = gray black
