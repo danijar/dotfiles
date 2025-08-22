@@ -442,20 +442,21 @@ vmap <leader>k gc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! PythonSyntax()
+  syntax keyword MyPythonConstants True False None Ellipsis
   syntax match MyPythonSelf "\<self\>\.\?"
   syntax match MyPythonLibrary "\<np\.\|\<tf\.\|\<scipy\.\<os\."
   syntax match MyPythonKwarg "\((\| \)\@<=\<[A-Za-z0-9_]\+\>="
   syntax match MyPythonNumber "\<[0-9.]\+\>\.\?"
-  " syntax match MyPythonFunction /\v[[:alpha:]_.]+\ze(\s?\()/
   syntax match MyPythonFunction /\v[[:alpha:]_.]+\ze\s?\(/
-  syntax keyword MyPythonConstants True False None Ellipsis
-  " syntax match MyPythonFunction /\v[[:alpha:]_.]+\s?\(\ze/
+  syntax match MyPythonUnpack '\*\*\?\ze[a-z]'
+  syntax match MyPythonContainers /[][}{]/
   " syntax match MyPythonParens /[()]/
-  hi MyPythonSelf    cterm=none ctermfg=gray ctermbg=none
-  hi MyPythonLibrary cterm=none ctermfg=gray ctermbg=none
-  hi MyPythonKwarg   cterm=none ctermfg=magenta ctermbg=none
-  hi MyPythonNumber  cterm=none ctermfg=red ctermbg=none
-  " hi MyPythonParens  cterm=none ctermfg=gray
+  hi MyPythonSelf       cterm=none ctermfg=gray ctermbg=none
+  hi MyPythonLibrary    cterm=none ctermfg=gray ctermbg=none
+  hi MyPythonKwarg      cterm=none ctermfg=magenta ctermbg=none
+  hi MyPythonNumber     cterm=none ctermfg=red ctermbg=none
+  hi MyPythonUnpack     cterm=none ctermfg=lightgray ctermbg=none
+  " hi MyPythonContainers cterm=none ctermfg=darkgray ctermbg=lightgray
   hi def link MyPythonFunction Function
   hi def link MyPythonConstants Constant
 endfunction
