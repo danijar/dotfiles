@@ -444,10 +444,10 @@ vmap <leader>k gc
 function! PythonSyntax()
   syntax keyword MyPythonConstants True False None Ellipsis
   syntax match MyPythonSelf "\<self\>\.\?"
-  syntax match MyPythonLibrary "\<np\.\|\<tf\.\|\<scipy\.\<os\."
+  syntax match MyPythonLibrary "\<\(np\|jnp\|os\|nn\|nj\|re\)\."
   syntax match MyPythonKwarg "\((\| \)\@<=\<[A-Za-z0-9_]\+\>="
   syntax match MyPythonNumber "\<[0-9.]\+\>\.\?"
-  syntax match MyPythonFunction /\v[[:alpha:]_.]+\ze\s?\(/
+  syntax match MyPythonFunction /\v[[:alpha:]_]+\ze\s?\(/
   syntax match MyPythonUnpack '\*\*\?\ze[a-z]'
   syntax match MyPythonContainers /[][}{]/
   " syntax match MyPythonParens /[()]/
