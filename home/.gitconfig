@@ -18,6 +18,7 @@
 [core]
 	excludesfile = ~/.gitignore_global
   pager = delta
+	pager = less -+X
 [delta]
   syntax-theme = none
   file-style = bold

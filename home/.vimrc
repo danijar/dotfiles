@@ -67,7 +67,8 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " junegunn/fzf
-let fzfcmd = "rg --files --hidden --no-ignore -g '!{.git,node_modules,__pycache__}'"
+" let fzfcmd = "rg --files --hidden --no-ignore -g '!{.git,.venv,node_modules,__pycache__}'"
+let fzfcmd = "rg --files --hidden -g '!{.git,.venv,node_modules,__pycache__}'"
 nnoremap <silent> <C-P> :call fzf#run(fzf#wrap({ 'source': fzfcmd }))<cr>
 let g:fzf_history_dir = '/tmp/fzf_history'
 let g:fzf_layout = {'window': 'new', 'down': '40%'}
@@ -447,7 +448,7 @@ function! PythonSyntax()
   syntax match MyPythonLibrary "\<\(np\|jnp\|os\|nn\|nj\|re\)\."
   syntax match MyPythonKwarg "\((\| \)\@<=\<[A-Za-z0-9_]\+\>="
   syntax match MyPythonNumber "\<[0-9.]\+\>\.\?"
-  syntax match MyPythonFunction /\v[[:alpha:]_]+\ze\s?\(/
+  syntax match MyPythonFunction /\v[[:alnum:]_]+\ze\s?\(/
   syntax match MyPythonUnpack '\*\*\?\ze[a-z]'
   syntax match MyPythonContainers /[][}{]/
   " syntax match MyPythonParens /[()]/
@@ -468,6 +469,7 @@ autocmd BufNewFile,BufRead *.scss set tw=0
 autocmd BufNewFile,BufRead *Dockerfile* set filetype=dockerfile
 autocmd BufNewFile,BufRead * set conceallevel=0
 
-autocmd FileType python setlocal ts=2 sw=2 sts=2 tw=79
+" autocmd FileType python setlocal ts=2 sw=2 sts=2 tw=79
+autocmd FileType python setlocal ts=4 sw=4 sts=4 tw=79
 autocmd FileType python call PythonSyntax()
 autocmd FileType markdown,tex set conceallevel=0
