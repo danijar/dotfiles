@@ -1,12 +1,11 @@
 #!/bin/sh
 
-export EDITOR=vim
+export EDITOR=nvim
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:/usr/local/bin
 
-# Mac
 if [ -d /opt/homebrew ]; then
   export EDITOR=vi
   export HOMEBREW_NO_ANALYTICS=1
@@ -18,7 +17,5 @@ if [ -d /opt/homebrew ]; then
   printf "\e[?1042l"  # Disable Alacritty icon bouncing
 fi
 
-# Python venv
 FILE="$HOME/venv/bin/activate"
 test -f $FILE && source $FILE
-

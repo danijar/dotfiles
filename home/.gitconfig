@@ -18,17 +18,12 @@
 [core]
 	excludesfile = ~/.gitignore_global
   pager = delta
-	pager = less -+X
 [delta]
   syntax-theme = none
   file-style = bold
   file-decoration-style = none
-  hunk-header-style = raw  #bold
+  hunk-header-style = raw
   hunk-header-decoration-style = none
-  # hunk-header-style = bold blue
-  # hunk-header-decoration-style = none
-  # hunk-header-line-number-style = bold "#003300"
-  # hunk-header-style = file line-number syntax
   line-numbers = true
   line-numbers-left-format = " {nm:>1} "
   line-numbers-right-format = ""
@@ -38,8 +33,3 @@
   line-numbers-right-style = gray
   line-numbers-zero-style = gray
   max-line-length = 1000
-  # line-numbers-left-style = gray black
-  # line-numbers-minus-style = gray black
-  # line-numbers-plus-style = gray black
-  # line-numbers-right-style = gray black
-  # line-numbers-zero-style = gray black

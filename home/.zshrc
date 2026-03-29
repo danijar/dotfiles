@@ -1,15 +1,8 @@
-# Zsh configuration file.
-# http://zsh.sourceforge.net/Doc/Release/Options.html
-
 # Enable command completion
 autoload -U compinit && compinit
 
 # Enable text reflow in terminal.
 printf '\e[99999;H\n\e[H'
-
-# Trick Vim into using all colors even inside tmux.
-# export TERM="xterm-256color"
-# export TERM="screen-256color"
 
 # History
 SAVEHIST=10000
@@ -98,32 +91,8 @@ setopt promptsubst
     PS1="$line "
 }
 
-# Start tmux automatically with SSH.
-if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
-  # We run tmux in this complicated way so that systemd does not kill the
-  # process on logout when the SSH session ends. For more information:
-  # https://www.freedesktop.org/software/systemd/man/systemd-run.html
-  tmux attach || systemd-run --user --scope tmux -f ~/.config/tmux/tmux.conf
-fi
-
 # Run interactive scripts in interactive mode.
 [[ $- != *i* ]] && return
 for script in ~/autoload/*; do
     . $script;
 done
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/danijar/download/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/danijar/download/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/danijar/download/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/danijar/download/google-cloud-sdk/completion.zsh.inc'; fi
-
-PATH="/Users/danijar/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/danijar/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/danijar/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/danijar/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/danijar/perl5"; export PERL_MM_OPT;
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
