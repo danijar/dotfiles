@@ -17,5 +17,5 @@ if [ -d /opt/homebrew ]; then
   printf "\e[?1042l"  # Disable Alacritty icon bouncing
 fi
 
-FILE="$HOME/venv/bin/activate"
+FILE="$HOME/.venv/bin/activate"
 test -f $FILE && source $FILE
