@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$(uname)" = "Darwin" ]; then
+    pbpaste
+else
+    xclip -o -sel clipboard
+fi

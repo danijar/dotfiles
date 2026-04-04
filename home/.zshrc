@@ -20,56 +20,38 @@ setopt hist_reduce_blanks
 bindkey -v
 export KEYTIMEOUT=1
 
-# Remove trailing newlines after paste.
-bracketed-paste() {
-  zle .$WIDGET && LBUFFER=${LBUFFER%$'\n'}
-}
-zle -N bracketed-paste
-
-x-yank() {
-    zle copy-region-as-kill
-    print -rn -- $CUTBUFFER | xclip -sel clipboard
-}
-zle -N x-yank
-
-x-cut() {
-    zle kill-region
-    print -rn -- $CUTBUFFER | xclip -sel clipboard
-}
-zle -N x-cut
-
-x-paste() {
-    PASTE=$(xclip -o -sel clipboard)
-    LBUFFER="$LBUFFER${RBUFFER:0:1}"
-    RBUFFER="$PASTE${RBUFFER:1:${#RBUFFER}}"
-}
-zle -N x-paste
-
-bindkey -M vicmd "y" x-yank
-bindkey -M vicmd "Y" x-cut
-bindkey -M vicmd "p" x-paste
-bindkey -M vicmd "^K" up-history
-bindkey -M vicmd "^J" down-history
-
-autoload edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
-
 # Start line editor in command mode.
 zle-line-init() { zle vi-cmd-mode; }
 zle -N zle-line-init
 
-# Use X clipboard
-[[ -n $DISPLAY ]] && (( $+commands[xclip] )) && {
-  function cutbuffer() { zle .$WIDGET; echo $CUTBUFFER | xclip; }
-  function putbuffer() { zle copy-region-as-kill "$(xclip -o)"; zle .$WIDGET; }
-  zle_cut_widgets=(vi-backward-delete-char vi-change vi-change-eol
-                   vi-change-whole-line vi-delete vi-delete-char vi-kill-eol
-                   vi-substitute vi-yank vi-yank-eol)
-  zle_put_widgets=(vi-put-after vi-put-before)
-  for widget in $zle_cut_widgets; do; zle -N $widget cutbuffer; done
-  for widget in $zle_put_widgets; do; zle -N $widget putbuffer; done
+# Clipboard
+clip-yank() {
+    zle copy-region-as-kill
+    print -rn -- $CUTBUFFER | $HOME/bin/copy
 }
+zle -N clip-yank
+clip-cut() {
+    zle kill-region
+    print -rn -- $CUTBUFFER | $HOME/bin/copy
+}
+zle -N clip-cut
+clip-paste() {
+    PASTE=$($HOME/bin/paste)
+    LBUFFER="$LBUFFER${RBUFFER:0:1}"
+    RBUFFER="$PASTE${RBUFFER:1:${#RBUFFER}}"
+}
+zle -N clip-paste
+bindkey -M vicmd "y" clip-yank
+bindkey -M vicmd "Y" clip-cut
+bindkey -M vicmd "p" clip-paste
+
+bindkey -M vicmd "^K" up-history
+bindkey -M vicmd "^J" down-history
+
+# Edit command in Vim
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 # Prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
