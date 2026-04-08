@@ -75,6 +75,6 @@ setopt promptsubst
 
 # Run interactive scripts in interactive mode.
 [[ $- != *i* ]] && return
-for script in ~/autoload/*; do
-    . $script;
-done
+
+. ~/profile/aliases
+. ~/profile/env

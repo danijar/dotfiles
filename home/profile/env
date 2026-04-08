@@ -19,3 +19,6 @@ fi
 
 FILE="$HOME/.venv/bin/activate"
 test -f $FILE && source $FILE
+
+export PATH="/opt/homebrew/share/google-cloud-sdk/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

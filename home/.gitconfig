@@ -10,13 +10,11 @@
 [alias]
   append = commit --amend --no-edit
   reword = commit --amend
-  list = log --name-only
-  wip = !git add -A && git commit -m 'WIP' && git show
 [init]
-	defaultBranch = main
-	editor = nvim
+  defaultBranch = main
+  editor = nvim
 [core]
-	excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore_global
   pager = delta
 [delta]
   syntax-theme = none
