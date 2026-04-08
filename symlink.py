@@ -32,6 +32,8 @@ def create_links(repo, user):
         if path.is_dir():
             dest.mkdir(exist_ok=True)
             continue
+        if dest.is_symlink() and not dest.exists():
+            dest.unlink()
         if not dest.exists():
             print("Create:", dest, "->", path)
             dest.symlink_to(path)
