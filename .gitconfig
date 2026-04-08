@@ -28,3 +28,6 @@
   line-numbers-right-style = gray
   line-numbers-zero-style = gray
   max-line-length = 1000
+[user]
+	name = Danijar Hafner
+	email = mail@danijar.com
