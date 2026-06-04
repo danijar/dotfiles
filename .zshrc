@@ -61,7 +61,7 @@ zstyle ":vcs_info:git:*" formats "%b"
 setopt promptsubst
 (){
     local line
-    if [ -n "$SSH_CONNECTION" ]; then
+    if [ -n "$SSH_CONNECTION" ] || [ -n "$KUBERNETES_SERVICE_HOST" ]; then
         line='%B%F{black}%K{red}'
     else
         line='%B%F{black}%K{blue}'
