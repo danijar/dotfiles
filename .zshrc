@@ -78,3 +78,4 @@ setopt promptsubst
 
 . ~/profile/aliases
 . ~/profile/env
+. ~/profile/settings

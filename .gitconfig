@@ -1,5 +1,6 @@
 [push]
   default = current
+  autoSetupRemote = true
 [pull]
   rebase = true
 [rebase]
@@ -14,6 +15,7 @@
   excludesfile = ~/.gitignore_global
   pager = delta
 [delta]
+  # brew/apt install git-delta
   syntax-theme = none
   file-style = bold
   file-decoration-style = none
@@ -29,5 +31,7 @@
   line-numbers-zero-style = gray
   max-line-length = 1000
 [user]
-	name = Danijar Hafner
-	email = mail@danijar.com
+  name = Danijar Hafner
+  email = mail@danijar.com
+[include]
+  path = ~/.gitconfig.local

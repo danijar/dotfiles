@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -euo pipefail
+trap 'echo "Script errored at line $LINENO"' ERR
+
+# Repositories
+apt-get update
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:neovim-ppa/unstable
+apt-get update
+
+# Packages
+apt-get install -y build-essential
+apt-get install -y curl
+apt-get install -y gh
+apt-get install -y git
+apt-get install -y git-delta
+apt-get install -y htop
+apt-get install -y neovim
+apt-get install -y psmisc
+apt-get install -y ripgrep
+apt-get install -y sudo
+apt-get install -y tmux
+apt-get install -y wget
+apt-get install -y zsh
+
+# UV
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Folders
+mkdir -p ~/repo
+mkdir -p ~/temp
+
+# Dotfiles
+cd ~/repo
+if [ ! -d ~/repo/dotfiles ]; then
+  git clone https://github.com/danijar/dotfiles-template.git dotfiles
+fi
+cd dotfiles
+git pull
+uv tool run python symlink.py
+cd ~
