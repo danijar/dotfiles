@@ -1,8 +1,7 @@
 # Enable command completion
 autoload -U compinit && compinit
 
-# Enable text reflow in terminal.
-printf '\e[99999;H\n\e[H'
+. ~/profile/env
 
 # History
 SAVEHIST=10000
@@ -17,12 +16,17 @@ setopt hist_verify
 setopt hist_reduce_blanks
 
 # Vi commands
-bindkey -v
-export KEYTIMEOUT=1
-
-# Start line editor in command mode.
-zle-line-init() { zle vi-cmd-mode; }
-zle -N zle-line-init
+case $DOTFILES_VIM_MODE in
+  1)
+    bindkey -v
+    export KEYTIMEOUT=1
+    export INPUTRC=~/.config/readline/vim.inputrc
+    zle-line-init() { zle vi-cmd-mode; }
+    zle -N zle-line-init
+    ;;
+  0) bindkey -e ;;
+  *) echo "DOTFILES_VIM_MODE must be 0 or 1" >&2 ;;
+esac
 
 # Clipboard
 clip-yank() {
@@ -77,5 +81,4 @@ setopt promptsubst
 [[ $- != *i* ]] && return
 
 . ~/profile/aliases
-. ~/profile/env
 . ~/profile/settings
