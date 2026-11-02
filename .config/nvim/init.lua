@@ -346,7 +346,6 @@ end
 ----------------------------------------------------------------
 
 autocmd({ "BufRead", "BufNewFile" }, "*", [[match Error /\s\+$/]])
-autocmd({ "BufRead", "BufNewFile" }, { "*.html", "*.md" }, [[2match PreProc /{%.\{-}%}\|{#.\{-}#}/]])
 autocmd({ "FocusGained", "BufEnter" }, "*", "checktime")
 -- autocmd("BufWritePost", "*", function() require("lint").try_lint() end)
 

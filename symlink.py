@@ -1,3 +1,4 @@
+import argparse
 import pathlib
 
 
@@ -26,7 +27,7 @@ def remove_broken_links(repo, user):
 
 def create_links(repo, user):
     for path in repo.glob("**/*"):
-        if should_skip(path):
+        if should_skip(path, repo):
             continue
         dest = user / path.relative_to(repo)
         if path.is_dir():
@@ -47,19 +48,31 @@ def create_links(repo, user):
         print("Exists:", dest)
 
 
-def should_skip(path):
+def should_skip(path, repo):
+    parts = path.relative_to(repo).parts
     return (
         path == pathlib.Path(__file__)
-        or ".git" in path.parts
-        or path.name == ".gitignore"
+        or ".git" in parts
+        or parts[0] == "users"
+        or path.name in (".gitignore", "README.md")
     )
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--user", default=None)
+    args = parser.parse_args()
     repo = (pathlib.Path(__file__).parent).resolve()
     user = pathlib.Path("~").expanduser().resolve()
     remove_broken_links(repo, user)
     create_links(repo, user)
+    if args.user:
+        overlay = repo / "users" / args.user
+        assert overlay.is_dir(), overlay
+        for path in overlay.glob("**/*"):
+            shared = repo / path.relative_to(overlay)
+            assert path.is_dir() or not shared.exists(), shared
+        create_links(overlay, user)
     print("Done.")
 
 

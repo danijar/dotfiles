@@ -1,6 +1,5 @@
 #!/bin/sh
 
-export DOTFILES_VIM_MODE=1
 export EDITOR=nvim
 export PATH=$PATH:~/bin
 export PATH=$PATH:~/.local/bin

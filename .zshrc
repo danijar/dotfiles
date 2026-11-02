@@ -1,7 +1,7 @@
 # Enable command completion
 autoload -U compinit && compinit
 
-. ~/profile/env
+for script in ~/profile/*; do . $script; done
 
 # History
 SAVEHIST=10000
@@ -16,7 +16,7 @@ setopt hist_verify
 setopt hist_reduce_blanks
 
 # Vi commands
-case $DOTFILES_VIM_MODE in
+case ${DOTFILES_VIM_MODE:-0} in
   1)
     bindkey -v
     export KEYTIMEOUT=1
@@ -76,9 +76,3 @@ setopt promptsubst
     line+='%K{yellow} %~ %k%f%b'
     PS1="$line "
 }
-
-# Run interactive scripts in interactive mode.
-[[ $- != *i* ]] && return
-
-. ~/profile/aliases
-. ~/profile/settings
