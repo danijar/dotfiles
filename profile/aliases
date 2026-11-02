@@ -80,13 +80,16 @@ gt() {
   # Subshell keeps the caller's directory unchanged.
   local dir
   dir=$(gw $1 >&2 && pwd) || return 1
-  tmux has-session -t main 2>/dev/null || tmux new-session -d -s main -c $dir
-  # Match windows by a custom option because window names can get renamed.
-  local win
-  win=$(tmux list-windows -t main -f "#{==:#{@worktree},$dir}" -F '#{window_id}')
+  # Create the session around this worktree so there is no leftover window.
+  local win left
+  if tmux has-session -t main 2>/dev/null; then
+    # Match windows by a custom option because window names can get renamed.
+    win=$(tmux list-windows -t main -f "#{==:#{@worktree},$dir}" -F '#{window_id}')
+  else
+    left=$(tmux new-session -d -P -F '#{pane_id}' -s main -n ${dir:t} -c $dir 'claude; exec $SHELL')
+  fi
   if [[ -z $win ]]; then
-    local left
-    left=$(tmux new-window -d -P -F '#{pane_id}' -t main: -n ${dir:t} -c $dir 'claude; exec $SHELL')
+    [[ -n $left ]] || left=$(tmux new-window -d -P -F '#{pane_id}' -t main: -n ${dir:t} -c $dir 'claude; exec $SHELL')
     tmux set-option -w -t $left @worktree $dir
     tmux split-window -h -d -t $left -c $dir 'nvim; exec $SHELL'
     tmux split-window -v -d -t $left -c $dir 'command ls --color=auto --group-directories-first -lhA --time-style long-iso; exec $SHELL'
